@@ -26,7 +26,7 @@ class BloggerCategoryService
         if ($request->hasFile('category_image')) {
            
             if ($category->category_image) {
-                $previousImagePath = getcwd().'/uploads/blogger_categories/'.$category->category_image;
+                $previousImagePath = getcwd().'/public/uploads/blogger_categories/'.$category->category_image;
                 if (file_exists($previousImagePath)) {
                     @unlink($previousImagePath);
                 }
@@ -35,7 +35,7 @@ class BloggerCategoryService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('category_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('category_image')->move(getcwd().'/uploads/blogger_categories', $fileNameToStore);
+            $path = $request->file('category_image')->move(getcwd().'/public/uploads/blogger_categories', $fileNameToStore);
             $category->category_image = $fileNameToStore;
         }
         
@@ -111,7 +111,7 @@ class BloggerCategoryService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('category_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('category_image')->move(getcwd().'/uploads/blogger_categories', $fileNameToStore);
+            $path = $request->file('category_image')->move(getcwd().'/public/uploads/blogger_categories', $fileNameToStore);
             
         } else {
             $fileNameToStore = '';
@@ -239,7 +239,7 @@ class BloggerCategoryService
     {
         $category = BloggerCategory::findOrFail($id);
         if ($category->category_image) {
-            $imagePath = getcwd().'/uploads/blogger_categories/'.$category->category_image;
+            $imagePath = getcwd().'/public/uploads/blogger_categories/'.$category->category_image;
             if (file_exists($imagePath)) {
                 @unlink($imagePath);
             }

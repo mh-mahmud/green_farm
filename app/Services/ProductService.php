@@ -80,7 +80,7 @@ class ProductService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('img_path')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $request->file('img_path')->move(getcwd().'/uploads/products', $fileNameToStore);
+            $request->file('img_path')->move(getcwd().'/public/uploads/products', $fileNameToStore);
         }
 
         // upload image 2
@@ -172,7 +172,7 @@ class ProductService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('img_path')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $request->file('img_path')->move(getcwd().'/uploads/products', $fileNameToStore);
+            $request->file('img_path')->move(getcwd().'/public/uploads/products', $fileNameToStore);
             
         } 
 

@@ -62,7 +62,7 @@ class SliderService
         if ($request->hasFile('slider_image')) {
            
             if ($slider->slider_image) {
-                $previousImagePath = getcwd().'/uploads/sliders/'.$slider->slider_image;
+                $previousImagePath = getcwd().'/public/uploads/sliders/'.$slider->slider_image;
                 if (file_exists($previousImagePath)) {
                     @unlink($previousImagePath);
                 }
@@ -71,7 +71,7 @@ class SliderService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('slider_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('slider_image')->move(getcwd().'/uploads/sliders', $fileNameToStore);
+            $path = $request->file('slider_image')->move(getcwd().'/public/uploads/sliders', $fileNameToStore);
             $slider->slider_image = $fileNameToStore;
                
         }
@@ -97,7 +97,7 @@ class SliderService
     {
         $slider = Slider::findOrFail($id);
         if ($slider->slider_image) {
-            $imagePath = getcwd().'/uploads/sliders/'.$slider->slider_image;
+            $imagePath = getcwd().'/public/uploads/sliders/'.$slider->slider_image;
             if (file_exists($imagePath)) {
                 @unlink($imagePath);
             }

@@ -293,7 +293,7 @@ class UserService {
     // Handle profile image upload if provided
     if ($request->hasFile('profile_image')) {
         if ($user->profile_image) {
-            $previousImagePath = getcwd().'/uploads/agents/'.$user->profile_image;
+            $previousImagePath = getcwd().'/public/uploads/agents/'.$user->profile_image;
             if (file_exists($previousImagePath)) {
                 @unlink($previousImagePath);
             }
@@ -302,7 +302,7 @@ class UserService {
         $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
         $extension = $request->file('profile_image')->getClientOriginalExtension();
         $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-        $path = $request->file('profile_image')->move(getcwd().'/uploads/agents', $fileNameToStore);
+        $path = $request->file('profile_image')->move(getcwd().'/public/uploads/agents', $fileNameToStore);
         $data['profile_image'] = $fileNameToStore;
     }
 

@@ -24,7 +24,7 @@ class BlogService
         if ($request->hasFile('blog_image')) {
            
             if ($blog->blog_image) {
-                $previousImagePath = getcwd().'/uploads/blogs/'.$blog->blog_image;
+                $previousImagePath = getcwd().'/public/uploads/blogs/'.$blog->blog_image;
                 if (file_exists($previousImagePath)) {
                     @unlink($previousImagePath);
                 }
@@ -33,7 +33,7 @@ class BlogService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('blog_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('blog_image')->move(getcwd().'/uploads/blogs', $fileNameToStore);
+            $path = $request->file('blog_image')->move(getcwd().'/public/uploads/blogs', $fileNameToStore);
             $blog->blog_image = $fileNameToStore;
         }
         
@@ -56,7 +56,7 @@ class BlogService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('blog_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('blog_image')->move(getcwd().'/uploads/blogs', $fileNameToStore);
+            $path = $request->file('blog_image')->move(getcwd().'/public/uploads/blogs', $fileNameToStore);
             
         } else {
             $fileNameToStore = '';
@@ -85,7 +85,7 @@ class BlogService
     {
         $blog = Blog::findOrFail($id);
         if ($blog->blog_image) {
-            $imagePath = getcwd().'/uploads/blogs/'.$blog->blog_image;
+            $imagePath = getcwd().'/public/uploads/blogs/'.$blog->blog_image;
             if (file_exists($imagePath)) {
                 @unlink($imagePath);
             }

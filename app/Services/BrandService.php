@@ -20,7 +20,7 @@ class BrandService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('brand_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('brand_image')->move(getcwd().'/uploads/brands', $fileNameToStore);
+            $path = $request->file('brand_image')->move(getcwd().'/public/uploads/brands', $fileNameToStore);
             
         } else {
             
@@ -62,7 +62,7 @@ class BrandService
         if ($request->hasFile('brand_image')) {
            
             if ($brand->brand_image) {
-                $previousImagePath = getcwd().'/uploads/brands/'.$brand->brand_image;
+                $previousImagePath = getcwd().'/public/uploads/brands/'.$brand->brand_image;
                 if (file_exists($previousImagePath)) {
                     @unlink($previousImagePath);
                 }
@@ -71,7 +71,7 @@ class BrandService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('brand_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('brand_image')->move(getcwd().'/uploads/brands', $fileNameToStore);
+            $path = $request->file('brand_image')->move(getcwd().'/public/uploads/brands', $fileNameToStore);
             $brand->brand_image = $fileNameToStore;
                
         }
@@ -97,7 +97,7 @@ class BrandService
     {
         $brand = Brand::findOrFail($id);
         if ($brand->brand_image) {
-            $imagePath = getcwd().'/uploads/brands/'.$brand->brand_image;
+            $imagePath = getcwd().'/public/uploads/brands/'.$brand->brand_image;
             if (file_exists($imagePath)) {
                 @unlink($imagePath);
             }

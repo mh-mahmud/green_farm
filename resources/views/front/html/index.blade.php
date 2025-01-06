@@ -6,7 +6,7 @@
       <section class="slider-area pb-25">
          <div class="container">
             <div class="row justify-content-xl-end">
-               <div class="col-xl-9 col-xxl-7 col-lg-9">
+               <div class="col-xl-9 col-xxl-10 col-lg-12">
                   <div class="tp-slider-area p-relative">
                      <div class="swiper-container slider-active">
                         <div class="swiper-wrapper">
@@ -36,6 +36,8 @@
                   </div>
                </div>
                <!-- <div class="col-xl-3 col-xxl-3 col-lg-3 d-none d-md-block"> -->
+               
+               {{--
                <div class="col-xl-3 col-xxl-3 col-lg-3">
                   <div class="row">
                      <div class="col-lg-12 col-md-6 col-6">
@@ -66,6 +68,7 @@
                      </div>
                   </div>
                </div>
+               --}}
             </div>
          </div>
       </section>
