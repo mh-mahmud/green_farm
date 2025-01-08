@@ -28,13 +28,10 @@ class FrontController extends Controller
         $blogs = Blog::where('status', 1)->orderBy('created_at', 'desc')->limit(4)->get();
         // dd($blogs);
         $sliders = Slider::where('status', 1)->get(['slider_title', 'slider_image']);
-        $tyres = Product::where('status', 1)->where('category_id', 2)->limit(4)->get();
-        $engine_oil = Product::where('status', 1)->where('category_id', 3)->limit(4)->get();
-        $break_shoe = Product::where('status', 1)->where('category_id', 1)->limit(4)->get();
-        $battery = Product::where('status', 1)->where('category_id', 7)->limit(4)->get();
+        $products = Product::where('status', 1)->inRandomOrder()->limit(30)->get();
         $top_sell = Product::where('status', 1)->orderBy('total_sell', 'desc')->limit(5)->get();
         // dd($top_sell);
-        return view('front.html.index', compact('brands', 'tyres', 'sliders', 'top_sell', 'engine_oil', 'battery', 'break_shoe', 'blogs'));
+        return view('front.html.index', compact('brands', 'products', 'sliders', 'top_sell', 'blogs'));
     }
 
     public function blogs() {

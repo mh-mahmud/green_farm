@@ -141,7 +141,7 @@
             <div class="row">
                <div class="col-lg-4 col-md-6 col-12">
                   <div class="tpsection mb-40">
-                     <h4 class="tpsection__title">Tyres</h4>
+                     <h4 class="tpsection__title">ALL PRODUCTS</h4>
                   </div>
                </div>
                
@@ -150,13 +150,11 @@
                <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
                   <div class="row row-cols-xxl-5 row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2">
 
-                     @foreach($tyres as $product)
+                     @foreach($products as $product)
                      <div class="col">
-                        <div class=" tpproduct pb-15 mb-30">
+                        <div class=" tpproduct pb-15 mb-30" style="border: 1px solid #ddd;">
                            <div class="tpproduct__thumb p-relative">
-                              @if($product->stock_status == "In Stock")
-                                 <span class="tpproduct__thumb-discount_in-stock">{{$product->stock_status}}</span>
-                              @else
+                              @if($product->stock_status == "Out of Stock")
                                  <span class="tpproduct__thumb-discount">{{$product->stock_status}}</span>
                               @endif
                               
@@ -177,15 +175,19 @@
                                  <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a>
                               </div>
                            </div>
-                           <div class="tpproduct__content">
-                              <h3 class="tpproduct__title"><a href="shop-details-2.html">{{$product->name}}</a></h3>
+                           <div class="tpproduct__content"  style="text-align:center;">
+                              <h3 class="tpproduct__title" style="margin-bottom:20px;"><a href="{{route('product-details', $product->id)}}">{{ $product->name }}</a></h3>
                               <div class="tpproduct__priceinfo p-relative">
-                                 <div class="tpproduct__priceinfo-list">
+                                 <div class="tpproduct__priceinfo-list--" style="margin-bottom:20px;">
                                     <span>Tk {{$product->product_value}}</span>
                                  </div>
-                                 <div class="tpproduct__cart">
-                                    <a href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
-                                 </div>
+
+                                 <!-- <button type="button" class="btn btn-warning">Warning</button> -->
+
+                                 <!-- <div class="tpproduct__cart"> -->
+
+                                    <a class="btn btn-warning" href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                 <!-- </div> -->
                               </div>
                            </div>
                         </div>
@@ -198,188 +200,6 @@
             </div>
          </div>
 
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-4 col-md-6 col-12">
-                  <div class="tpsection mb-40">
-                     <h4 class="tpsection__title">Engine Oil</h4>
-                  </div>
-               </div>
-               
-            </div>
-            <div class="tab-content" id="nav-tabContent">
-               <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
-                  <div class="row row-cols-xxl-5 row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2">
-
-                     @foreach($engine_oil as $product)
-                     <div class="col">
-                        <div class=" tpproduct pb-15 mb-30">
-                           <div class="tpproduct__thumb p-relative">
-                              @if($product->stock_status == "In Stock")
-                                 <span class="tpproduct__thumb-discount_in-stock">{{$product->stock_status}}</span>
-                              @else
-                                 <span class="tpproduct__thumb-discount">{{$product->stock_status}}</span>
-                              @endif
-                              
-
-                              @if(file_exists(public_path('/uploads/products/'.$product->img_path)) )
-                              <a href="{{route('product-details', $product->id)}}">
-                                 <img style="max-height: 350px;border:1px solid #ddd;padding:20px" src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="product-thumb">
-                                 {{--<img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-three/product-44.jpg" alt="product-thumb">--}}
-                              </a>
-                              @else
-                                 <a href="{{route('product-details', $product->id)}}">
-                                    <img style="max-height: 350px;border:1px solid #ddd;padding:20px" src="{{url('/')}}/uploads/blank.png" alt="product-thumb">
-                                 </a>
-                              @endif
-                              <div class="tpproduct__thumb-action">
-                                 <!-- <a class="comphare" href="#"><i class="fal fa-exchange"></i></a> -->
-                                 <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
-                                 <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a>
-                              </div>
-                           </div>
-                           <div class="tpproduct__content">
-                              <h3 class="tpproduct__title"><a href="shop-details-2.html">{{$product->name}}</a></h3>
-                              <div class="tpproduct__priceinfo p-relative">
-                                 <div class="tpproduct__priceinfo-list">
-                                    <span>Tk {{$product->product_value}}</span>
-                                 </div>
-                                 <div class="tpproduct__cart">
-                                    <a href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     @endforeach
-
-                  </div>
-               </div>
-
-            </div>
-         </div>
-
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-4 col-md-6 col-12">
-                  <div class="tpsection mb-40">
-                     <h4 class="tpsection__title">Break Shoe</h4>
-                  </div>
-               </div>
-               
-            </div>
-            <div class="tab-content" id="nav-tabContent">
-               <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
-                  <div class="row row-cols-xxl-5 row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2">
-
-                     @foreach($break_shoe as $product)
-                     <div class="col">
-                        <div class=" tpproduct pb-15 mb-30">
-                           <div class="tpproduct__thumb p-relative">
-                              @if($product->stock_status == "In Stock")
-                                 <span class="tpproduct__thumb-discount_in-stock">{{$product->stock_status}}</span>
-                              @else
-                                 <span class="tpproduct__thumb-discount">{{$product->stock_status}}</span>
-                              @endif
-                              
-
-                              @if(file_exists(public_path('/uploads/products/'.$product->img_path)) )
-                              <a href="{{route('product-details', $product->id)}}">
-                                 <img style="max-height: 350px;border:1px solid #ddd;padding:20px" src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="product-thumb">
-                                 {{--<img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-three/product-44.jpg" alt="product-thumb">--}}
-                              </a>
-                              @else
-                                 <a href="{{route('product-details', $product->id)}}">
-                                    <img style="max-height: 350px;border:1px solid #ddd;padding:20px" src="{{url('/')}}/uploads/blank.png" alt="product-thumb">
-                                 </a>
-                              @endif
-                              <div class="tpproduct__thumb-action">
-                                 <!-- <a class="comphare" href="#"><i class="fal fa-exchange"></i></a> -->
-                                 <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
-                                 <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a>
-                              </div>
-                           </div>
-                           <div class="tpproduct__content">
-                              <h3 class="tpproduct__title"><a href="shop-details-2.html">{{$product->name}}</a></h3>
-                              <div class="tpproduct__priceinfo p-relative">
-                                 <div class="tpproduct__priceinfo-list">
-                                    <span>Tk {{$product->product_value}}</span>
-                                 </div>
-                                 <div class="tpproduct__cart">
-                                    <a href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     @endforeach
-
-                  </div>
-               </div>
-
-            </div>
-         </div>
-
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-4 col-md-6 col-12">
-                  <div class="tpsection mb-40">
-                     <h4 class="tpsection__title">Battery</h4>
-                  </div>
-               </div>
-               
-            </div>
-            <div class="tab-content" id="nav-tabContent">
-               <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
-                  <div class="row row-cols-xxl-5 row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2">
-
-                     @foreach($battery as $product)
-                     <div class="col">
-                        <div class=" tpproduct pb-15 mb-30">
-                           <div class="tpproduct__thumb p-relative">
-                              @if($product->stock_status == "In Stock")
-                                 <span class="tpproduct__thumb-discount_in-stock">{{$product->stock_status}}</span>
-                              @else
-                                 <span class="tpproduct__thumb-discount">{{$product->stock_status}}</span>
-                              @endif
-                              
-
-                              @if(file_exists(public_path('/uploads/products/'.$product->img_path)) )
-                              <a href="{{route('product-details', $product->id)}}">
-                                 <img style="max-height: 350px;border:1px solid #ddd;padding:20px" src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="product-thumb">
-                                 {{--<img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-three/product-44.jpg" alt="product-thumb">--}}
-                              </a>
-                              @else
-                                 <a href="{{route('product-details', $product->id)}}">
-                                    <img style="max-height: 350px;border:1px solid #ddd;padding:20px" src="{{url('/')}}/uploads/blank.png" alt="product-thumb">
-                                 </a>
-                              @endif
-                              <div class="tpproduct__thumb-action">
-                                 <!-- <a class="comphare" href="#"><i class="fal fa-exchange"></i></a> -->
-                                 <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
-                                 <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a>
-                              </div>
-                           </div>
-                           <div class="tpproduct__content">
-                              <h3 class="tpproduct__title"><a href="shop-details-2.html">{{$product->name}}</a></h3>
-                              <div class="tpproduct__priceinfo p-relative">
-                                 <div class="tpproduct__priceinfo-list">
-                                    <span>Tk {{$product->product_value}}</span>
-                                 </div>
-                                 <div class="tpproduct__cart">
-                                    <a href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     @endforeach
-
-                  </div>
-               </div>
-
-            </div>
-         </div>
       </section>
       <!-- product-area-end -->
 

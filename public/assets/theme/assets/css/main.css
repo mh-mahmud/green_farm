@@ -755,7 +755,9 @@ input[type=color] {
 }
 
 .space-bg {
-  background: var(--tp-theme-2);
+/*  background: var(--tp-theme-2);*/
+  background: #fc8934;
+  color: #FFF;
 }
 
 .theme-bg {

@@ -463,3 +463,6 @@ CREATE TABLE IF NOT EXISTS `careers` (
 ALTER TABLE `users` CHANGE `email` `email` VARCHAR(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL;
 
 ALTER TABLE `users` ADD `city` VARCHAR(100) NULL DEFAULT NULL AFTER `profile_image`, ADD `state` VARCHAR(100) NULL DEFAULT NULL AFTER `city`, ADD `zip` VARCHAR(20) NULL DEFAULT NULL AFTER `state`;
+
+
+ALTER TABLE `products` CHANGE `description` `description` MEDIUMTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;
