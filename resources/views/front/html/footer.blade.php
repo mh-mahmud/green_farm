@@ -1,17 +1,24 @@
    <!-- footer-area-start -->
 
    <footer>
-      <div class="footer-area secondary-footer black-bg-2 pt-65">
+      <div class="footer-area theme-bg pt-65">
          <div class="container">
             <div class="main-footer pb-15 mb-30">
                <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="col-lg-e3 col-md-4 col-sm-6">
                      <div class="footer-widget footer-col-1 mb-40">
                         <div class="footer-logo mb-30">
-                           <a href="{{ route('index') }}"><img style="width:165px" src="{{url('/')}}/assets/theme/assets/img/logo/car-clinic-logo.png" alt="logo"></a>
+                           <a href="{{ route('index') }}"><img style="width:120px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="Green Farm Logo"></a>
                         </div>
                         <div class="footer-content">
-                           <p>Carclinic is a leading Online Car Parts and accessories shop in Bangladesh. </p>
+                           <p><b>Green Farm: Your Trusted Source for Safe & Organic Food</b></p>
+                           <p>
+                              Green Farm is a leading e-commerce platform committed to delivering safe, healthy, and organic food products across Bangladesh. Renowned for its dedication to quality, Green Farm offers a diverse range of health-focused items, including premium mustard oil, pure ghee, organic honey, dates, chia seeds, and an assortment of nuts. Each product is carefully sourced and crafted to ensure maximum health benefits, meeting the highest standards of purity and freshness.
+                           </p>
+                           <!-- <p>
+                              With a focus on convenience, Green Farm operates primarily online, bringing the goodness of nature straight to your doorstep. Whether you're seeking to elevate your wellness journey or simply enjoy natural, wholesome foods, Green Farm is your go-to destination for authentic, trustworthy products.
+                           </p> -->
+                           
                         </div>
                      </div>
                   </div>
@@ -21,7 +28,7 @@
                         <div class="footer-widget__links">
                            <ul>
                               <!-- <li><a href="#">Custom Service</a></li> -->
-                              <li><a href="{{ route('faq') }}">FAQs</a></li>
+                              <li><a href="{{ route('faq') }}">গ্রাহক সেবা</a></li>
                               <li><a href="{{ route('track-your-order') }}">Ordering Tracking</a></li>
                               <li><a href="{{ route('contact-us') }}">Contacts</a></li>
                               <!-- <li><a href="#">Events</a></li> -->
@@ -35,10 +42,10 @@
                         <div class="footer-widget__links">
                            <ul>
                               <li><a href="{{ route('about-us') }}">About Us</a></li>
-                              <li><a href="{{ route('return-policy') }}">Return Policy</a></li>
+                              <li><a href="{{ route('return-policy') }}">রিটার্ন পলিসি</a></li>
                               <!-- <li><a href="#">Discount</a></li> -->
                               <!-- <li><a href="#">Custom Service</a></li> -->
-                              <li><a href="{{ route('terms-and-conditions') }}">Terms & Condition</a></li>
+                              <li><a href="{{ route('terms-and-conditions') }}">রিফান্ড পলিসি</a></li>
                            </ul>
                         </div>
                      </div>
@@ -58,6 +65,7 @@
                      </div>
                   </div>
 
+                  {{--
                   <div class="col-lg-3 col-md-4 col-sm-6">
                      <div class="footer-widget footer-col-5 mb-40">
                         <h4 class="footer-widget__title mb-30">Get Newsletter</h4>
@@ -70,9 +78,12 @@
                         </div>
                      </div>
                   </div>
+                  --}}
 
                </div>
             </div>
+
+            {{--
             <div class="footer-cta pb-20">
                <div class="row justify-content-between">
                   <div class="col-xl-6 col-lg-4 col-md-4 col-sm-6">
@@ -100,18 +111,19 @@
                   </div>
                </div>
             </div>
+            --}}
          </div>
-         <div class="footer-copyright black-bg-2">
+         <div class="footer-copyright" style="background-color:#fc8934">
             <div class="container">
-               <div class="row align-items-center">
+               <div class="row align-items-center" style="font-size:14px;">
                   <div class="col-xl-6 col-lg-7 col-md-5">
-                     <div class="footer-copyright__content">
-                        <span>Copyright 2024 <a href="index.html">©Car Clinic</a>.Powered by <a target="_blank" href="https://foxtechnologies.net">Fox Technologies</a>.</span>
+                     <div class="footer-">
+                        <span>Copyright 2025 <a href="{{ route('index') }}">&copy; Green Farm</a>
                      </div>
                   </div>
                   <div class="col-xl-6 col-lg-5 col-md-7">
                      <div class="footer-copyright__brand">
-                        <img src="{{url('/')}}/assets/theme/assets/img/footer/f-brand-icon-01.png" alt="footer-brand">
+                        Powered by <a target="_blank" href="https://foxtechnologies.net">Fox Technologies</a>.</span>
                      </div>
                   </div>
                </div>

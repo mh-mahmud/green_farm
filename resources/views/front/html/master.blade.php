@@ -81,8 +81,8 @@ else {
          <div class="container">
             <div class="row align-items-center">
                <div class="col-xl-2 col-lg-3">
-                  <div class="logo" style="width:155px;background-color: #332D2D;">
-                     <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/car-clinic-logo.png" alt="car-clinic-logo"></a>
+                  <div class="logo" style="">
+                     <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="car-clinic-logo"></a>
                   </div>
                </div>
                <div class="col-xl-10 col-lg-9">
@@ -146,6 +146,7 @@ else {
          <div class="for-megamenu p-relative">
             <div class="container">
                <div class="row align-items-center">
+                  {{--
                   <div class="col-xl-2 col-lg-3">
                      <div class="cat-menu__category p-relative">
                         <a class="tp-cat-toggle" href="#" role="button"><i class="fal fa-bars"></i>Categories</a>
@@ -189,16 +190,20 @@ else {
                         </div>
                      </div> 
                   </div>
-                  <div class="col-xl-7 col-lg-6">
+                  --}}
+                  <div class="col-xl-9 col-lg-12">
                      <div class="main-menu">
                         <nav id="mobile-menu">
                            <ul>
                               <li><a href="{{route('index')}}">Home</a></li>
-                              <li><a href="{{ route('all-products') }}">Products</a></li>
-                              <li><a href="{{ route('blogs') }}">Blogs</a></li>
-                              <li><a href="{{ route('contact-us') }}">Contact</a></li>
-                              <li><a href="{{ route('about-us') }}">About</a></li>
-                              <li><a href="{{ route('careers') }}">Career</a></li>
+                              @foreach($cats as $cat)
+                              @php
+                                 $cat_link = explode(" ", strtolower($cat->category_name));
+                                 $cat_link = implode("-", $cat_link);
+                              @endphp
+                              <li><a href="{{ route('product-category-wise', $cat_link) }}">{{ $cat->category_name }}</a></li>
+                              @endforeach
+                              
                               <li class="d-block d-md-none has-dropdown has-megamenu">
                                  <a href="#">Categories</a>
                                  <ul class="submenu mega-menu">
@@ -235,6 +240,8 @@ else {
                         </nav>
                      </div>
                   </div>
+
+                  
                   <div class="col-xl-3 col-lg-3">
 
                      <div class="menu-contact">
@@ -242,20 +249,20 @@ else {
                            <li>
                               <div class="menu-contact__item">
                                  <div class="menu-contact__icon">
-                                    <i class="fal fa-phone"></i>
+                                    <i class="fal fa-plane-departure"></i>
                                  </div>
                                  <div class="menu-contact__info">
-                                    <a href="tel:+88 01910-000-000">01917 0000</a>
+                                    <a href="tel:+88 01910-000-000">Track Order</a>
                                  </div>
                               </div>
                            </li>
                            <li>
                               <div class="menu-contact__item">
                                  <div class="menu-contact__icon">
-                                    <i class="fal fa-map-marker-alt"></i>
+                                    <i class="fal fa-user"></i>
                                  </div>
                                  <div class="menu-contact__info">
-                                    <a href="#">24/7 Support</a>
+                                    <a href="#">Login</a>
                                  </div>
                               </div>
                            </li>
@@ -263,6 +270,7 @@ else {
                      </div>
 
                   </div>
+                  
                </div>
             </div>
          </div>
@@ -276,8 +284,8 @@ else {
       <div class="container">
          <div class="row align-items-center">
             <div class="col-xl-2 col-lg-3">
-               <div class="logo" style="width:155px;background-color: #332D2D;">
-                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/car-clinic-logo.png" alt="logo"></a>
+               <div class="logo" style="">
+                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="logo"></a>
                </div>
             </div>
             <div class="col-xl-6 col-lg-6">
@@ -369,8 +377,8 @@ else {
                <div class="header-canvas flex-auto">
                   <button class="tp-menu-toggle"><i class="far fa-bars"></i></button>
                </div>
-               <div class="logo"style="width:155px;background-color: #332D2D;">
-                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/car-clinic-logo.png" alt="logo"></a>
+               <div class="logo"style="">
+                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="logo"></a>
                </div>
             </div>
             <div class="col-lg-9 col-md-8">
@@ -407,8 +415,8 @@ else {
                </div>
             </div>
             <div class="col-6">
-               <div class="logo text-center"  style="width:155px;background-color: #332D2D;">
-                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/car-clinic-logo.png" alt="logo"></a>
+               <div class="logo text-center"  style="">
+                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="logo"></a>
                </div>
             </div>
             <div class="col-3">

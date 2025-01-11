@@ -1,12 +1,12 @@
 <head>
    <meta charset="utf-8">
    <meta http-equiv="x-ua-compatible" content="ie=edge">
-   <title>Car Clinic</title>
+   <title>গ্রীন ফার্ম</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
    <!-- Place favicon.ico in the root directory -->
-   <link rel="shortcut icon" type="image/x-icon" href="{{url('/')}}/assets/theme/assets/img/logo/fav-logo.webp">
+   <link rel="shortcut icon" type="image/x-icon" href="{{url('/')}}/assets/theme/assets/img/logo/favicon.jpg">
 
    <!-- CSS here -->
    <link rel="stylesheet" href="{{url('/')}}/assets/theme/assets/css/bootstrap.min.css">
