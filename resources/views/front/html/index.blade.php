@@ -6,7 +6,7 @@
       <section class="slider-area pb-25">
          <div class="container">
             <div class="row justify-content-xl-end">
-               <div class="col-xl-9 col-xxl-10 col-lg-12">
+               <div class="col-xl-12 col-xxl-10 col-lg-12">
                   <div class="tp-slider-area p-relative">
                      <div class="swiper-container slider-active">
                         <div class="swiper-wrapper">
@@ -161,7 +161,7 @@
 
                               @if(file_exists(public_path('/uploads/products/'.$product->img_path)) )
                               <a href="{{route('product-details', $product->id)}}">
-                                 <img style="max-height: 350px;border:1px solid #ddd;padding:20px" src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="product-thumb">
+                                 <img style="max-height: 350px;padding:20px" src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="product-thumb">
                                  {{--<img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-three/product-44.jpg" alt="product-thumb">--}}
                               </a>
                               @else
@@ -176,7 +176,7 @@
                               </div>
                            </div>
                            <div class="tpproduct__content"  style="text-align:center;">
-                              <h3 class="tpproduct__title" style="margin-bottom:20px;"><a href="{{route('product-details', $product->id)}}">{{ $product->name }}</a></h3>
+                              <h3 class="tpproduct__title" style="margin-bottom:20px;padding:10px"><a href="{{route('product-details', $product->id)}}">{{ $product->name }}</a></h3>
                               <div class="tpproduct__priceinfo p-relative">
                                  <div class="tpproduct__priceinfo-list--" style="margin-bottom:20px;">
                                     <span>Tk {{$product->product_value}}</span>
@@ -208,7 +208,7 @@
       <section class="banner-area pb-20">
          <div class="container">
             <div class="row">
-               <div class="col-xl-6 col-lg-12 col-md-12">
+               <div class="col-xl-12 col-lg-12 col-md-12">
                   <div class="tpbanneritems p-relative">
                      <div class="tpbanneritem__thumb mb-20">
                         <img src="{{url('/')}}/assets/theme/assets/img/banner/side-banner.png" alt="banner-img">
@@ -217,30 +217,6 @@
                            <h5 class="tpbanneritem__title mb-60" style="color:#FFF">New Modern & Stylist <br> Products</h5>
                            <div class="tpbanneritem__btn">
                               <a class="tp-btn green-btn banner-animation" href="{{ route('all-products') }}">Shop Now <i class="fal fa-long-arrow-right"></i></a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-6 col-lg-12 col-md-12">
-                  <div class="tpbanneritem">
-                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                           <div class="tpbanneritem__thumb banner-animation p-relative">
-                              <img src="{{url('/')}}/assets/theme/assets/img/banner/car-clinic-banner-02.png" alt="banner-img">
-                              <div class="tpbanneritem__text">
-                                 <h5 class="tpbanneritem__text-title"><a href="{{ route('all-products') }}">Free <br> Delivery</a></h5>
-                              </div>
-                              <span class="tp-banner-item-small"></span>
-                           </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                           <div class="tpbanneritem__thumb banner-animation p-relative">
-                              <img src="{{url('/')}}/assets/theme/assets/img/banner/car-clinic-banner-03.png" alt="banner-img">
-                              <div class="tpbanneritem__text">
-                                 <h5 class="tpbanneritem__text-title"><a href="{{ route('all-products') }}">Buy Tyres</a></h5>
-                                 <h3 class="tpbanneritem__text-price">10% Offer</h3>
-                              </div>
                            </div>
                         </div>
                      </div>
