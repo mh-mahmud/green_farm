@@ -15,6 +15,7 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Career;
 use App\Models\Wishlist;
+use App\Models\Setting;
 use Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -30,8 +31,9 @@ class FrontController extends Controller
         $sliders = Slider::where('status', 1)->get(['slider_title', 'slider_image']);
         $products = Product::where('status', 1)->inRandomOrder()->limit(30)->get();
         $top_sell = Product::where('status', 1)->orderBy('total_sell', 'desc')->limit(5)->get();
+        $cats = Category::all();
         // dd($top_sell);
-        return view('front.html.index', compact('brands', 'products', 'sliders', 'top_sell', 'blogs'));
+        return view('front.html.index', compact('brands', 'products', 'cats', 'sliders', 'top_sell', 'blogs'));
     }
 
     public function blogs() {
@@ -97,7 +99,8 @@ class FrontController extends Controller
 
     public function product_details($id) {
         $product = Product::findOrFail($id);
-        return view('front.html.product_details', compact('product'));
+        $settings = Setting::first();
+        return view('front.html.product_details', compact('product', 'settings'));
     }
 
     public function contact_page() {
@@ -126,8 +129,10 @@ class FrontController extends Controller
     // }
 
     public function product_category_wise($category) {
+
         $cat = explode("-", $category);
         $cat = implode(" ", $cat);
+
         $get_cat = Category::where('category_name', $cat)->first();
         if($get_cat==null) {
             dd("No Category Found");
@@ -136,7 +141,7 @@ class FrontController extends Controller
         $products = Product::where('status', 1)->where('category_id', $cat_id)->orderBy('created_at', 'asc')->paginate(30);
         $count = Product::where('status', 1)->where('category_id', $cat_id)->count();
         $page = "Category: " . ucfirst($cat);
-        return view('front.html.products', compact('products', 'count', 'page'));
+        return view('front.html.products', compact('products', 'count', 'page', 'cat'));
     }
 
     public function product_brand_wise($brand_name) {

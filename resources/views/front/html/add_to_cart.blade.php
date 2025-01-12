@@ -3,16 +3,12 @@
 
 	<div class="free">
       <!-- breadcrumb-area -->
-      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" data-background="{{url('/')}}/assets/theme/assets/img/banner/breadcrumb-01.jpg">
+      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
             <div class="row align-items-center">
-               <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                   <div class="tp-breadcrumb">
-                     <div class="tp-breadcrumb__link mb-10">
-                        <span class="breadcrumb-item-active"><a href="{{ route('index') }}">Home</a></span>
-                        <span>Cart</span>
-                     </div>
-                     <h2 class="tp-breadcrumb__title">Product Cart</h2>
+                     <h2 class="tp-" style="text-align:center;">PRODUCT CART</h2>
                   </div>
                </div>
             </div>

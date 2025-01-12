@@ -6,7 +6,7 @@
       <section class="slider-area pb-25">
          <div class="container">
             <div class="row justify-content-xl-end">
-               <div class="col-xl-12 col-xxl-10 col-lg-12">
+               <div class="col-xl-12 col-xxl-12 col-lg-12">
                   <div class="tp-slider-area p-relative">
                      <div class="swiper-container slider-active">
                         <div class="swiper-wrapper">
@@ -195,20 +195,28 @@
             <div class="swiper-container product-active">
                <div class="swiper-wrapper">
 
-                  @foreach($top_sell as $sell)
+                  @foreach($cats as $cat)
+                  @php
+                     $cat_link = explode(" ", strtolower($cat->category_name));
+                     $cat_link = implode("-", $cat_link);
+                  @endphp
                   <div class="swiper-slide">
                      <div class="whiteproduct">
                         <div class="whiteproduct__thumb">
-                           <a href={{ route('product-details', $sell->id) }}><img style="max-height: 350px;" src="{{url('/')}}/uploads/products/{{$sell->img_path}}" alt="product-thumb"></a>
+                           <a href="{{ route('product-category-wise', $cat_link) }}"><img style="max-height: 350px;" src="{{url('/')}}/public/uploads/categories/{{$cat->category_image}}" alt="product-thumb"></a>
                         </div>
                         <div class="whiteproduct__content d-flex justify-content-between align-items-center">
                            <div class="whiteproduct__text">
-                              <h5 class="whiteproduct__title"><a href="shop-details-2.html">{{$sell->name}}</a></h5>
-                              <span>Tk. {{$sell->product_value}}</span>
+                              {{--<h5 class="whiteproduct__title"><a href="shop-details-2.html">{{ $cat->category_name }}</a></h5>--}}
+                              <span>{{$cat->category_name}}</span>
                            </div>
                            <div class="whiteproduct__rating">
                               <i class="fas fa-star"></i>
-                              <span>({{$sell->total_sell}})</span>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <!-- <span>({{$cat->category_name}})</span> -->
                            </div>
                         </div>
                      </div>

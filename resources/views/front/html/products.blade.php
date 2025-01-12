@@ -3,17 +3,12 @@
 
    <div class="free">
       <!-- breadcrumb-area -->
-      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" data-background="{{url('/')}}/assets/theme/assets/img/banner/breadcrumb-01.jpg">
+      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
             <div class="row align-items-center">
-               <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                   <div class="tp-breadcrumb">
-                     <div class="tp-breadcrumb__link mb-10">
-                        <span class="breadcrumb-item-active"><a href="{{ route('index') }}">Home</a></span>
-                        <span  class="breadcrumb-item-active">All Products</span>
-                        <span>{{ $page }}</span>
-                     </div>
-                     <h2 class="tp-breadcrumb__title">Product List</h2>
+                     <h2 class="tp-" style="text-align:center;">{{ strtoupper($cat) }}</h2>
                   </div>
                </div>
             </div>
@@ -265,51 +260,12 @@
                                           <span>Tk. {{ $product->product_value }}</span>
                                        </div>
                                     </div>
-                                 </div>
-                                 <div class="tpproduct__ratingarea">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                       {{--<div class="tpproductdot">
-                                          <a class="tpproductdot__variationitem" href="shop-details.html">
-                                             <div class="tpproductdot__termshape">
-                                                <span class="tpproductdot__termshape-bg"></span>
-                                                <span class="tpproductdot__termshape-border"></span>
-                                             </div>
-                                          </a>
-                                          <a class="tpproductdot__variationitem" href="shop-details.html">
-                                             <div class="tpproductdot__termshape">
-                                                <span class="tpproductdot__termshape-bg red-product-bg"></span>
-                                                <span class="tpproductdot__termshape-border red-product-border"></span>
-                                             </div>
-                                          </a>
-                                          <a class="tpproductdot__variationitem" href="shop-details.html">
-                                             <div class="tpproductdot__termshape">
-                                                <span class="tpproductdot__termshape-bg orange-product-bg"></span>
-                                                <span class="tpproductdot__termshape-border orange-product-border"></span>
-                                             </div>
-                                          </a>
-                                          <a class="tpproductdot__variationitem" href="shop-details.html">
-                                             <div class="tpproductdot__termshape">
-                                                <span class="tpproductdot__termshape-bg purple-product-bg"></span>
-                                                <span class="tpproductdot__termshape-border purple-product-border"></span>
-                                             </div>
-                                          </a>
-                                       </div>--}}
-                                       <div class="tpproduct__rating">
-                                          <ul>
-                                             <li>
-                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                <a href="#"><i class="fas fa-star"></i></a>
-                                                <a href="#"><i class="far fa-star"></i></a>
-                                             </li>
-                                             <li>
-                                                <span>(0)</span>
-                                             </li>
-                                          </ul>
-                                       </div>
+                                    <div style="margin-top: 20px;">
+                                       <a style="width:100%;" class="btn btn-warning" href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
                                     </div>
+                                    
                                  </div>
+                                 
                               </div>
                            </div>
                            @endforeach

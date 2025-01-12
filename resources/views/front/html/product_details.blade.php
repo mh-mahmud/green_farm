@@ -3,16 +3,12 @@
 
 	<div class="free">
       <!-- breadcrumb-area -->
-      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" data-background="{{url('/')}}/assets/theme/assets/img/banner/breadcrumb-01.jpg">
+      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
             <div class="row align-items-center">
-               <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                   <div class="tp-breadcrumb">
-                     <div class="tp-breadcrumb__link mb-10">
-                        <span class="breadcrumb-item-active"><a href="index.html">Home</a></span>
-                        <span>Product Details</span>
-                     </div>
-                     <h2 class="tp-breadcrumb__title">Product Details</h2>
+                     <h2 class="tp-" style="text-align:center;">Product Details</h2>
                   </div>
                </div>
             </div>
@@ -68,8 +64,10 @@
                       </div>
                   </div>
                </div>
-               <div class="col-lg-5 col-md-7">
+               <div class="col-lg-6 col-md-8">
                   <div class="tpproduct-details__content">
+
+                     {{--
                      <div class="tpproduct-details__tag-area d-flex align-items-center mb-5">
                         <span class="tpproduct-details__tag">{{$product->category->category_name}}</span>
                         <div class="tpproduct-details__rating">
@@ -79,6 +77,7 @@
                         </div>
                         <a class="tpproduct-details__reviewers">{{ $product->total_sell }}+ Total Sell</a>
                      </div>
+                     --}}
                      <div class="tpproduct-details__title-area d-flex align-items-center flex-wrap mb-5">
                         <h3 class="tpproduct-details__title">{{$product->name}}</h3>
                         @if($product->stock_status=="In Stock")
@@ -90,7 +89,7 @@
                      </div>
                      <div class="tpproduct-details__price mb-30">
                         <!-- <del>$9.35</del> -->
-                        <span>Tk. {{$product->product_value}}</span>
+                        <span style="color:#14A44D;">Tk. {{$product->product_value}}</span>
                      </div>
                      {{--
                      <div class="tpproduct-details__pera" style="max-width: 90%;">
@@ -98,14 +97,15 @@
                      </div>
                      --}}
                      <div class="tpproduct-details__count d-flex align-items-center flex-wrap mb-25">
-                        <div class="tpproduct-details__quantity">
+                        <!-- <div class="tpproduct-details__quantity">
                            <span class="cart-minus"><i class="far fa-minus"></i></span>
                            <input class="tp-cart-input" type="text" value="1">
                            <span class="cart-plus"><i class="far fa-plus"></i></span>
-                        </div>
-                        <div class="tpproduct-details__cart ml-20">
-                           <button data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> Add To Cart</button>
-                           <!-- <a href=""><i class="fal fa-shopping-cart"></i> Add To Cart</a> -->
+                        </div> -->
+                        <div class="tpproduct-details__cart ml-0" style="width:100%">
+                           <button style="background-color:#332D2D;width:100%" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> Add To Cart</button>
+
+                           <button style="background-color:#14A44D;width:100%;margin-top:20px" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
                         </div>
 
                         {{--
@@ -115,34 +115,7 @@
                         --}}
 
                      </div>
-                     {{--
-                     <div class="tpproductdot mb-30">
-                        <a class="tpproductdot__variationitem" href="#">
-                           <div class="tpproductdot__termshape">
-                              <span class="tpproductdot__termshape-bg"></span>
-                              <span class="tpproductdot__termshape-border"></span>
-                           </div>
-                        </a>
-                        <a class="tpproductdot__variationitem" href="#">
-                           <div class="tpproductdot__termshape">
-                              <span class="tpproductdot__termshape-bg red-product-bg"></span>
-                              <span class="tpproductdot__termshape-border red-product-border"></span>
-                           </div>
-                        </a>
-                        <a class="tpproductdot__variationitem" href="#">
-                           <div class="tpproductdot__termshape">
-                              <span class="tpproductdot__termshape-bg orange-product-bg"></span>
-                              <span class="tpproductdot__termshape-border orange-product-border"></span>
-                           </div>
-                        </a>
-                        <a class="tpproductdot__variationitem" href="#">
-                           <div class="tpproductdot__termshape">
-                              <span class="tpproductdot__termshape-bg purple-product-bg"></span>
-                              <span class="tpproductdot__termshape-border purple-product-border"></span>
-                           </div>
-                        </a>
-                     </div>
-                     --}}
+
                      <div class="tpproduct-details__information tpproduct-details__code">
                         <p>SKU:</p><span>{{$product->product_code}}</span>
                      </div>
@@ -165,13 +138,6 @@
                      </div>
 
                      {{--
-                     <div class="tpproduct-details__information tpproduct-details__tags">
-                        <p>Tags:</p>
-                        <span><a href="#">fashion,</a></span>
-                        <span><a href="#">t-shirts,</a></span>
-                        <span><a href="#">women</a></span>
-                     </div>
-                     --}}
                      <div class="tpproduct-details__information tpproduct-details__social">
                         <p>Share:</p>
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -180,8 +146,14 @@
                         <a href="#"><i class="fab fa-youtube"></i></a>
                         <a href="#"><i class="fab fa-linkedin"></i></a>
                      </div>
+                     --}}
+                     <div class="details">
+                        {!! $settings->product_contact_address !!}
+                     </div>
                   </div>
                </div>
+
+               {{--
                <div class="col-lg-2 col-md-5">
                   <div class="tpproduct-details__condation">
                      <ul>
@@ -228,6 +200,7 @@
                      </ul>
                   </div>
                </div>
+               --}}
             </div>
          </div>
       </section>
@@ -244,9 +217,7 @@
                            <li class="nav-item" role="presentation">
                               <button class="nav-links active" id="home-tab-1" data-bs-toggle="tab" data-bs-target="#home-1" type="button" role="tab" aria-controls="home-1" aria-selected="true">Description</button>
                            </li>
-                           <li class="nav-item" role="presentation">
-                              <button class="nav-links" id="information-tab" data-bs-toggle="tab" data-bs-target="#additional-information" type="button" role="tab" aria-controls="additional-information" aria-selected="false">Additional information</button>
-                           </li>
+
                            <li class="nav-item" role="presentation">
                               <button class="nav-links" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews</button>
                            </li>
@@ -256,52 +227,7 @@
                         <div class="tab-para tab-pane fade show active" id="home-1" role="tabpanel" aria-labelledby="home-tab-1">
                            {!! $product->description !!}
                         </div>
-                        <div class="tab-pane fade" id="additional-information" role="tabpanel"
-                        aria-labelledby="information-tab">
-                           <div class="product__details-info table-responsive">
-                              <!-- <table class="table table-striped">
-                                 <tbody>
-                                    <tr>
-                                       <td class="add-info">Weight</td>
-                                       <td class="add-info-list"> 2 lbs</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="add-info">Dimensions</td>
-                                       <td class="add-info-list"> 12 × 16 × 19 in</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="add-info">Product</td>
-                                       <td class="add-info-list"> Purchase this product on rag-bone.com</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="add-info">Color</td>
-                                       <td class="add-info-list"> Gray, Black</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="add-info">Size</td>
-                                       <td class="add-info-list"> S, M, L, XL</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="add-info">Model</td>
-                                       <td class="add-info-list"> Model </td>
-                                    </tr>
-                                    <tr>
-                                       <td class="add-info">Shipping</td>
-                                       <td class="add-info-list"> Standard shipping: $5,95L</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="add-info">Care Info</td>
-                                       <td class="add-info-list"> Machine Wash up to 40ºC/86ºF Gentle Cycle</td>
-                                    </tr>
-                                    <tr>
-                                       <td class="add-info">Brand</td>
-                                       <td  class="add-info-list">  Kazen</td>
-                                    </tr>
-                                 </tbody>
-                             </table> -->
-                             {!! $product->product_specification !!}
-                           </div>
-                        </div>
+
                         <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
 
                            <div class="product-details-review">
