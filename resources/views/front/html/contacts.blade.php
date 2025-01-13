@@ -2,16 +2,12 @@
 @section('content')
 
       <!-- breadcrumb-area -->
-      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" data-background="{{url('/')}}/assets/theme/assets/img/banner/breadcrumb-01.jpg">
+      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
             <div class="row align-items-center">
-               <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                   <div class="tp-breadcrumb">
-                     <div class="tp-breadcrumb__link mb-10">
-                        <span class="breadcrumb-item-active"><a href="index.html">Home</a></span>
-                        <span>Contact</span>
-                     </div>
-                     <h2 class="tp-breadcrumb__title">Get In Touch</h2>
+                     <h2 class="tp-" style="text-align:center;">CONTACT US</h2>
                   </div>
                </div>
             </div>
@@ -26,27 +22,30 @@
                <div class="col-lg-4 col-12">
                   <div class="tpcontact__right mb-40">
                      <div class="tpcontact__shop mb-30">
-                        <h4 class="tpshop__title mb-25">Get In Touch</h4>
+                        <h4 class="tpshop__title mb-25">Address</h4>
                         <div class="tpshop__info">
                            <ul>
-                              <li><i class="fal fa-map-marker-alt"></i> <a href="#">24/26 Strait Bargate, Boston, PE21,  United Kingdom</a></li>
+                              <li><i class="fal fa-map-marker-alt"></i> <a href="#">Tokyo Square, 9 Ring Rd, Dhaka 1207, Mohammadpur,  Dhaka</a></li>
                               <li>
                                  <i class="fal fa-phone"></i>
-                                 <a href="tel:0123456789">+098 (905) 786 897 8</a>
-                                 <a href="tel:0123456789">6 - 146 - 389 - 5748</a>
+                                 <a href="tel:+88 01926 313 321">+88 01926 313 321</a>
+                                 <a href="tel:0123456789">+88 01789 944 503</a>
                               </li>
                               <li>
                                  <i class="fal fa-clock"></i>
-                                 <span>Store Hours:</span>
-                                 <span>10 am - 10 pm EST, 7 days a week</span>
+                                 <span>Service Time:</span>
+                                 <span>09 am - 10 pm +6 GMT, 7 days a week</span>
                               </li>
                            </ul>
                         </div>
                      </div>
+
+                     {{--
                      <div class="tpcontact__support">
                         <a href="tel:0123456">Get Support On Call <i class="fal fa-headphones"></i></a>
                         <a target="_blank" href="https://www.google.com/maps/@36.963672,-119.2249843,7.17z">Get Direction <i class="fal fa-map-marker-alt"></i></a>
                      </div>
+                     --}}
                   </div>
                </div>
                <div class="col-lg-8 col-12">
@@ -97,11 +96,11 @@
       <!-- contact-area-end -->
 
       <!-- map-area-start -->
-      <div class="map-area">
+      <!-- <div class="map-area">
          <div class="tpshop__location-map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.089890097914!2d90.34928531457048!3d23.7676268845825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8100031a53f%3A0x9c6fd142dd0a3aa3!2sAdabor%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1691580634567!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
          </div>
-      </div>
+      </div> -->
       <!-- map-area-end -->
 
 

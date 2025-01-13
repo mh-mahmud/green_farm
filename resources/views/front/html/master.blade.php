@@ -45,35 +45,16 @@ else {
       <div class="header-top tertiary-header-top space-bg">
          <div class="container">
             <div class="row">
-               <div class="col-xl-7 col-lg-12 col-md-12 ">
-                  <div class="header-welcome-text">
-                     <!-- <span>Welcome to our international shop! Enjoy free shipping on orders $100 & up.</span>
-                     <a href="#">Shop Now<i class="fal fa-long-arrow-right"></i></a> -->
+               <div class="col-xl-12 col-lg-12 col-md-12 ">
+                  <div class="header-welcome-text" style="font-size:14px;text-align:center;">
+                     আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন:  +88 01789 944 503 | হট লাইন: 01926-313321
                   </div>
                </div>
-               <div class="col-xl-5 d-none d-xl-block">
+               <!-- <div class="col-xl-5 d-none d-xl-block">
                   <div class="headertoplag d-flex align-items-center justify-content-end">
-                     <div class="headertoplag__lang">
-                        <ul>
-                           <li>
-                              @if(Auth::user())
-                                 <a href="{{ route('customer-dashboard') }}"><i class="fal fa-user"></i> Dashboard</a>
-                              @else
-                                 <a href="{{ route('user-register') }}"><i class="fal fa-user"></i> Account</a>
-                              @endif
-                              <a class="order-tick" href="{{ URL::to('track-your-order') }}"><i class="fal fa-plane-departure"></i>Track Your Order</a>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="menu-top-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-behance"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                     </div>
+                     আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন:  +8801789944503 | হট লাইন: 01926-313321
                   </div>
-               </div>
+               </div> -->
             </div>
          </div>
       </div>
@@ -252,7 +233,7 @@ else {
                                     <i class="fal fa-plane-departure"></i>
                                  </div>
                                  <div class="menu-contact__info">
-                                    <a href="tel:+88 01910-000-000">Track Order</a>
+                                    <a href="{{ URL::to('track-your-order') }}">Track Order</a>
                                  </div>
                               </div>
                            </li>
@@ -262,7 +243,11 @@ else {
                                     <i class="fal fa-user"></i>
                                  </div>
                                  <div class="menu-contact__info">
-                                    <a href="#">Login</a>
+                                    @if(Auth::user())
+                                    <a href="{{ route('customer-dashboard') }}"><i class="fal fa-user"></i> Dashboard</a>
+                                    @else
+                                    <a href="{{ route('user-login') }}">Login</a>
+                                    @endif
                                  </div>
                               </div>
                            </li>
@@ -292,48 +277,43 @@ else {
                <div class="main-menu">
                   <nav>
                      <ul>
-                        <li><a href="{{route('index')}}">Home</a></li>
-                        <li><a href="{{ route('all-products') }}">Products</a></li>
-                        <li><a href="{{ route('blogs') }}">Blogs</a></li>
-                        <li><a href="{{ route('contact-us') }}">Contact</a></li>
-                        <li><a href="{{ route('about-us') }}">About</a></li>
-                        <li><a href="{{ route('careers') }}">Career</a></li>
-                        {{--     
-                        <li class="has-dropdown has-megamenu">
-                           <a href="about.html">Pages</a>
-                           <ul class="submenu mega-menu">
-                              <li>
-                                 <a class="mega-menu-title">Page layout</a>
-                                 <ul>
-                                    <li><a href="shop.html">Shop filters v1</a></li>
-                                    <li><a href="shop-2.html">Shop filters v2</a></li>
-                                    <li><a href="shop-details.html">Shop sidebar</a></li>
-                                    <li><a href="shop-details-2.html">Shop Right sidebar</a></li>
-                                    <li><a href="shop-location.html">Shop List view</a></li>
-                                 </ul>
-                              </li>
-                              <li>
-                                 <a class="mega-menu-title">Page layout</a>
-                                 <ul>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="sign-in.html">Sign In</a></li>
-                                    <li><a href="sign-in.html">Log In</a></li>
-                                 </ul>
-                              </li>
-                              <li>
-                                 <a class="mega-menu-title">Page type</a>
-                                 <ul>
-                                    <li><a href="track.html">Product Track</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="error.html">404 / Error</a></li>
-                                    <li><a href="coming-soon.html">Coming Soon</a></li>
-                                 </ul>
-                              </li>
-                           </ul>
-                        </li>
-                        --}}
+
+                                    @foreach($cats as $cat)
+
+                                    @if($cat->has_child==1)
+                                    @php
+                                       $sub_cats = Category::where('parent_id', $cat->id)->where('status', 1)->get(['category_name']);
+                                    @endphp
+                                    <li>
+                                       <a class="mega-menu-title">{{ $cat->category_name }}</a>
+                                       <ul>
+                                          @foreach($sub_cats as $scat)
+                                          @php
+                                             $scat_link = explode(" ", strtolower($scat->category_name));
+                                             $scat_link = implode("-", $scat_link);
+                                          @endphp
+                                          <li><a href="{{ route('product-category-wise', $scat_link) }}">{{ $scat->category_name }}</a></li>
+                                          @endforeach
+                                       </ul>
+                                    </li>
+                                    @else
+                                    @php
+                                       $cat_link = explode(" ", strtolower($cat->category_name));
+                                       $cat_link = implode("-", $cat_link);
+                                    @endphp
+                                    <li><a href="{{ route('product-category-wise', $cat_link) }}">{{ $cat->category_name }}</a></li>
+                                    @endif
+                                    @endforeach
+                                    
+                                    {{--
+                                    <li><a href="{{route('index')}}">Home</a></li>
+                                    <li><a href="{{ route('all-products') }}">Products</a></li>
+                                    <li><a href="{{ route('blogs') }}">Blogs</a></li>
+                                    <li><a href="{{ route('contact-us') }}">Contact</a></li>
+                                    <li><a href="{{ route('about-us') }}">About</a></li>
+                                    <li><a href="{{ route('careers') }}">Careersss</a></li>
+                                    --}}
+
                      </ul>
                   </nav>
                </div>

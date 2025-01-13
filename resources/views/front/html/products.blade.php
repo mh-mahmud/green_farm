@@ -243,14 +243,17 @@
                                           <img  style="max-height:300px" src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="product-thumb">
                                           {{--<img class="thumbitem-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-two/product-22.jpg" alt="product-thumb">--}}
                                        </a>
+
+                                       {{--
                                        <div class="tpproduct__thumb-bg">
                                           <div class="tpproductactionbg">
                                              <a href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-basket"></i></a>
-                                             {{--<a href="#"><i class="fal fa-exchange"></i></a>--}}
+                                             <a href="#"><i class="fal fa-exchange"></i></a>
                                              <a href="{{ route('product-details', $product->id) }}"><i class="fal fa-eye"></i></a>
                                              <a href="{{ route('add-to-wishlist', $product->id) }}"><i class="fal fa-heart"></i></a>
                                           </div>
                                        </div>
+                                       --}}
                                     </div>
                                  </div>
                                  <div class="tpproduct__content-area">

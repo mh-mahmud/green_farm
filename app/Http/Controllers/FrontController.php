@@ -61,7 +61,8 @@ class FrontController extends Controller
         $products = Product::where('status', 1)->orderBy('created_at', 'asc')->paginate(30);
         $count = Product::where('status', 1)->count();
         $page = "Products";
-        return view('front.html.products', compact('products', 'count', 'page'));
+        $cat = "ALL PRODUCTS";
+        return view('front.html.products', compact('products', 'count', 'page', 'cat'));
     }
 
     public function customer_dashboard() {
@@ -112,15 +113,18 @@ class FrontController extends Controller
     }
 
     public function terms_and_conditions() {
-        return view('front.html.terms_and_conditions');
+        $settings = Setting::first();
+        return view('front.html.terms_and_conditions', compact('settings'));
     }
 
     public function return_policy() {
-        return view('front.html.return_policy');
+        $settings = Setting::first();
+        return view('front.html.return_policy', compact('settings'));
     }
 
     public function faq() {
-        return view('front.html.faq');
+        $settings = Setting::first();
+        return view('front.html.faq', compact('settings'));
     }
 
 

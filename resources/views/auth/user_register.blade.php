@@ -41,11 +41,11 @@
 
 
 	          <div class="tptrack__product mb-40">
-	             <div class="tptrack__thumb">
+	             <!-- <div class="tptrack__thumb">
 	                <img src="{{url('/')}}/assets/theme/assets/img/banner/full-banner.png" alt="">
-	             </div>
+	             </div> -->
 	             <div class="tptrack__content grey-bg-3">
-	                <div class="tptrack__item d-flex mb-20">
+	                <!-- <div class="tptrack__item d-flex mb-20">
 	                   <div class="tptrack__item-icon">
 	                      <img src="{{url('/')}}/assets/theme/assets/img/icon/sign-up.png" alt="">
 	                   </div>
@@ -53,7 +53,7 @@
 	                      <h4 class="tptrack__item-title">Sign Up</h4>
 	                      <p>Your personal data will be used to support your experience throughout this website, to manage access to your account.</p>
 	                   </div>
-	                </div>
+	                </div> -->
 
 	                <form action="{{ route('user.register.post') }}" method="POST">
 	                	@csrf
@@ -97,7 +97,7 @@
 		                   <a href="{{ route('user-login') }}">Already Have Account?</a>
 		                </div>
 		                <div class="tptrack__btn">
-		                   <button class="tptrack__submition tpsign__reg">Register Now<i class="fal fa-long-arrow-right"></i></button>
+		                   <button style="width:100%" class="btn btn-success">Register Now&nbsp;&nbsp;<i class="fal fa-long-arrow-right"></i></button>
 		                </div>
 	                </form>
 

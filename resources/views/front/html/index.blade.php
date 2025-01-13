@@ -112,8 +112,8 @@
                               @endif
                               <div class="tpproduct__thumb-action">
                                  <!-- <a class="comphare" href="#"><i class="fal fa-exchange"></i></a> -->
-                                 <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
-                                 <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a>
+                                 <!-- <a class="quckview" href="#"><i class="fal fa-eye"></i></a> -->
+                                 <!-- <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a> -->
                               </div>
                            </div>
                            <div class="tpproduct__content"  style="text-align:center;">

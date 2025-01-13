@@ -3,16 +3,12 @@
 
 	<div class="free">
       <!-- breadcrumb-area -->
-      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" data-background="{{url('/')}}/assets/theme/assets/img/banner/breadcrumb-01.jpg">
+      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
             <div class="row align-items-center">
-               <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                   <div class="tp-breadcrumb">
-                     <div class="tp-breadcrumb__link mb-10">
-                        <span class="breadcrumb-item-active"><a href="index.html">Home</a></span>
-                        <span>About</span>
-                     </div>
-                     <h2 class="tp-breadcrumb__title">About Us</h2>
+                     <h2 class="tp-" style="text-align:center;">ABOUT US</h2>
                   </div>
                </div>
             </div>
@@ -27,28 +23,21 @@
                <div class="row">
                   <div class="col-lg-6">
                      <div class="tpabout__inner-thumb mb-40">
-                        <img src="{{url('/')}}/assets/theme/assets/img/about-us.jpg" alt="">
+                        <img src="{{url('/')}}/assets/theme/assets/img/green-farm-about-us.webp" alt="">
                      </div>
                   </div>
                   <div class="col-lg-6">
                      <div class="tpabout__inner-title-area mt-25 mb-45">
-                        <h4 class="tpabout__inner-sub-title">About Us</h4>
-                        <h4 class="tpabout__inner-title">About Our Story</h4>
+                        <h4 class="tpabout__inner-title">গ্রীন ফার্ম সম্পর্কে</h4>
                      </div>
 
                      <div class="tpabout__inner-story mb-40" style="padding-right:30px;border-right: 1px solid #ddd;">
-                        <p>Publish your eCommerce site quickly with our easy-to-use store
-                           builder— no coding required. Migrate your items from your
-                           point of sale system or turn your Instagram feed into a shopping
-                           site and start selling fast. Square Online works for all kinds of
-                           businesses—retail, restaurants, services without costly
-                           customization or add ons. Get orders to your customers in lots
-                           of ways by offering shipping, pickup, delivery, and even QR
-                           code ordering.</p>
+                        <p>
+                           <span>Grown in Nature, Served by Nature</span><br><br>
 
-                           <p style="margin-top: 30px;">
-                              Expand your reach and sell more using seamless integrations with Google, Instagram, Facebook, and more. Built- in SEO tools make it easy for shoppers to find your business on search engines. Get access to the entire suite of integrated Square solutions to help you run your business. Integration between Square Online and all Square point of sale systems makes inventory management easy. Subscribe to Square Marketing and easily send email promotions to your customers using the contact information
-                           </p>
+‘’ গ্রীন ফার্ম’’ দেশের অন্যতম বিশ্বস্ত প্রতিষ্ঠান! প্রত্যন্ত অঞ্চল থেকে নিরাপাদ খাদ্য সংগ্রহ করে,পুষ্টিগুন বজায় রেখে ক্রেতার হাতে পৌছে দেয়াই আমাদের মূল উদ্দেশ্য। পুষ্টিকর ও উচ্চমানের পণ্য সরবারহের প্রতিশ্রুতি বজায় রেখে এর মধ্যেই গ্রাহকের আস্থা অর্জন করেছে, দেশে নিরাপদ খাদ্যে সরবারহকারী অন্যতম বিশ্বস্ত এই প্রতিষ্ঠান। বিশুদ্ধ এবং নিরাপদ খাদ্য সরবারহ এবং গ্রাহক সেবা নিশ্চিত করতে আমরা প্রতিশ্রুতিবদ্ধ। প্রত্যন্ত অঞ্চল থেকে নিরাপাদ খাদ্য সংগ্রহ করে,পুষ্টিগুন বজায় রেখে ক্রেতার হাতে পৌছে দেয়াই আমাদের প্রধান লক্ষ্য।
+                        </p>
+
                      </div>
                   </div>
                </div>
@@ -110,6 +99,7 @@
       <!-- about-area-end -->
 
       <!-- team-area-start -->
+      {{--
       <section class="team-area grey-bg-3 pb-30">
          <div class="container">
             <div class="row">
@@ -170,6 +160,7 @@
             </div>
          </div>
       </section>
+      --}}
       <!-- team-area-end -->
 
       <!-- feature-area-start -->

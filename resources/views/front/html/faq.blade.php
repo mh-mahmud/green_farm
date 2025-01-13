@@ -3,16 +3,12 @@
 
 	<div class="free">
       <!-- breadcrumb-area -->
-      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" data-background="{{url('/')}}/assets/theme/assets/img/banner/breadcrumb-01.jpg">
+      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
             <div class="row align-items-center">
-               <div class="col-xl-7 col-lg-12 col-md-12 col-12">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                   <div class="tp-breadcrumb">
-                     <div class="tp-breadcrumb__link mb-10">
-                        <span class="breadcrumb-item-active"><a href="{{ route('index') }}">Home</a></span>
-                        <span>FAQ</span>
-                     </div>
-                     <h2 class="tp-breadcrumb__title">FAQs</h2>
+                     <h2 class="tp-" style="text-align:center;">FAQ</h2>
                   </div>
                </div>
             </div>
@@ -20,22 +16,28 @@
       </section>
       <!-- breadcrumb-area-end -->
           
-      <!-- about-area-start -->
+      <!-- area-start -->
       <section class="about-area pt-80  pb-40">
          <div class="container">
             <div class="tpabout__inner-logo p-relative">
                <div class="row">
-                  Sorry, No faq to show. We will update this section soon.
-               </div>
-               <!-- <div class="tpabout__logo">
-                  <a href="index.html"><img src="{{url('/')}}/assets/theme/assets/img/banner/about-img-3.png" alt=""></a>
-               </div> -->
-            </div>
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-10">
+                     <!-- <div class="tpabout__inner-title-area mt-25 mb-45">
+                        <h4 class="tpabout__inner-title">Refund Policy</h4>
+                     </div> -->
 
+                     {!! $settings->faq !!}
+
+                  </div>
+                  <div class="col-lg-1"></div>
+               </div>
+
+            </div>
 
          </div>
       </section>
-      <!-- about-area-end -->
+      <!-- area-end -->
 
 	</div>
 
