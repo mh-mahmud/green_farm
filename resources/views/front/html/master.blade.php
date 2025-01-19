@@ -113,7 +113,12 @@ else {
                               <span>{{ count($carts) }}</span>
                               @endif
                            </button>
-                           <a href="{{ route('user-login') }}"><i class="fal fa-user"></i></a>
+                           
+                           @if(Auth::user())
+                              <a href="{{ route('customer-dashboard') }}"><i class="fal fa-tachometer-alt"></i></a>
+                           @else
+                              <a href="{{ route('user-login') }}"><i class="fal fa-user"></i></a>
+                           @endif
                            <a href="{{ route('my-wishlist') }}"><i class="fal fa-heart"></i></a>
                         </div>
                      </div>
@@ -185,6 +190,7 @@ else {
                               <li><a href="{{ route('product-category-wise', $cat_link) }}">{{ $cat->category_name }}</a></li>
                               @endforeach
                               
+                              {{--
                               <li class="d-block d-md-none has-dropdown has-megamenu">
                                  <a href="#">Categories</a>
                                  <ul class="submenu mega-menu">
@@ -217,6 +223,7 @@ else {
 
                                  </ul>
                               </li>
+                              --}}
                            </ul>
                         </nav>
                      </div>
@@ -244,7 +251,7 @@ else {
                                  </div>
                                  <div class="menu-contact__info">
                                     @if(Auth::user())
-                                    <a href="{{ route('customer-dashboard') }}"><i class="fal fa-user"></i> Dashboard</a>
+                                    <a href="{{ route('customer-dashboard') }}"><i class="fal fa-tachometer-alt"></i> Dashboard</a>
                                     @else
                                     <a href="{{ route('user-login') }}">Login</a>
                                     @endif
@@ -265,6 +272,7 @@ else {
    <!-- header-area-end -->
 
    <!-- header-xl-sticky-area -->
+   {{--
    <div id="header-sticky" class="logo-area tp-sticky-one mainmenu-5">
       <div class="container">
          <div class="row align-items-center">
@@ -278,41 +286,33 @@ else {
                   <nav>
                      <ul>
 
-                                    @foreach($cats as $cat)
+                     @foreach($cats as $cat)
 
-                                    @if($cat->has_child==1)
-                                    @php
-                                       $sub_cats = Category::where('parent_id', $cat->id)->where('status', 1)->get(['category_name']);
-                                    @endphp
-                                    <li>
-                                       <a class="mega-menu-title">{{ $cat->category_name }}</a>
-                                       <ul>
-                                          @foreach($sub_cats as $scat)
-                                          @php
-                                             $scat_link = explode(" ", strtolower($scat->category_name));
-                                             $scat_link = implode("-", $scat_link);
-                                          @endphp
-                                          <li><a href="{{ route('product-category-wise', $scat_link) }}">{{ $scat->category_name }}</a></li>
-                                          @endforeach
-                                       </ul>
-                                    </li>
-                                    @else
-                                    @php
-                                       $cat_link = explode(" ", strtolower($cat->category_name));
-                                       $cat_link = implode("-", $cat_link);
-                                    @endphp
-                                    <li><a href="{{ route('product-category-wise', $cat_link) }}">{{ $cat->category_name }}</a></li>
-                                    @endif
-                                    @endforeach
+                     @if($cat->has_child==1)
+                     @php
+                        $sub_cats = Category::where('parent_id', $cat->id)->where('status', 1)->get(['category_name']);
+                     @endphp
+                     <li>
+                        <a class="mega-menu-title">{{ $cat->category_name }}</a>
+                        <ul>
+                           @foreach($sub_cats as $scat)
+                           @php
+                              $scat_link = explode(" ", strtolower($scat->category_name));
+                              $scat_link = implode("-", $scat_link);
+                           @endphp
+                           <li><a href="{{ route('product-category-wise', $scat_link) }}">{{ $scat->category_name }}</a></li>
+                           @endforeach
+                        </ul>
+                     </li>
+                     @else
+                     @php
+                        $cat_link = explode(" ", strtolower($cat->category_name));
+                        $cat_link = implode("-", $cat_link);
+                     @endphp
+                     <li><a href="{{ route('product-category-wise', $cat_link) }}">{{ $cat->category_name }}</a></li>
+                     @endif
+                     @endforeach
                                     
-                                    {{--
-                                    <li><a href="{{route('index')}}">Home</a></li>
-                                    <li><a href="{{ route('all-products') }}">Products</a></li>
-                                    <li><a href="{{ route('blogs') }}">Blogs</a></li>
-                                    <li><a href="{{ route('contact-us') }}">Contact</a></li>
-                                    <li><a href="{{ route('about-us') }}">About</a></li>
-                                    <li><a href="{{ route('careers') }}">Careersss</a></li>
-                                    --}}
 
                      </ul>
                   </nav>
@@ -347,6 +347,7 @@ else {
          </div>
       </div>
    </div>
+   --}}
    <!-- header-xl-sticky-end -->
 
    <!-- header-md-lg-area -->
@@ -378,7 +379,12 @@ else {
                            <span>{{ count($carts) }}</span>
                         @endif
                      </button>
-                     <a href="{{ route('user-login') }}"><i class="fal fa-user"></i></a>
+                     
+                     @if(Auth::user())
+                        <a href="{{ route('customer-dashboard') }}"><i class="fal fa-tachometer-alt"></i></a>
+                     @else
+                        <a href="{{ route('user-login') }}"><i class="fal fa-user"></i></a>
+                     @endif
                      <a href="{{ route('my-wishlist') }}"><i class="fal fa-heart"></i></a>
                   </div>
                </div>
@@ -409,7 +415,14 @@ else {
                               <span>{{ count($carts) }}</span>
                            @endif
                         </button>
-                        <a href="{{ route('user-login') }}"><i class="fal fa-user"></i></a>
+
+                        @if(Auth::user())
+                           <a href="{{ route('customer-dashboard') }}"><i class="fal fa-tachometer-alt"></i></a>
+                        @else
+                           <a href="{{ route('user-login') }}"><i class="fal fa-user"></i></a>
+                        @endif
+
+                        
                      </div>
                   </div>
                </div>
@@ -422,13 +435,19 @@ else {
    <!-- sidebar-menu-area -->
    <div class="tpsideinfo">
       <button class="tpsideinfo__close">Close<i class="fal fa-times ml-10"></i></button>
+
+      
       <div class="tpsideinfo__search text-center pt-35">
+         {{--
          <span class="tpsideinfo__search-title mb-20">What Are You Looking For?</span>
          <form action="#">
             <input type="text" placeholder="Search Products...">
             <button><i class="fal fa-search"></i></button>
          </form>
+         --}}
       </div>
+      
+
       <div class="tpsideinfo__nabtab">
          <!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -473,19 +492,20 @@ else {
          <a href="{{ route('user-register') }}"><i class="fal fa-user-plus"></i> Register</a>
       </div>
       @endif
-
+      {{--
       <div class="tpsideinfo__wishlist-link">
          <a href="{{ route('my-wishlist') }}" target="_parent"><i class="fal fa-heart"></i> Wishlist</a>
       </div>
+      --}}
    </div>
    <div class="body-overlay"></div>
    <!-- sidebar-menu-area-end -->
 
    <!-- header-cart-start -->
    <div class="tpcartinfo tp-cart-info-area p-relative">
-      <button class="tpcart__close"><i class="fal fa-times"></i></button>
+      <button class="tpcart__close"><i class="fal fa-times" style="color:#FFF;"></i></button>
       <div class="tpcart">
-         <h4 class="tpcart__title">Your Cart</h4>
+         <h4 class="tpcart__title" style="background-color:#4FBB7A;color:#FFF;">Your Cart</h4>
          <div class="tpcart__product">
             <div class="tpcart__product-list">
                <ul>
@@ -533,7 +553,7 @@ else {
             @endif
          </div>
          <div class="tpcart__free-shipping text-center">
-            <span>Free shipping for orders <b>under Dhaka City</b></span>
+            <span>Free shipping, orders inside Dhaka</span>
          </div>
 
       </div>
