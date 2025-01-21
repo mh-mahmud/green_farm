@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 13, 2025 at 08:05 PM
+-- Generation Time: Jan 21, 2025 at 07:51 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.2.0
 
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `billing_address`
@@ -120,7 +120,8 @@ CREATE TABLE IF NOT EXISTS `billing_address` (
 
 INSERT INTO `billing_address` (`id`, `user_id`, `session_id`, `first_name`, `last_name`, `company_name`, `email`, `mobile`, `city`, `state`, `zip`, `shipping_address`, `shipping_address_2`, `created_at`, `updated_at`, `status`) VALUES
 (16, NULL, 'ABCDEF1234', 'SHANGIDA', 'BINTE', 'Man Power', 'tamjidmahmud1518@gmail.com', '01717761611', 'Dhaka', 'Dhaka', '1201', 'Feni, Mastar para, Mohipal, Feni', 'Feni, Mastar para, Mohipal, Feni', '2024-12-14 19:41:41', '2024-12-14 19:41:41', 1),
-(17, 80, NULL, 'Obaidul', 'Obaidul', 'Roads & Highway', NULL, '01919001122', 'Dhaka', 'Dhaka', '1200', 'Master para, Feni', NULL, '2024-12-29 23:31:43', '2024-12-29 23:31:43', 1);
+(17, 80, NULL, 'Obaidul', 'Obaidul', 'Roads & Highway', NULL, '01919001122', 'Dhaka', 'Dhaka', '1200', 'Master para, Feni', NULL, '2024-12-29 23:31:43', '2024-12-29 23:31:43', 1),
+(18, 81, NULL, 'John', 'John', NULL, 'john@ymail.com', '01919101010', 'Dhaka', 'Dhaka', '1200', 'Tokyo square, Mohammad pur, Dhaka', NULL, '2025-01-19 14:57:47', '2025-01-19 14:57:47', 1);
 
 -- --------------------------------------------------------
 
@@ -383,7 +384,7 @@ CREATE TABLE IF NOT EXISTS `carts` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `carts`
@@ -1588,7 +1589,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `orders`
@@ -1596,7 +1597,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `session_id`, `billing_address_id`, `custom_order_id`, `order_phone_number`, `total_price`, `discount`, `final_price`, `coupon`, `payment_status`, `pay_amount`, `delivery_charge`, `delivery_status`, `order_note`, `order_status`, `cancel_reason`, `possible_delivery_date`, `delivery_date`, `cancel_date`, `created_at`, `updated_at`) VALUES
 (7, NULL, 'ABCDEF1234', 16, 'CBVGTY', '01717761611', '30560.00', '0.00', '30560.00', NULL, 'NOT PAID', NULL, '60.00', 'Pending', NULL, 'PROCESSING', NULL, '2024-12-17 01:41:41', NULL, NULL, '2024-12-14 19:41:41', '2024-12-14 19:41:41'),
-(8, 80, NULL, 17, 'IHZSND', '01919001122', '1610.00', '0.00', '1610.00', NULL, 'NOT PAID', NULL, '0.00', 'Pending', NULL, 'PROCESSING', NULL, '2024-12-31 11:31:43', NULL, NULL, '2024-12-29 23:31:43', '2024-12-29 23:31:43');
+(8, 80, NULL, 17, 'IHZSND', '01919001122', '1610.00', '0.00', '1610.00', NULL, 'NOT PAID', NULL, '0.00', 'Pending', NULL, 'PROCESSING', NULL, '2024-12-31 11:31:43', NULL, NULL, '2024-12-29 23:31:43', '2024-12-29 23:31:43'),
+(9, 81, NULL, 18, 'WR77XB', '01919101010', '2060.00', '0.00', '2060.00', NULL, 'NOT PAID', NULL, '0.00', 'Pending', NULL, 'PROCESSING', NULL, '2025-01-21 08:57:47', NULL, NULL, '2025-01-19 14:57:47', '2025-01-19 14:57:47');
 
 -- --------------------------------------------------------
 
@@ -1619,7 +1621,7 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `order_details`
@@ -1632,7 +1634,9 @@ INSERT INTO `order_details` (`id`, `user_id`, `session_id`, `product_id`, `order
 (21, NULL, 'ABCDEF1234', 32, 7, 1, '8000.00', '8000.00', NULL, NULL, '2024-12-14 19:41:41', '2024-12-14 19:41:41'),
 (25, 80, NULL, 21, 8, 1, '150.00', '150.00', NULL, NULL, '2024-12-29 23:31:43', '2024-12-29 23:31:43'),
 (26, 80, NULL, 24, 8, 1, '500.00', '500.00', NULL, NULL, '2024-12-29 23:31:43', '2024-12-29 23:31:43'),
-(27, 80, NULL, 28, 8, 1, '900.00', '900.00', NULL, NULL, '2024-12-29 23:31:43', '2024-12-29 23:31:43');
+(27, 80, NULL, 28, 8, 1, '900.00', '900.00', NULL, NULL, '2024-12-29 23:31:43', '2024-12-29 23:31:43'),
+(28, 81, NULL, 29, 9, 1, '1000.00', '1000.00', NULL, NULL, '2025-01-19 14:57:47', '2025-01-19 14:57:47'),
+(29, 81, NULL, 23, 9, 1, '1000.00', '1000.00', NULL, NULL, '2025-01-19 14:57:47', '2025-01-19 14:57:47');
 
 -- --------------------------------------------------------
 
@@ -2266,7 +2270,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -2275,7 +2279,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `user_id`, `username`, `first_name`, `last_name`, `email`, `phone_number`, `user_type`, `gender`, `profile_image`, `city`, `state`, `zip`, `address`, `role_id`, `email_verified_at`, `password`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'root', 'Khan1', 'Riyad', 'khan@gmail.com', '01731415537', 'admin', NULL, '313405982_1289255718315219_4110666478942719247_n_1732727105.jpg', NULL, NULL, NULL, NULL, '5', NULL, '$2y$12$W9G7uVmQHVeqsgNQrmpvtueBNg6QS4JzgaXwNixuZ8mv9KV5x57yi', NULL, '1', '2024-05-19 22:24:44', '2024-11-27 17:05:05'),
 (79, '2181464017486', 'car-clinic', 'Green Farm', 'Admin', 'farm@gmail.com', '01717761611', 'admin', 'Male', NULL, NULL, NULL, NULL, NULL, '25', NULL, '$2y$12$kvmKmafQPO4IyN7JDefXWOQXcR2DdcIqTOzrXo404o/v1Bf3wDN8q', NULL, '1', '2024-12-21 15:52:47', '2025-01-11 13:42:18'),
-(80, NULL, NULL, 'Obaidul', 'Obaidul', NULL, '01919001122', 'customer', NULL, NULL, 'Dhaka', 'Dhaka', NULL, 'Master para, Feni', NULL, NULL, '$2y$12$pIk9MuTLqSRODCGkO.1olO95/JoJB0Qiy0h5Jr09ZrEi4lSkU7erG', NULL, '1', '2024-12-29 23:29:42', '2024-12-29 23:30:37');
+(80, NULL, NULL, 'Obaidul', 'Obaidul', NULL, '01919001122', 'customer', NULL, NULL, 'Dhaka', 'Dhaka', NULL, 'Master para, Feni', NULL, NULL, '$2y$12$pIk9MuTLqSRODCGkO.1olO95/JoJB0Qiy0h5Jr09ZrEi4lSkU7erG', NULL, '1', '2024-12-29 23:29:42', '2024-12-29 23:30:37'),
+(81, NULL, NULL, 'John', 'John', 'john@ymail.com', '01919101010', 'customer', NULL, NULL, 'Dhaka', 'Dhaka', '1200', NULL, NULL, NULL, '$2y$12$4vSz6Mi1.JFotn52KMLTzu7zWzWxW2CN.yaaIh9Xm2yFfvWmMrNfm', NULL, '1', '2025-01-19 14:55:06', '2025-01-19 14:56:05');
 
 -- --------------------------------------------------------
 
