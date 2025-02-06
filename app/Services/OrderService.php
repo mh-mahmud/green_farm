@@ -124,8 +124,17 @@ class OrderService
     public function updateOrder($id, $data)
     {
         $order = Order::findOrFail($id);
-        $data['total_price'] = $data['unit_price'] * $data['quantity'];
-        $order->update($data);
+        $order->payment_status = $data['payment_status'];
+        $order->payment_type = $data['payment_type'];
+        $order->pay_amount = $data['pay_amount'];
+        $order->delivery_note = $data['delivery_note'];
+        $order->order_status = $data['order_status'];
+        $order->cancel_reason = $data['cancel_reason'];
+        $order->delivery_status = $data['delivery_status'];
+        $order->delivery_date = $data['delivery_date'];
+        $order->cancel_date = $data['cancel_date'];
+        // $data['total_price'] = $data['unit_price'] * $data['quantity'];
+        $order->update();
         return $order;
     }
 

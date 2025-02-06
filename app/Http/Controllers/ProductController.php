@@ -22,6 +22,12 @@ class ProductController extends Controller {
         return view('products.product-list', compact('products'));
     }
 
+    public function product_stock_report(Request $request)
+    {
+        $products = $this->productService->product_stock($request);
+        return view('products.product-list', compact('products'));
+    }
+
     public function productCreate()
     {
         $categories = Category::where('status', 1)->get(['id', 'category_name']);

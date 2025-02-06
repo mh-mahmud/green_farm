@@ -74,6 +74,7 @@ Route::get('add-to-wishlist/{product_id}', [FrontController::class, 'add_to_wish
 Route::get('my-wishlist', [FrontController::class, 'my_wishlist'])->name('my-wishlist');
 Route::post('/wishlist/add', [FrontController::class, 'add_wishlist'])->name('wishlist.add');
 Route::get('remove-wishlist/{id}', [FrontController::class, 'remove_wishlist'])->name('remove-wishlist');
+Route::get('remove-from-cart/{id}', [FrontController::class, 'remove_from_cart'])->name('remove-from-cart');
 Route::get('blogs', [FrontController::class, 'blogs'])->name('blogs');
 Route::get('blog_details/{id}', [FrontController::class, 'blog_details'])->name('blog-details');
 
@@ -82,6 +83,7 @@ Route::get('careers/{id}', [FrontController::class, 'career_details'])->name('ca
 // Route::get('order-history', [FrontController::class, 'order_history'])->name('order-history')->middleware(['check-permission']);
 
 Route::get('checkout', [FrontController::class, 'checkout_page'])->name('checkout');
+Route::post('go-checkout', [FrontController::class, 'go_checkout'])->name('go-checkout');
 Route::post('checkout', [FrontController::class, 'checkout_store'])->name('checkout-store');
 Route::get('terms-and-conditions', [FrontController::class, 'terms_and_conditions'])->name('terms-and-conditions');
 Route::get('return-policy', [FrontController::class, 'return_policy'])->name('return-policy');
@@ -158,6 +160,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::put('/account-settings/{id}', [UserController::class, 'profile_update'])->name('profile-update');
 	Route::post('/user/search', [UserController::class, 'search'])->name('user-search');
 	Route::put('/user/{id}/update-profile-image', [UserController::class, 'updateProfileImage'])->name('update-profile-image');
+	
+	Route::get('app-settings', [UserController::class, 'app_settings'])->name('app-settings')->middleware(['check-permission']);
+	Route::post('app-settings', [UserController::class, 'store_app_settings'])->name('save-app-settings');
 
     Route::get('permission-list',        [UserController::class, 'permission_index'])->name('permission.index')->middleware(['check-permission']);
     Route::get('permission-show/{id}',        [UserController::class, 'permission_show'])->name('permission.show')->middleware(['check-permission']);
@@ -224,6 +229,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 	// Product routes start
+	Route::get('product-stock-report', [ProductController::class, 'product_stock_report'])->name('product-stock-report')->middleware(['check-permission']);
 	Route::get('product-list', [ProductController::class, 'productList'])->name('product-list')->middleware(['check-permission']);
 	Route::get('add-product', [ProductController::class, 'productCreate'])->name('add-product')->middleware(['check-permission']);
 	Route::post('add-product-pro', [ProductController::class, 'productStore'])->name('add-product-pro');
@@ -303,7 +309,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/orders', [OrderController::class, 'store'])->name('orders-store');
 	Route::get('/orders/{id?}', [OrderController::class, 'show'])->name('orders-show')->middleware(['check-permission']);
 	Route::get('/orders/{id?}/edit', [OrderController::class, 'edit'])->name('orders-edit')->middleware(['check-permission']);
-	Route::put('/orders/{id?}', [OrderController::class, 'update'])->name('orders-update');
+	Route::post('/orders/{id?}', [OrderController::class, 'update'])->name('orders-update');
 	Route::post('/orders/search', [OrderController::class, 'search'])->name('orders-search');
 	Route::delete('/orders/{id?}', [OrderController::class, 'destroy'])->name('orders-destroy')->middleware(['check-permission']);
 	

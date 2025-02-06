@@ -24,7 +24,7 @@ class CareerService
         if ($request->hasFile('job_image')) {
            
             if ($career->job_image) {
-                $previousImagePath = getcwd().'/public/uploads/careers/'.$career->job_image;
+                $previousImagePath = getcwd().'/uploads/careers/'.$career->job_image;
                 if (file_exists($previousImagePath)) {
                     @unlink($previousImagePath);
                 }
@@ -33,7 +33,7 @@ class CareerService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('job_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('job_image')->move(getcwd().'/public/uploads/careers', $fileNameToStore);
+            $path = $request->file('job_image')->move(getcwd().'/uploads/careers', $fileNameToStore);
             $career->job_image = $fileNameToStore;
         }
         
@@ -56,7 +56,7 @@ class CareerService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('job_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('job_image')->move(getcwd().'/public/uploads/careers', $fileNameToStore);
+            $path = $request->file('job_image')->move(getcwd().'/uploads/careers', $fileNameToStore);
             
         } else {
             $fileNameToStore = '';
@@ -85,7 +85,7 @@ class CareerService
     {
         $career = Career::findOrFail($id);
         if ($career->job_image) {
-            $imagePath = getcwd().'/public/uploads/careers/'.$career->job_image;
+            $imagePath = getcwd().'/uploads/careers/'.$career->job_image;
             if (file_exists($imagePath)) {
                 @unlink($imagePath);
             }

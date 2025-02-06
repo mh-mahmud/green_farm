@@ -67,9 +67,9 @@ class OrderController extends Controller
     public function show($id)
     {
         $data = $this->orderService->getOrder($id);
-        // dd($data);
         return view('orders.show', [
             'order' => $data['order'],
+            'order_id' => $id,
             'orderDetails' => $data['orderDetails'],
         ]);
     }
@@ -83,23 +83,8 @@ class OrderController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validated = $request->validate([
-            'customer_name' => 'required|string',
-            'mobile_number' => 'required|string',
-            'area' => 'required|in:Inside Dhaka,Outside Dhaka',
-            'address' => 'required|string',
-            'product_code' => 'required|string',
-            'product_name' => 'required|string',
-            'product_color' => 'nullable|string',
-            'product_size' => 'nullable|string',
-            'unit_price' => 'required|numeric',
-            'quantity' => 'required|integer',
-            'shipping_charge' => 'nullable|numeric',
-            'discount' => 'nullable|numeric',
-        ]);
-
-        $this->orderService->updateOrder($id, $validated);
-        return redirect()->route('orders-index')->with('success', 'Order updated successfully!');
+        $this->orderService->updateOrder($id, $request);
+        return redirect()->back()->with('success', 'Order updated successfully!');
     }
 
     public function destroy($id)

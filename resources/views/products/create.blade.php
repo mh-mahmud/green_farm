@@ -4,8 +4,8 @@
 
             <!-- <div class="content d-flex flex-column flex-column-fluid" id="kt_content"> -->
 
-            						     <!--begin::Toolbar-->
-	  <div class="toolbar" id="kt_toolbar">
+                                         <!--begin::Toolbar-->
+      <div class="toolbar" id="kt_toolbar">
                     <!--begin::Container-->
                     <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
                         <!--begin::Page title-->
@@ -103,7 +103,7 @@
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <!--begin::Label-->
-                                                    <label class="form-label fw-bolder text-dark">Brand Name</label>
+                                                    <label class="form-label fw-bolder text-dark"><span class="text-danger">*</span>Brand Name</label>
                                                     <select class="form-control form-control-sm form-control-solid" name="brand_id" aria-label="Default select example">
                                                         <option value=''>Select</option>
                                                         @foreach ($brands as $key => $val)
@@ -124,9 +124,7 @@
                                                         id="assigned_to" name="product_type" aria-label="Default select example">
                                                         <option value='' {{ old('product_type', '') === '' ? 'selected' : '' }}>Select</option>
                                                         @foreach (config('constants.PRODUCT_TYPE') as $key => $type)
-                                                            <option value="{{ $type }}" {{ old('product_type') === (string)$type ? 'selected' : '' }}>
-                                                                {{ $type }}
-                                                            </option>
+                                                            <option value="{{$type}}" {{ $type == 'Physical' ? 'selected' : '' }}>{{$type}}</option>
                                                         @endforeach
                                                     </select>
                                                     @if ($errors->has('product_type'))
@@ -168,6 +166,7 @@
                                                 </div>
                                             </div>
 
+                                            {{--
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Club Points</label>
@@ -178,6 +177,7 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            --}}
 
                                             {{--<div class="col-md-6">
                                                 <div class="form-group">
@@ -213,7 +213,7 @@
                                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_3" autocomplete="off" />
                                                 </div>
                                             </div>
-
+                                            {{--
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Image 4</label>
@@ -235,7 +235,7 @@
                                                 </div>
                                             </div>
 
-                                            {{--<div class="col-md-6">
+                                            <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Image 7</label>
                                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_7" autocomplete="off" />
@@ -273,6 +273,7 @@
                                                 </div>
                                             </div>
 
+                                            {{--
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <label class="form-label fw-bolder text-dark">Max Purchase Limit</label>
@@ -283,6 +284,7 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            --}}
 
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
@@ -324,6 +326,7 @@
                                                 </div>
                                             </div>
 
+                                            {{--
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="form-label fw-bolder text-dark" for="textarea">Key Features</label>
@@ -337,6 +340,7 @@
                                                     @endif
                                                 </div>
                                             </div>
+                                            --}}
                                         </div>
 
                                       <div class="card-footer d-flex justify-content-end py-6 px-9">

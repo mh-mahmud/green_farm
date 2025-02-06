@@ -26,7 +26,7 @@ class CategoryService
         if ($request->hasFile('category_image')) {
            
             if ($category->category_image) {
-                $previousImagePath = getcwd().'/public/uploads/categories/'.$category->category_image;
+                $previousImagePath = getcwd().'/uploads/categories/'.$category->category_image;
                 if (file_exists($previousImagePath)) {
                     @unlink($previousImagePath);
                 }
@@ -111,7 +111,7 @@ class CategoryService
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $request->file('category_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('category_image')->move(getcwd().'/public/uploads/categories', $fileNameToStore);
+            $path = $request->file('category_image')->move(getcwd().'/uploads/categories', $fileNameToStore);
             
         } else {
             $fileNameToStore = '';
@@ -239,7 +239,7 @@ class CategoryService
     {
         $category = Category::findOrFail($id);
         if ($category->category_image) {
-            $imagePath = getcwd().'/public/uploads/categories/'.$category->category_image;
+            $imagePath = getcwd().'/uploads/categories/'.$category->category_image;
             if (file_exists($imagePath)) {
                 @unlink($imagePath);
             }

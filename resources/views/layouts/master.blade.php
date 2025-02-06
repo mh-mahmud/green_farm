@@ -14,7 +14,8 @@
 	<meta property="og:url" content="https://keenthemes.com/metronic" />
 	<meta property="og:site_name" content="Keenthemes | Metronic" />
 	<link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
-	<link rel="shortcut icon" href="{{url('/')}}/assets/media/logos/fox-technologies.jpg" />
+	<!-- <link rel="shortcut icon" href="{{url('/')}}/assets/media/logos/fox-technologies.jpg" /> -->
+	<link rel="shortcut icon" href="{{url('/')}}/assets/media/logos/logo-1-light.svg" />
 	<!--begin::Fonts-->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 	<!--end::Fonts-->
@@ -45,7 +46,8 @@
 				<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 					<!--begin::Logo-->
 					<a href="{{ route('login') }}">
-						<img alt="Logo" src="{{url('/')}}/assets/media/logos/fox-technologies.jpg" class="h-50px logo" />
+						<!-- <img alt="Logo" src="{{url('/')}}/assets/media/logos/fox-technologies.jpg" class="h-50px logo" /> -->
+						<img alt="Logo" src="{{url('/')}}/assets/media/logos/logo-1-dark.svg" class="h-50px logo" />
 					</a>
 					<!--end::Logo-->
 					<!--begin::Aside toggler-->
@@ -323,7 +325,8 @@
 						<!--begin::Mobile logo-->
 						<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 							<a href="../dist/index.html" class="d-lg-none">
-								<img alt="Logo" src="{{ asset('assets/media/logos/fox-technologies.jpg') }}" class="h-30px" />
+								<!-- <img alt="Logo" src="{{ asset('assets/media/logos/fox-technologies.jpg') }}" class="h-30px" /> -->
+								<img alt="Logo" src="{{ asset('assets/media/logos/logo-1-light.svg') }}" class="h-30px" />
 							</a>
 						</div>
 						<!--end::Mobile logo-->
@@ -713,7 +716,8 @@
 						<div class="text-dark order-2 order-md-1">
 							<span class="text-muted fw-bold me-1">2024©</span>
                             <a target="_blank" href="https://foxtechnologies.net" class="text-muted text-hover-primary px-2"> Powered by
-                                <img height="18px" alt="Logo" src="{{url('/')}}/assets/media/logos/fox-technologies.jpg"  />
+                                <!-- <img height="18px" alt="Logo" src="{{url('/')}}/assets/media/logos/fox-technologies.jpg"  /> -->
+                                <img height="18px" alt="Logo" src="{{url('/')}}/assets/media/logos/logo-1-light.svg"/>
                             </a>
 						</div>
 						<!--end::Copyright-->

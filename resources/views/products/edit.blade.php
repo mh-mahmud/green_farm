@@ -170,6 +170,7 @@
                                 </div>
                             </div>
 
+                            {{--
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Club Points</label>
@@ -180,6 +181,7 @@
                                     @endif
                                 </div>
                             </div>
+                            --}}
 
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
@@ -237,6 +239,7 @@
                                 </div>
                             </div>
 
+                            {{--
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 4</label>
@@ -290,6 +293,7 @@
                                     @endif
                                 </div>
                             </div>
+                            --}}
 
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
@@ -316,6 +320,7 @@
                                 </div>
                             </div>
 
+                            {{--
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Max Purchase Limit</label>
@@ -326,6 +331,7 @@
                                     @endif
                                 </div>
                             </div>
+                            --}}
 
 
                             <div class="col-md-6">
@@ -365,6 +371,7 @@
                                 </div>
                             </div>
 
+                            {{--
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-label fw-bolder text-dark" for="textarea">Key Features</label>
@@ -378,6 +385,7 @@
                                     @endif
                                 </div>
                             </div>
+                            --}}
 
 
                         </div>
