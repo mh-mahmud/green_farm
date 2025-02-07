@@ -34,9 +34,10 @@
                 </div>
             @endif
 
-                  <form action="#">
+                  <form action="{{ route('go-checkout') }}" method="POST">
+                     @csrf
                      <div class="table-content table-responsive">
-                        <table class="table">
+                        <table id="cartTable" class="table">
                               <thead>
                                  <tr>
                                     <th class="product-thumbnail">Images</th>
@@ -51,29 +52,33 @@
 
                                  @php
                                     $total = [];
+                                    //dd($carts);
                                  @endphp
                                  @foreach($carts as $cart)
+
                                  <tr>
+                                    <input type="hidden" name="cart_id[]" value="{{$cart->id}}">
                                     <td class="product-thumbnail">
                                        <a href="{{ route('product-details', $cart->product_id) }}"><img src="{{url('/')}}/uploads/products/{{$cart->product_image}}" alt="">
                                        </a>
                                     </td>
                                     <td class="product-name">
-                                       <a href="shop-details.html">{{ $cart->product_name }}</a>
+                                       <a href="{{ route('product-details', $cart->product_id) }}">{{ $cart->product_name }}</a>
                                     </td>
                                     <td class="product-price">
-                                       <span class="amount">Tk. {{ $cart->unit_price }}</span>
+                                       <span class="unit-price" data-price="{{$cart->unit_price}}">Tk. {{ $cart->unit_price }}</span>
+                                       <input type="hidden" name="unit_price[]" value="{{$cart->unit_price}}">
                                     </td>
                                     <td class="product-quantity">
                                           <span class="cart-minus">-</span>
-                                          <input class="cart-input" type="text" value="{{ $cart->quantity }}"/>
+                                          <input class="cart-input quantity" name="quantity[]" type="text" value="{{ $cart->quantity }}"/>
                                           <span class="cart-plus">+</span>
                                     </td>
                                     <td class="product-subtotal">
-                                       <span class="amount">Tk.{{ $cart->total_price }}</span>
+                                       TK. <span class="product-total">{{ $cart->total_price }}</span>
                                     </td>
                                     <td class="product-remove">
-                                       <a href="#"><i class="fa fa-times"></i></a>
+                                       <a href="{{ route('remove-from-cart', $cart->id) }}"><i class="fa fa-times"></i></a>
                                     </td>
                                  </tr>
                                  @php $total[] = $cart->total_price @endphp
@@ -83,6 +88,8 @@
                               </tbody>
                         </table>
                      </div>
+
+                     {{--
                      <div class="row">
                         <div class="col-12">
                               <div class="coupon-all">
@@ -98,15 +105,24 @@
                               </div>
                         </div>
                      </div>
+                     --}}
                      <div class="row justify-content-end">
                         <div class="col-md-5 ">
                               <div class="cart-page-total">
-                                 <h2>Cart totals</h2>
+                                 <h2>Cart total</h2>
                                  <ul class="mb-20">
-                                    <li>Subtotal <span>Tk. {{ $sub_total }}</span></li>
-                                    <li>Total <span>Tk. {{ $sub_total }}</span></li>
+                                    <li>Subtotal <span>Tk. <span class="cart-total">{{ $sub_total }}</span></span></li>
+                                    <li>Total <span>Tk. <span class="cart-total">{{ $sub_total }}</span></span></li>
                                  </ul>
-                                 <a href="{{ route('checkout') }}" class="tp-btn tp-color-btn banner-animation">Proceed to Checkout</a>
+                                 <!-- <a href="{{ route('checkout') }}" class="tp-btn tp-color-btn banner-animation">Proceed to Checkout</a> -->
+                                 <div>
+                                 @if(count($carts) > 0)
+                                 <button style="overflow: hidden !important;" type="submit" class="tp-btn tp-color-btn banner-animation">Proceed to Checkout</button>
+                                 @endif
+                                 <a href="{{ route('all-products') }}" class="tp-btn banner-animation" style="background-color:#66BB6A;overflow: visible !important;">Continue Shopping</a>
+                                 </div>
+
+                                 
                               </div>
                         </div>
                      </div>
@@ -133,5 +149,34 @@
          $('.coupon-p').hide();
       }
    });
+
+   $(document).ready(function() {
+     // Function to update total prices
+      function updateCart() {
+         let cartTotal = 0;
+
+         // Iterate through each row in the cart
+         $('#cartTable tbody tr').each(function() {
+             const unitPrice = parseFloat($(this).find('.unit-price').data('price'));
+             const quantity = parseInt($(this).find('.quantity').val());
+             const productTotal = unitPrice * quantity;
+
+             // Update the product total in the table
+             $(this).find('.product-total').text(productTotal.toFixed(2));
+
+             // Add to cart total
+             cartTotal += productTotal;
+         });
+
+         // Update the cart total
+         $('.cart-total').text(cartTotal.toFixed(2));
+      }
+
+      // Event listener for quantity changes
+      $("span.cart-plus, span.cart-minus").on("click", function() {
+         updateCart();
+      });
+   });
+
 </script>
 @endsection

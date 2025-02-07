@@ -15,12 +15,13 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Career;
 use App\Models\Wishlist;
-use App\Models\Setting;
+use App\Models\Settings;
 use Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Helpers\Helper;
 
 class FrontController extends Controller
 {
@@ -100,7 +101,7 @@ class FrontController extends Controller
 
     public function product_details($id) {
         $product = Product::findOrFail($id);
-        $settings = Setting::first();
+        $settings = Settings::first();
         return view('front.html.product_details', compact('product', 'settings'));
     }
 
@@ -113,17 +114,17 @@ class FrontController extends Controller
     }
 
     public function terms_and_conditions() {
-        $settings = Setting::first();
+        $settings = Settings::first();
         return view('front.html.terms_and_conditions', compact('settings'));
     }
 
     public function return_policy() {
-        $settings = Setting::first();
+        $settings = Settings::first();
         return view('front.html.return_policy', compact('settings'));
     }
 
     public function faq() {
-        $settings = Setting::first();
+        $settings = Settings::first();
         return view('front.html.faq', compact('settings'));
     }
 
@@ -293,6 +294,16 @@ class FrontController extends Controller
         return redirect()->route('my-wishlist')->with('success', 'Item deleted from wishlist successfully');
     }
 
+    public function remove_from_cart($id) {
+        if(Auth::user()) {
+            $lists = Cart::where('user_id', Auth::user()->id)->where('id', $id)->delete();
+        }
+        else {
+            $lists = Cart::where('session_id', Session::get('car-clinic-visitor'))->where('id', $id)->delete();
+        }
+        return redirect()->route('add-to-cart-details')->with('success', 'Item deleted from cart successfully');
+    }
+
     public function add_wishlist(Request $request)
     {
         if(Session::get('car-clinic-visitor')==null) {
@@ -355,16 +366,31 @@ class FrontController extends Controller
         return view('front.html.customer_order_details', compact('order', 'orderDetails'));
     }
 
+    public function go_checkout(Request $request) {
+        // dd($request->all());
+        $data = $request->all();
+        // dd($data['cart_id']);
+        for($i=0; $i<count($data['cart_id']); $i++) {
+            $cart = Cart::findorfail($data['cart_id'][$i]);
+            $cart->quantity = $data['quantity'][$i];
+            $cart->total_price = $cart->unit_price * $data['quantity'][$i];
+            $cart->final_price = $cart->unit_price * $data['quantity'][$i];
+            $cart->save();
+            // dd($cart);
+        }
+        return redirect()->route('checkout');
+    }
+
     public function checkout_store(Request $request) {
+
         if(Auth::user()) {
             $carts = Cart::where('user_id', Auth::user()->id)->get();
         }
         else {
             $carts = Cart::where('session_id', $request->cart_session_id)->get();
         }
-        
-        DB::beginTransaction();
 
+        DB::beginTransaction();
         try {
             $ship = new BillingAddress();
             $ship->user_id = (Auth::user() != null) ? Auth::user()->id : null;
@@ -397,6 +423,8 @@ class FrontController extends Controller
             $order->payment_status = "NOT PAID";
             $order->order_note = $request->order_note;
             $order->order_status = "PROCESSING";
+            $order->payment_type = "Cash on Delivery";
+            $order->delivery_charge = $request->shipping;
             $order->possible_delivery_date = date("Y-m-d h:i:s", time() + 86400 + 86400);
             $order->save();
 
@@ -426,14 +454,21 @@ class FrontController extends Controller
 
             DB::commit();
 
+            // send message
+            $messages = "Welcome to https://greenfarm.com.bd, Thanks for your order. " . $order->custom_order_id . " is your order number. Please save your order number for future tracking.";
+            $phone = "88".$request->mobile . "";
+            $response = Helper::send_sms($phone, $messages);
+            $last_order = Order::findOrFail($order->id);
+            $last_order->sms_response = $response;
+            $last_order->save();
+
             return redirect()->route('checkout')->with('success', "Thanks for your order.Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
         } catch (\Exception $e) {
             DB::rollBack();
             return 'Transaction failed: ' . $e->getMessage();
         }
-        
-
     }
+
 
     public function generateUniqueOrderId($length = 6) {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

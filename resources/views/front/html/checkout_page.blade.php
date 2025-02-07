@@ -16,11 +16,11 @@
          </div>
       </section>
       <!-- breadcrumb-area-end -->
-          
+
       <!-- coupon-area start -->
       
       <section class="coupon-area pt-80 pb-30 wow fadeInUp" data-wow-duration=".8s" data-wow-delay=".2s">
-      	{{--
+         {{--
          <div class="container">
          <div class="row">
             <div class="col-md-6">
@@ -98,98 +98,59 @@
 
             @if(!empty($carts))
             <form action="{{ route('checkout-store') }}" method="POST">
-            	@csrf
-            	<input type="hidden" name="cart_session_id" value="{{ $session_id }}">
+               @csrf
+               <input type="hidden" name="cart_session_id" value="{{ $session_id }}">
                <div class="row">
-                     <div class="col-lg-6 col-md-12">
+                     <div class="col-lg-5 col-md-12">
                         <div class="checkbox-form">
                            <h3>Billing Details</h3>
                            <div class="row">
 
-									<div class="col-md-6">
-									<div class="checkout-form-list">
-									   <label>First Name <span class="required">*</span></label>
-									   <input type="text" value="{{ Auth::user() ? Auth::user()->first_name : null }}" name="first_name" required />
-									</div>
-									</div>
-									<div class="col-md-6">
-									<div class="checkout-form-list">
-									   <label>Last Name <span class="required">*</span></label>
-									   <input name="last_name" value="{{ Auth::user() ? Auth::user()->last_name : null }}" type="text" required />
-									</div>
-									</div>
-									<div class="col-md-6">
-									<div class="checkout-form-list">
-									   <label>Company Name</label>
-									   <input name="company_name" type="text" />
-									</div>
-									</div>
+                           <div class="col-md-12">
+                           <div class="checkout-form-list">
+                              <label>First Name <span class="required">*</span></label>
+                              <input type="text" value="{{ Auth::user() ? Auth::user()->first_name : null }}" name="first_name" required />
+                           </div>
+                           </div>
+                           <div class="col-md-12">
+                           <div class="checkout-form-list">
+                              <label>Last Name <span class="required">*</span></label>
+                              <input name="last_name" value="{{ Auth::user() ? Auth::user()->last_name : null }}" type="text" required />
+                           </div>
+                           </div>
 
-									<div class="col-md-6">
-									<div class="checkout-form-list">
-									   <label>Town / City</label>
-									   <input type="text" name="city" value="{{ Auth::user() ? Auth::user()->city : null }}" />
-									</div>
-									</div>
-									<div class="col-md-6">
-									<div class="checkout-form-list">
-									   <label>State <span class="required">*</span></label>
-									   <input type="text" name="state" value="{{ Auth::user() ? Auth::user()->state : null }}" />
-									</div>
-									</div>
-									<div class="col-md-6">
-									<div class="checkout-form-list">
-									   <label>Postcode / Zip <span class="required">*</span></label>
-									   <input type="text" name="zip" value="{{ Auth::user() ? Auth::user()->zip : null }}" />
-									</div>
-									</div>
-									<div class="col-md-6">
-									<div class="checkout-form-list">
-									   <label>Email Address</label>
-									   <input name="email" type="email" value="{{ Auth::user() ? Auth::user()->email : null }}" />
-									</div>
-									</div>
-									<div class="col-md-6">
-									<div class="checkout-form-list">
-									   <label>Phone <span class="required">*</span></label>
-									   <input name="mobile" type="text" value="{{ Auth::user() ? Auth::user()->phone_number : null }}" required placeholder="Phone Number" />
-									</div>
-									</div>
+                           <div class="col-md-12">
+                           <div class="checkout-form-list">
+                              <label>Phone Number<span class="required">*</span></label>
+                              <input name="mobile" type="text" value="{{ Auth::user() ? Auth::user()->phone_number : null }}" required placeholder="" />
+                           </div>
+                           </div>
 
-									<div class="col-md-12">
-									<div class="checkout-form-list">
-									   <label>Shipping Address <span class="required">*</span></label>
-									 <div class="order-notes">
-									    <div class="checkout-form-list">
-									       <textarea id="checkout-mess" cols="30" rows="10" name="shipping_address">{{ Auth::user() ? Auth::user()->address : null }}</textarea>
-									    </div>
-									 </div>
+                           <div class="col-md-12">
+                           <div class="checkout-form-list">
+                              <label>Shipping Address <span class="required">*</span></label>
+                            <div class="order-notes">
+                               <div class="checkout-form-list">
+                                  <textarea id="checkout-mess" cols="30" rows="10" name="shipping_address">{{ Auth::user() ? Auth::user()->address : null }}</textarea>
+                               </div>
+                            </div>
 
-									</div>
-									</div>
-									<div class="col-md-12">
-									<div class="checkout-form-list">
-									   <label>Shipping Address (optional)</label>
-									 <div class="order-notes">
-									    <div class="checkout-form-list">
-									       <textarea id="checkout-mess" cols="30" rows="10" name="shipping_address_2"></textarea>
-									    </div>
-									 </div>
+                           </div>
+                           </div>
 
-									</div>
-									</div>
-									<div class="col-md-12">
-									<div class="checkout-form-list">
-									   <label>Order Notes</label>
-									 <div class="order-notes">
-									    <div class="checkout-form-list">
-									       <textarea name="order_note" cols="30" rows="10"
-									         placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-									    </div>
-									 </div>
 
-									</div>
-									</div>
+                           <div class="col-md-12">
+                           <div class="checkout-form-list">
+                              <label>Order Notes</label>
+                            <div class="order-notes">
+                               <div class="checkout-form-list">
+                                  <textarea name="order_note" cols="30" rows="10"
+                                    placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                               </div>
+                            </div>
+
+                           </div>
+                           </div>
 
                            @if(Auth::user()==null)
                            <div class="col-md-12">
@@ -202,7 +163,7 @@
                            
                         </div>
                      </div>
-                     <div class="col-lg-6 col-md-12">
+                     <div class="col-lg-7 col-md-12">
                         <div class="your-order mb-30 ">
                            <h3>Your order</h3>
                            <div class="your-order-table table-responsive">
@@ -215,8 +176,8 @@
                                     </thead>
                                     <tbody>
 
-                                		@php $total = []; @endphp
-                                    	@foreach($carts as $cart)
+                                    @php $total = []; @endphp
+                                       @foreach($carts as $cart)
                                         <tr class="cart_item">
                                             <td class="product-name">
                                                 {{ $cart->product_name }} <strong class="product-quantity"> × {{ $cart->quantity }}</strong>
@@ -240,21 +201,21 @@
                                              <td>
                                                 <ul>
                                                    <li>
-                                                        <input type="radio" checked name="shipping" value="inside_dhaka"/>
-                                                        <label style="color:red;">Inside Dhaka: <span class="amount">Tk. 60/-</span></label>
+                                                        <input required id="charge_inside_dhaka" type="radio" name="shipping" value="{{\App\Helpers\Helper::settings()->charge_inside_dhaka}}"/>
+                                                        <label style="color:red;">Inside Dhaka: <span class="amount">Tk. {{\App\Helpers\Helper::settings()->charge_inside_dhaka}}/-</span></label>
                                                    </li>
                                                    <li>
-                                                        <input type="radio" name="shipping" value="outside_dhaka"/>
-                                                        <label style="color:red">Next to Dhaka: <span class="amount">Tk. 120/-</span></label>
+                                                        <input required id="charge_outside_dhaka" type="radio" name="shipping" value="{{\App\Helpers\Helper::settings()->charge_outside_dhaka}}"/>
+                                                        <label style="color:red">Next to Dhaka: <span class="amount">Tk. {{\App\Helpers\Helper::settings()->charge_outside_dhaka}}/-</span></label>
                                                    </li>
                                                 </ul>
                                              </td>
                                        </tr>
                                        <tr class="order-total">
-                                       		<input type="hidden" name="total_price" value="{{ $sub_total + 60 }}">
-                                       		<input type="hidden" name="discount" value="0">
+                                             <input id="order_total" type="hidden" name="total_price" value="{{$sub_total}}">
+                                             <input type="hidden" name="discount" value="0">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">Tk.{{$sub_total + 60}}</span></strong>
+                                            <td><strong>TK.<span class="total_amount">{{$sub_total}}</span></strong>
                                             </td>
                                        </tr>
                                     </tfoot>
@@ -262,7 +223,7 @@
                            </div>
                            <div class="payment-method">
                               <div class="accordion" id="checkoutAccordion">
-                              	{{--
+                                 {{--
                                  <div class="accordion-item">
                                     <h2 class="accordion-header" id="checkoutOne">
                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bankOne" aria-expanded="true" aria-controls="bankOne">
@@ -281,12 +242,12 @@
                                  <div class="accordion-item">
                                     <h2 class="accordion-header" id="paymentTwo">
                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#payment" aria-expanded="false" aria-controls="payment">
-                                       Cash on Delivery
+                                       Payment Type: Cash on Delivery
                                        </button>
                                     </h2>
                                     <div id="payment" class="accordion-collapse collapse" aria-labelledby="paymentTwo" data-bs-parent="#checkoutAccordion">
                                        <div class="accordion-body">
-                                       		Now, we only support cash on delivery
+                                             Now, we only support cash on delivery
                                        </div>
                                     </div>
                                  </div>
@@ -324,6 +285,7 @@
       </section>
       <!-- checkout-area end -->
 
+
 </div>
 
 @endsection
@@ -341,5 +303,14 @@
          $('.coupon-p').hide();
       }
    });
+   var order_total = parseInt($("#order_total").val());
+   $('input[name="shipping"]').change(function() {
+       var selectedValue = $('input[name="shipping"]:checked').val();
+       var total = order_total + parseInt(selectedValue);
+       $("span.total_amount").text(total);
+       $("#order_total").val(total);
+       console.log(selectedValue);
+   });
+
 </script>
 @endsection
