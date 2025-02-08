@@ -237,6 +237,9 @@ class FrontController extends Controller
     }
 
     public function checkout_page() {
+        if(Auth::user() && Auth::user()->user_type=='admin') {
+            return redirect()->back()->with('error', 'You are logged in as an admin. As a system user, you can not checkout.');
+        }
         $session_id = Session::get('car-clinic-visitor');
         $carts = [];
         if(Auth::user()) {
