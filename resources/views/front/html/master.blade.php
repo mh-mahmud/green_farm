@@ -4,7 +4,16 @@
 use App\Models\Category;
 use App\Models\Cart;
 
-
+$sett = \App\Helpers\Helper::settings();
+$set_phone = $sett->office_phone_number;
+$set_fb = $sett->facebook_link;
+$set_twitter = $sett->twitter_link;
+$set_youtube = $sett->youtube_link;
+$set_insta = $sett->instagram_link;
+$set_linkedin = $sett->linkedin_link;
+$set_whats_app_link = $sett->whats_app_link;
+$footer_msg = $sett->footer_message;
+$top_header_message = $sett->top_header_message;
 
 $cats = Category::where('parent_id', '=', null)->orderBy('id', 'asc')->get();
 if(Auth::user() != null) {

@@ -11,14 +11,7 @@
                            <a href="{{ route('index') }}"><img style="width:120px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="Green Farm Logo"></a>
                         </div>
                         <div class="footer-content">
-                           <p><b>Green Farm: Your Trusted Source for Safe & Organic Food</b></p>
-                           <p>
-                              Green Farm is a leading e-commerce platform committed to delivering safe, healthy, and organic food products across Bangladesh. Renowned for its dedication to quality, Green Farm offers a diverse range of health-focused items, including premium mustard oil, pure ghee, organic honey, dates, chia seeds, and an assortment of nuts. Each product is carefully sourced and crafted to ensure maximum health benefits, meeting the highest standards of purity and freshness.
-                           </p>
-                           <!-- <p>
-                              With a focus on convenience, Green Farm operates primarily online, bringing the goodness of nature straight to your doorstep. Whether you're seeking to elevate your wellness journey or simply enjoy natural, wholesome foods, Green Farm is your go-to destination for authentic, trustworthy products.
-                           </p> -->
-                           
+                           {!! $footer_msg !!}
                         </div>
                      </div>
                   </div>
@@ -55,11 +48,9 @@
                         <h4 class="footer-widget__title mb-30">Social Network</h4>
                         <div class="footer-widget__links">
                            <ul>
-                              <li><a href="#"><i class="fab fa-facebook-f"></i>Facebook</a></li>
-                              <!-- <li><a href="#"><i class="fab fa-dribbble"></i>Dribbble</a></li> -->
-                              <li><a href="#"><i class="fab fa-twitter"></i>Twitter</a></li>
-                              <!-- <li><a href="#"><i class="fab fa-behance"></i>Behance</a></li> -->
-                              <li><a href="#"><i class="fab fa-youtube"></i>Youtube</a></li>
+                              <li><a target="_blank" href="{{ $set_fb }}"><i class="fab fa-facebook-f"></i>Facebook</a></li>
+                              <li><a target="_blank" href="{{ $set_twitter }}"><i class="fab fa-twitter"></i>Twitter</a></li>
+                              <li><a target="_blank" href="{{ $set_youtube }}"><i class="fab fa-youtube"></i>Youtube</a></li>
                            </ul>
                         </div>
                      </div>
