@@ -56,7 +56,7 @@ else {
             <div class="row">
                <div class="col-xl-12 col-lg-12 col-md-12 ">
                   <div class="header-welcome-text" style="font-size:14px;text-align:center;">
-                     আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন:  +88 01789 944 503 | হট লাইন: 01926-313321
+                     {!! $top_header_message !!}
                   </div>
                </div>
                <!-- <div class="col-xl-5 d-none d-xl-block">
@@ -186,7 +186,7 @@ else {
                      </div> 
                   </div>
                   --}}
-                  <div class="col-xl-9 col-lg-12">
+                  <div class="col-xl-9 col-lg-9">
                      <div class="main-menu">
                         <nav id="mobile-menu">
                            <ul>

@@ -1,5 +1,10 @@
 @extends('front.html.master')
 @section('content')
+@php
+   $data = \App\Helpers\Helper::settings();
+   $phone = $data->office_phone_number;
+   $contact = $data->contact_address;
+@endphp
 
       <!-- breadcrumb-area -->
       <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
@@ -25,11 +30,10 @@
                         <h4 class="tpshop__title mb-25">Address</h4>
                         <div class="tpshop__info">
                            <ul>
-                              <li><i class="fal fa-map-marker-alt"></i> <a href="#">Tokyo Square, 9 Ring Rd, Dhaka 1207, Mohammadpur,  Dhaka</a></li>
+                              <li><i class="fal fa-map-marker-alt"></i> <a href="#">{!! $contact !!}</a></li>
                               <li>
                                  <i class="fal fa-phone"></i>
-                                 <a href="tel:+88 01926 313 321">+88 01926 313 321</a>
-                                 <a href="tel:0123456789">+88 01789 944 503</a>
+                                 <a href="tel:+88 01926 313 321">+88 {{ $phone }}</a>
                               </li>
                               <li>
                                  <i class="fal fa-clock"></i>
@@ -51,8 +55,8 @@
                <div class="col-lg-8 col-12">
                   <div class="tpcontact__form">
                      <div class="tpcontact__info mb-35">
-                        <h4 class="tpcontact__title">Make Custom Request</h4>
-                        <p>Must-have pieces selected every month want style Ideas and Treats?</p>
+                        <h4 class="tpcontact__title">Contact Form</h4>
+                        <p>Share your opinion with us, few time later your agent will contact with you</p>
                      </div>
                      <form action="" id="contact-form" method="POST">
                         @csrf

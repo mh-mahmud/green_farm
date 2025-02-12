@@ -105,7 +105,7 @@
                         <div class="tpproduct-details__cart ml-0" style="width:100%">
                            <button style="background-color:#332D2D;width:100%" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> Add To Cart</button>
 
-                           <button style="background-color:#14A44D;width:100%;margin-top:20px" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+                           <button style="background-color:#14A44D;width:100%;margin-top:20px" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart2"><i class="fal fa-shopping-cart"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
                         </div>
 
                         {{--
@@ -567,7 +567,10 @@
    });
    $("#add-to-cart").on("click", function() {
       var url_data = $(this).data('cart-url');
-      // alert(url_data);
+      window.location.href = url_data;
+   });
+   $("#add-to-cart2").on("click", function() {
+      var url_data = $(this).data('cart-url');
       window.location.href = url_data;
    });
 </script>

@@ -140,8 +140,15 @@ class OrderService
 
     public function deleteOrder($id)
     {
-        $order = OrderInfo::findOrFail($id);
-        $order->orderDetails()->delete();
+        $order = Order::findOrFail($id);
+        if($order->order_status=="Confirmed") {
+            return redirect()->back()->with('error', 'Confirm order can not be deleted!');
+        }
+        // dd($order->order_status);
+        $details = OrderDetail::where('order_id', $id)->get();
+        $details->each(function($detail) {
+            $detail->delete();
+        });
         return $order->delete();
     }
 
