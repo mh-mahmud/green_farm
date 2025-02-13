@@ -88,6 +88,7 @@ Route::post('checkout', [FrontController::class, 'checkout_store'])->name('check
 Route::get('terms-and-conditions', [FrontController::class, 'terms_and_conditions'])->name('terms-and-conditions');
 Route::get('return-policy', [FrontController::class, 'return_policy'])->name('return-policy');
 Route::get('faq', [FrontController::class, 'faq'])->name('faq');
+Route::post('product-search', [FrontController::class, 'product_search'])->name('product-search');
 
 
 

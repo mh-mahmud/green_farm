@@ -487,5 +487,23 @@ class FrontController extends Controller
         return $orderId;
     }
 
+    public function product_search(Request $request) {
+        if(empty($request->search_product)) {
+            return redirect()->back();
+        }
+
+        $sql = Product::with('category');
+        if (!empty($request->search_product)) {
+            $sql->where('name', 'like', '%' . $request->search_product . '%');
+        }
+        $products = $sql->orderBy('id', 'DESC')->paginate(30);
+
+        // attach with product page
+        $count = count($products);
+        $page = "Products";
+        $cat = "Search Products";
+        return view('front.html.products', compact('products', 'count', 'page', 'cat'));
+    }
+
 
 }

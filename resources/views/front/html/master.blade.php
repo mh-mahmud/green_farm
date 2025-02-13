@@ -78,10 +78,11 @@ else {
                <div class="col-xl-10 col-lg-9">
                   <div class="header-meta-info d-flex align-items-center justify-content-between">
                      <div class="header-search-bar">
-                        <form action="#">
+                        <form action="{{ route('product-search') }}" method="POST">
+                           @csrf
                            <div class="search-info p-relative">
-                              <button class="header-search-icon"><i class="fal fa-search"></i></button>
-                              <input type="text" placeholder="Search products...">
+                              <button type="submit" class="header-search-icon"><i class="fal fa-search"></i></button>
+                              <input required type="text" name="search_product" placeholder="Search products...">
                            </div>
                         </form>
                      </div>
@@ -374,10 +375,11 @@ else {
             <div class="col-lg-9 col-md-8">
                <div class="header-meta-info d-flex align-items-center justify-content-between">
                   <div class="header-search-bar">
-                     <form action="#">
+                     <form action="{{ route('product-search') }}" method="POST">
+                        @csrf
                         <div class="search-info p-relative">
-                           <button class="header-search-icon"><i class="fal fa-search"></i></button>
-                           <input type="text" placeholder="Search products...">
+                           <button type="submit" class="header-search-icon"><i class="fal fa-search"></i></button>
+                           <input required type="text" name="search_product" placeholder="Search products...">
                         </div>
                      </form>
                   </div>
@@ -447,13 +449,12 @@ else {
 
       
       <div class="tpsideinfo__search text-center pt-35">
-         {{--
          <span class="tpsideinfo__search-title mb-20">What Are You Looking For?</span>
-         <form action="#">
-            <input type="text" placeholder="Search Products...">
-            <button><i class="fal fa-search"></i></button>
+         <form action="{{ route('product-search') }}" method="POST">
+            @csrf
+            <input required name="search_product" type="text" placeholder="Search Products...">
+            <button type="submit"><i class="fal fa-search"></i></button>
          </form>
-         --}}
       </div>
       
 
