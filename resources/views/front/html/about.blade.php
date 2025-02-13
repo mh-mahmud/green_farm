@@ -1,7 +1,7 @@
 @extends('front.html.master')
 @section('content')
 
-	<div class="free">
+   <div class="free">
       <!-- breadcrumb-area -->
       <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
@@ -27,18 +27,7 @@
                      </div>
                   </div>
                   <div class="col-lg-6">
-                     <div class="tpabout__inner-title-area mt-25 mb-45">
-                        <h4 class="tpabout__inner-title">গ্রীন ফার্ম সম্পর্কে</h4>
-                     </div>
-
-                     <div class="tpabout__inner-story mb-40" style="padding-right:30px;border-right: 1px solid #ddd;">
-                        <p>
-                           <span>Grown in Nature, Served by Nature</span><br><br>
-
-‘’ গ্রীন ফার্ম’’ দেশের অন্যতম বিশ্বস্ত প্রতিষ্ঠান! প্রত্যন্ত অঞ্চল থেকে নিরাপাদ খাদ্য সংগ্রহ করে,পুষ্টিগুন বজায় রেখে ক্রেতার হাতে পৌছে দেয়াই আমাদের মূল উদ্দেশ্য। পুষ্টিকর ও উচ্চমানের পণ্য সরবারহের প্রতিশ্রুতি বজায় রেখে এর মধ্যেই গ্রাহকের আস্থা অর্জন করেছে, দেশে নিরাপদ খাদ্যে সরবারহকারী অন্যতম বিশ্বস্ত এই প্রতিষ্ঠান। বিশুদ্ধ এবং নিরাপদ খাদ্য সরবারহ এবং গ্রাহক সেবা নিশ্চিত করতে আমরা প্রতিশ্রুতিবদ্ধ। প্রত্যন্ত অঞ্চল থেকে নিরাপাদ খাদ্য সংগ্রহ করে,পুষ্টিগুন বজায় রেখে ক্রেতার হাতে পৌছে দেয়াই আমাদের প্রধান লক্ষ্য।
-                        </p>
-
-                     </div>
+                     {!! $settings->about_us !!}
                   </div>
                </div>
                <!-- <div class="tpabout__logo">
@@ -210,7 +199,7 @@
       --}}
       <!-- feature-area-end -->
 
-	</div>
+   </div>
 
 @endsection
 @section('custom_js')

@@ -110,7 +110,8 @@ class FrontController extends Controller
     }
 
     public function about_page() {
-        return view('front.html.about');
+        $settings = Settings::first();
+        return view('front.html.about', compact('settings'));
     }
 
     public function terms_and_conditions() {

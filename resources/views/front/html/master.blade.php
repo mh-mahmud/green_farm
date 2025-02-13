@@ -71,8 +71,8 @@ else {
          <div class="container">
             <div class="row align-items-center">
                <div class="col-xl-2 col-lg-3">
-                  <div class="logo" style="">
-                     <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="car-clinic-logo"></a>
+                  <div class="logo">
+                     <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/green-farm-logo.png" alt="green-farm-logo"></a>
                   </div>
                </div>
                <div class="col-xl-10 col-lg-9">
@@ -128,7 +128,7 @@ else {
                            @else
                               <a href="{{ route('user-login') }}"><i class="fal fa-user"></i></a>
                            @endif
-                           <a href="{{ route('my-wishlist') }}"><i class="fal fa-heart"></i></a>
+                           {{--<a href="{{ route('my-wishlist') }}"><i class="fal fa-heart"></i></a>--}}
                         </div>
                      </div>
                   </div>
@@ -286,8 +286,8 @@ else {
       <div class="container">
          <div class="row align-items-center">
             <div class="col-xl-2 col-lg-3">
-               <div class="logo" style="">
-                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="logo"></a>
+               <div class="logo">
+                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/green-farm-logo.png" alt="logo"></a>
                </div>
             </div>
             <div class="col-xl-6 col-lg-6">
@@ -367,8 +367,8 @@ else {
                <div class="header-canvas flex-auto">
                   <button class="tp-menu-toggle"><i class="far fa-bars"></i></button>
                </div>
-               <div class="logo"style="">
-                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="logo"></a>
+               <div class="logo">
+                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/green-farm-logo.png" alt="logo"></a>
                </div>
             </div>
             <div class="col-lg-9 col-md-8">
@@ -394,7 +394,7 @@ else {
                      @else
                         <a href="{{ route('user-login') }}"><i class="fal fa-user"></i></a>
                      @endif
-                     <a href="{{ route('my-wishlist') }}"><i class="fal fa-heart"></i></a>
+                     {{--<a href="{{ route('my-wishlist') }}"><i class="fal fa-heart"></i></a>--}}
                   </div>
                </div>
             </div>
@@ -410,8 +410,8 @@ else {
                </div>
             </div>
             <div class="col-6">
-               <div class="logo text-center"  style="">
-                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="logo"></a>
+               <div class="logo text-center">
+                  <a href="{{route('index')}}"><img style="width:145px" src="{{url('/')}}/assets/theme/assets/img/logo/green-farm-logo.png" alt="logo"></a>
                </div>
             </div>
             <div class="col-3">
@@ -501,11 +501,13 @@ else {
          <a href="{{ route('user-register') }}"><i class="fal fa-user-plus"></i> Register</a>
       </div>
       @endif
+      
       {{--
       <div class="tpsideinfo__wishlist-link">
          <a href="{{ route('my-wishlist') }}" target="_parent"><i class="fal fa-heart"></i> Wishlist</a>
       </div>
       --}}
+      
    </div>
    <div class="body-overlay"></div>
    <!-- sidebar-menu-area-end -->

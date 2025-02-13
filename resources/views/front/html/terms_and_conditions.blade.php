@@ -28,7 +28,7 @@
                         <h4 class="tpabout__inner-title">Refund Policy</h4>
                      </div>
 
-                     {!! $settings->refund_policy !!}
+                     {!! $settings->terms_and_conditions !!}
 
                   </div>
                   <div class="col-lg-1"></div>
