@@ -54,16 +54,29 @@
                </div>
                <div class="col-lg-8 col-12">
                   <div class="tpcontact__form">
+
+                     @if (session('success'))
+                         <div class="alert alert-success">
+                             {{ session('success') }}
+                         </div>
+                     @endif
+
+                     @if (session('error'))
+                         <div class="alert alert-danger">
+                             {{ session('error') }}
+                         </div>
+                     @endif
+
                      <div class="tpcontact__info mb-35">
                         <h4 class="tpcontact__title">Contact Form</h4>
                         <p>Share your opinion with us, few time later your agent will contact with you</p>
                      </div>
-                     <form action="" id="contact-form" method="POST">
+                     <form action="{{ route('post-contact-form') }}" method="POST">
                         @csrf
                         <div class="row"> 
                            <div class="col-lg-6">
                               <div class="tpcontact__input mb-20">
-                                 <input name="name" type="text" placeholder="Full name" required>
+                                 <input name="full_name" type="text" placeholder="Full name" required>
                               </div>
                            </div>
                            <div class="col-lg-6">
@@ -73,7 +86,7 @@
                            </div>
                            <div class="col-lg-6">
                               <div class="tpcontact__input mb-20">
-                                 <input name="number" type="text" placeholder="Phone number" required>
+                                 <input name="phone" type="text" placeholder="Phone number" required>
                               </div>
                            </div>
                            <div class="col-lg-6">
@@ -83,7 +96,7 @@
                            </div>
                            <div class="col-lg-12">
                               <div class="tpcontact__input mb-30">
-                                 <textarea name="message" placeholder="Enter message" required></textarea>
+                                 <textarea name="contact_message" placeholder="Enter message" required></textarea>
                               </div>
                            </div>                      
                         </div>

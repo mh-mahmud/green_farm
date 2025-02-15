@@ -89,6 +89,7 @@ Route::get('terms-and-conditions', [FrontController::class, 'terms_and_condition
 Route::get('return-policy', [FrontController::class, 'return_policy'])->name('return-policy');
 Route::get('faq', [FrontController::class, 'faq'])->name('faq');
 Route::post('product-search', [FrontController::class, 'product_search'])->name('product-search');
+Route::post('post-contact-form', [FrontController::class, 'post_contact_form'])->name('post-contact-form');
 
 
 

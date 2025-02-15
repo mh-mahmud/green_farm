@@ -16,6 +16,7 @@ use App\Models\OrderDetail;
 use App\Models\Career;
 use App\Models\Wishlist;
 use App\Models\Settings;
+use App\Models\ContactForm;
 use Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -503,6 +504,25 @@ class FrontController extends Controller
         $page = "Products";
         $cat = "Search Products";
         return view('front.html.products', compact('products', 'count', 'page', 'cat'));
+    }
+
+    public function post_contact_form(Request $request) {
+
+        $request->validate([
+            'full_name' => 'required',
+            'phone' => 'required',
+            'subject' => 'required',
+            'contact_message' => 'required'
+        ]);
+
+        $data = new ContactForm();
+        $data->full_name = $request->full_name;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->subject = $request->subject;
+        $data->contact_message = $request->contact_message;
+        $data->save();
+        return redirect()->back()->with('success', 'Thank you. Form submitted successfully, Admin will contcat with you soon.');
     }
 
 
