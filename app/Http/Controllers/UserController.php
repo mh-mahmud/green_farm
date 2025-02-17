@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use App\Models\Agent;
 use App\Models\Settings;
+use App\Models\ContactForm;
 use Auth;
 
 class UserController extends Controller
@@ -392,6 +393,42 @@ class UserController extends Controller
         $settings->faq = $request->faq;
         $settings->save();
         return redirect()->back()->with('success', 'Settings updated successfully');
+    }
+
+
+    public function contact_form_data(Request $request) {
+        $res = [];
+
+        $sql = ContactForm::query();
+        $data = $request->all();
+        if(!empty($data["search"])) {
+            $sql->where('full_name','like', '%' . $data["search"] . '%');
+            $sql->orWhere('phone','like', '%' . $data["search"] . '%');
+            $sql->orWhere('email','like', '%' . $data["search"] . '%');
+            $sql->orWhere('subject','like', '%' . $data["search"] . '%');
+        }
+        if (isset($data['paginate']) && $data['paginate'] == false) {
+            $res['result'] =  $sql->orderBy('id', 'DESC')->get();
+
+        } else {
+            $res['result'] =  $sql->orderBy('id', 'DESC')->paginate(30);
+
+        }
+
+        // $res['result'] = ContactForm::paginate(30);
+        return view('users.contact_form_data', $res);
+    }
+
+    public function delete_contact_message($id) {
+        try {
+            $data = ContactForm::findOrFail($id);
+            if($data->delete()) {
+                return redirect()->back()->with('success', 'Data deleted successfully.');
+            }
+            return redirect()->back()->with('error', 'Failed action');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     

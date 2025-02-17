@@ -162,6 +162,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::put('/account-settings/{id}', [UserController::class, 'profile_update'])->name('profile-update');
 	Route::post('/user/search', [UserController::class, 'search'])->name('user-search');
 	Route::put('/user/{id}/update-profile-image', [UserController::class, 'updateProfileImage'])->name('update-profile-image');
+	Route::get('contact-form-data', [UserController::class, 'contact_form_data'])->name('contact-form-data')->middleware(['check-permission']);
+	Route::delete('delete-contact-message/{id?}',   [UserController::class, 'delete_contact_message'])->name('delete-contact-message')->middleware(['check-permission']);
+
 	
 	Route::get('app-settings', [UserController::class, 'app_settings'])->name('app-settings')->middleware(['check-permission']);
 	Route::post('app-settings', [UserController::class, 'store_app_settings'])->name('save-app-settings');
