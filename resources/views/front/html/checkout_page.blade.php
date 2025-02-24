@@ -319,6 +319,7 @@
 
        // BD phone number regex (supports +880 or 01 formats)
        let bdPhoneRegex = /^(?:\+8801[3-9]\d{8}|01[3-9]\d{8})$/;
+       // let bdPhoneRegex = /^(?:\01[3-9]\d{8}|01[3-9]\d{8})$/;
 
        if (!bdPhoneRegex.test(phone)) {
            errorMessage.textContent = "Invalid Bangladeshi phone number!";

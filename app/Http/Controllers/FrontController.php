@@ -388,6 +388,10 @@ class FrontController extends Controller
 
     public function checkout_store(Request $request) {
 
+        if(substr($request->mobile, 0, 1) == "+") {
+            $request->mobile = substr($request->mobile, 3);
+        }
+
         if(Auth::user()) {
             $carts = Cart::where('user_id', Auth::user()->id)->get();
         }
@@ -461,6 +465,7 @@ class FrontController extends Controller
 
             // send message
             $messages = "Welcome to https://greenfarm.com.bd, Thanks for your order. " . $order->custom_order_id . " is your order number. Please save your order number for future tracking.";
+
             $phone = "88".$request->mobile . "";
             $response = Helper::send_sms($phone, $messages);
             $last_order = Order::findOrFail($order->id);
