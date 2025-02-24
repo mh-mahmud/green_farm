@@ -122,7 +122,8 @@
                            <div class="col-md-12">
                            <div class="checkout-form-list">
                               <label>Phone Number<span class="required">*</span></label>
-                              <input name="mobile" type="text" value="{{ Auth::user() ? Auth::user()->phone_number : null }}" required placeholder="" />
+                              <input autocomplete="off" id="phone" name="mobile" type="text" value="{{ Auth::user() ? Auth::user()->phone_number : null }}" required placeholder="example: 01914060604" oninput="validatePhone(this)" />
+                              <small id="error-message" style="color: red;"></small>
                            </div>
                            </div>
 
@@ -311,6 +312,22 @@
        $("#order_total").val(total);
        console.log(selectedValue);
    });
+
+   function validatePhone(input) {
+       let phone = input.value;
+       let errorMessage = document.getElementById("error-message");
+
+       // BD phone number regex (supports +880 or 01 formats)
+       let bdPhoneRegex = /^(?:\+8801[3-9]\d{8}|01[3-9]\d{8})$/;
+
+       if (!bdPhoneRegex.test(phone)) {
+           errorMessage.textContent = "Invalid Bangladeshi phone number!";
+           input.style.borderColor = "red";
+       } else {
+           errorMessage.textContent = "";
+           input.style.borderColor = "green";
+       }
+   }
 
 </script>
 @endsection
