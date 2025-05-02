@@ -530,5 +530,17 @@ class FrontController extends Controller
         return redirect()->back()->with('success', 'Thank you. Form submitted successfully, Admin will contcat with you soon.');
     }
 
+    public function product_landing_page(Request $request, $id) {
+        $encode = base64_encode($id);
+
+        
+        $product = Product::findOrFail($id);
+        $settings = Settings::first();
+        // dd($product);
+        // dd($settings);
+        return view('front.html.product_landing_page', compact('product', 'settings'));
+        
+    }
+
 
 }
