@@ -12,6 +12,7 @@ use App\Models\BillingAddress;
 use App\Models\Blog;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\LandingPageOrder;
 use App\Models\OrderDetail;
 use App\Models\Career;
 use App\Models\Wishlist;
@@ -533,13 +534,60 @@ class FrontController extends Controller
     public function product_landing_page(Request $request, $id) {
         $encode = base64_encode($id);
 
-        
         $product = Product::findOrFail($id);
         $settings = Settings::first();
-        // dd($product);
-        // dd($settings);
-        return view('front.html.product_landing_page', compact('product', 'settings'));
-        
+        return view('front.html.product_landing_page', compact('product', 'settings'));        
+    }
+
+    public function landing_page_checkout(Request $request) {
+
+        DB::beginTransaction();
+        try {
+
+            // save to order table
+            $total_price = $request->quantity * $request->unit_price;
+            $final_price = $total_price + $request->optradio;
+            $order = new LandingPageOrder();
+            $order->user_id = (Auth::user()!=null) ? Auth::user()->id : null;
+            $order->session_id = (Auth::user() == null) ? $request->cart_session_id : null;
+            $order->full_name = $request->full_name;
+            $order->billing_address = $request->billing_address;
+            $order->custom_order_id = $this->generateUniqueOrderId();
+            $order->order_phone_number = $request->phone_number;
+            $order->unit_price = $request->unit_price;
+            $order->quantity = $request->quantity;
+            $order->total_price = $total_price;
+            $order->discount = 0;
+            $order->final_price = $final_price;
+            // $order->coupon = $request->coupon;
+            $order->payment_status = "NOT PAID";
+            $order->delivery_location = $request->delivery_location;
+            // $order->order_note = $request->order_note;
+            $order->order_status = "PROCESSING";
+            $order->payment_type = "Cash on Delivery";
+            $order->delivery_charge = $request->optradio;
+            $order->possible_delivery_date = date("Y-m-d h:i:s", time() + 86400 + 86400);
+            $order->save();
+
+            Session::forget('car-clinic-visitor');
+
+
+            DB::commit();
+
+            // send message
+            $messages = "Welcome to https://greenfarm.com.bd, Thanks for your order. " . $order->custom_order_id . " is your order number. Please save your order number for future tracking.";
+
+            $phone = "88".$request->phone_number . "";
+            $response = Helper::send_sms($phone, $messages);
+            $last_order = LandingPageOrder::findOrFail($order->id);
+            $last_order->sms_response = $response;
+            $last_order->save();
+
+            return redirect()->route('checkout')->with('success', "Thanks for your order.Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return 'Transaction failed: ' . $e->getMessage();
+        }
     }
 
 

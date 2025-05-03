@@ -115,30 +115,32 @@
                         <!-- CHECKOUT SHORTCODE -->
                         <div class="woocommerce">
                            
-                           <form action="/action_page.php" style="padding:20px">
+                           <form action="{{ route('landing-checkout-store') }}" method="POST" style="padding:20px">
+                              @csrf
                               <div class="form-group">
                                  <label for="full_name">আপনার নাম <span style="color:red" class="required" aria-hidden="true">*</span></label>
-                                 <input required type="text" class="form-control" id="full_name">
+                                 <input required type="text" class="form-control" name="full_name" id="full_name">
                               </div><br>
                               <div class="form-group">
                                  <label for="phone">মোবাইল নাম্বার <span style="color:red" class="required" aria-hidden="true">*</span></label>
-                                 <input required type="text" class="form-control" id="phone">
+                                 <input required type="text" class="form-control" name="phone_number" id="phone">
                               </div><br>
                               <div class="form-group">
                                  <label for="address">আপনার ঠিকানা <span style="color:red" class="required" aria-hidden="true">*</span></label>
-                                 <textarea required rows="4" class="form-control" id="address"></textarea>
+                                 <textarea required rows="4" class="form-control" name="billing_address" id="address"></textarea>
                               </div><br>
 
                               <div class="form-group">
                                  <label for="phone" style="font-weight:bold;font-size:19px;padding-bottom:10px;">Shipping <span style="color:red" class="required" aria-hidden="true">*</span></label>
 
                                  <div class="radio" style="padding-bottom:5px;border-bottom:1px solid #bbb;border-top:1px solid #ccc;maegin-top:10px;">
-                                   <label><input type="radio" name="optradio" checked> Inside Dhaka: {{\App\Helpers\Helper::settings()->charge_inside_dhaka}} ৳</label>
+                                   <label><input type="radio" data-type="inside_dhaka" name="optradio" value="{{\App\Helpers\Helper::settings()->charge_inside_dhaka}}" checked> Inside Dhaka: {{\App\Helpers\Helper::settings()->charge_inside_dhaka}} ৳</label>
                                  </div>
 
                                  <div class="radio" style="padding-bottom:5px;border-bottom:1px solid #bbb !important">
-                                   <label><input type="radio" name="optradio"> Outside Dhaka: {{\App\Helpers\Helper::settings()->charge_outside_dhaka}} ৳</label>
+                                   <label><input type="radio" data-type="outside_dhaka" value="{{\App\Helpers\Helper::settings()->charge_outside_dhaka}}" name="optradio"> Outside Dhaka: {{\App\Helpers\Helper::settings()->charge_outside_dhaka}} ৳</label>
                                  </div>
+                                 <input type="hidden" name="delivery_location" id="delivery_location" value="inside_dhaka">
                               </div><br>
 
 
@@ -172,13 +174,15 @@
                                                            <span class="cart-minus">-</span>
 
                                                            <!-- <input autocomplete="off" type="number" value="1" step="1" min="1" name="wcf_qty_selection" class="wcf-qty-selection" placeholder="1" data-sale-limit="false" title=""> -->
-                                                           <input class="cart-input quantity" name="quantity[]" type="number" value="1"/>
+                                                           <input class="cart-input quantity" name="quantity" type="number" value="1"/>
 
                                                            <!-- <span class="wcf-qty-selection-btn wcf-qty-increment wcf-qty-change-icon" title="">+</span> -->
                                                            <span class="cart-plus">+</span>
                                                        </div>
                                                    </div>
                                                    <div class="wcf-price">
+                                                      <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                      <input type="hidden" name="unit_price" id="unit-price" value="{{ $product->product_value }}">
                                                        <div class="wcf-display-price wcf-field-label"><span class="woocommerce-Price-amount amount">{{ $product->product_value }}  &nbsp;<span class="woocommerce-Price-currencySymbol">৳&nbsp;</span></span>
                                                        </div>
                                                    </div>
@@ -193,7 +197,7 @@
                                        <div class="cart-page-total">
                                           <h2>Your total order</h2>
                                           <ul class="mb-20">
-                                             <li>Subtotal <span>Tk. <span class="cart-total">{{ $product->product_value }}</span></span></li>
+                                             <li>Subtotal <span>Tk. <span class="product-total">{{ $product->product_value }}</span></span></li>
                                              <li>Total <span>Tk. <span class="cart-total">{{ @$init_total }}</span></span></li>
                                           </ul>
                                          
@@ -252,12 +256,12 @@
                     </section>
                     <div class="wd-negative-gap elementor-element elementor-element-61f7857 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="61f7857" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
                         <div class="e-con-inner">
-                            <div class="elementor-element elementor-element-aa72ab5 elementor-widget elementor-widget-video" data-id="aa72ab5" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;https:\/\/www.youtube.com\/watch?v=E_suIRp2Rmc&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;video_type&quot;:&quot;youtube&quot;,&quot;controls&quot;:&quot;yes&quot;}"
+                            <div class="elementor-element elementor-element-aa72ab5 elementor-widget elementor-widget-video" data-id="aa72ab5" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;https:\/\/www.youtube.com\/watch?v=1s75_ZI9IO0&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;video_type&quot;:&quot;youtube&quot;,&quot;controls&quot;:&quot;yes&quot;}"
                             data-widget_type="video.default">
                                 <div class="elementor-widget-container">
                                     <div class="elementor-wrapper elementor-open-inline">
                                         <iframe class="elementor-video" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="লিচু, সরিষা, কালোজিরা ফুলের মধুসহ ৪ ধরণের মধু পাচ্ছেন মাত্র ১৩০০ টাকায় | Falaq Food"
-                                        width="640" height="360" src="https://www.youtube.com/embed/E_suIRp2Rmc?controls=1&amp;rel=0&amp;playsinline=0&amp;cc_load_policy=0&amp;autoplay=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Ffalaqfood.com&amp;widgetid=1&amp;forigin=https%3A%2F%2Ffalaqfood.com%2Fstep%2Fhoney-combo%2F%3Futm_medium%3Dpaid%26utm_source%3Dfb%26utm_id%3D120221651767020660%26utm_content%3D120221651767060660%26utm_term%3D120221651766990660%26utm_campaign%3D120221651767020660%23orders&amp;aoriginsup=1&amp;vf=1"
+                                        width="640" height="360" src="https://www.youtube.com/embed/1s75_ZI9IO0?controls=1&amp;rel=0&amp;playsinline=0&amp;cc_load_policy=0&amp;autoplay=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Ffalaqfood.com&amp;widgetid=1&amp;forigin=https%3A%2F%2Ffalaqfood.com%2Fstep%2Fhoney-combo%2F%3Futm_medium%3Dpaid%26utm_source%3Dfb%26utm_id%3D120221651767020660%26utm_content%3D120221651767060660%26utm_term%3D120221651766990660%26utm_campaign%3D120221651767020660%23orders&amp;aoriginsup=1&amp;vf=1"
                                         id="widget2"></iframe>
                                     </div>
                                 </div>
@@ -272,7 +276,7 @@
                                     <div class="elementor-element elementor-element-98e2bd9 elementor-widget__width-inherit ha-has-bg-overlay elementor-widget elementor-widget-heading" data-id="98e2bd9" data-element_type="widget" data-settings="{&quot;motion_fx_motion_fx_scrolling&quot;:&quot;yes&quot;,&quot;motion_fx_devices&quot;:[&quot;desktop&quot;,&quot;tablet_extra&quot;,&quot;tablet&quot;,&quot;mobile_extra&quot;,&quot;mobile&quot;]}"
                                     data-widget_type="heading.default">
                                         <div class="elementor-widget-container">
-                                            <h2 class="elementor-heading-title elementor-size-large">ফালাক ফুড- যেভাবে কাস্টমারের আস্থার জায়গা করে নিয়েছে !!!</h2> </div>
+                                            <h2 class="elementor-heading-title elementor-size-large">গ্রীন ফার্ম - যেভাবে কাস্টমারের আস্থার জায়গা করে নিয়েছে !!!</h2> </div>
                                     </div>
                                     <section class="wd-negative-gap elementor-section elementor-inner-section elementor-element elementor-element-30350da elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="30350da"
                                     data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
@@ -328,7 +332,7 @@
                </h3>
 
                                                                     <p class="elementor-icon-box-description">
-                                                                        ফালাক ফুড এর কোন পণ্য অর্ডার করতে এক টাকাও অগ্রিম দিতে হবে না। </p>
+                                                                        গ্রীন ফার্ম এর কোন পণ্য অর্ডার করতে এক টাকাও অগ্রিম দিতে হবে না। </p>
 
                                                                 </div>
 
@@ -367,132 +371,9 @@
                                             </div>
                                         </div>
                                     </section>
-                                    <div class="elementor-element elementor-element-18fc336 elementor-widget__width-inherit ha-has-bg-overlay elementor-widget elementor-widget-heading" data-id="18fc336" data-element_type="widget" data-settings="{&quot;motion_fx_motion_fx_scrolling&quot;:&quot;yes&quot;,&quot;motion_fx_devices&quot;:[&quot;desktop&quot;,&quot;tablet_extra&quot;,&quot;tablet&quot;,&quot;mobile_extra&quot;,&quot;mobile&quot;]}"
-                                    data-widget_type="heading.default">
-                                        <div class="elementor-widget-container">
-                                            <h2 class="elementor-heading-title elementor-size-medium">হানিকম্বোতে কি কি পাবেন ?</h2> </div>
-                                    </div>
-                                    <section class="wd-negative-gap elementor-section elementor-inner-section elementor-element elementor-element-7635419 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7635419"
-                                    data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
-                                        <div class="elementor-container elementor-column-gap-default">
-                                            <div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-5d498a6" data-id="5d498a6" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-                                                <div class="elementor-widget-wrap elementor-element-populated">
-                                                    <div class="elementor-element elementor-element-ed9b598 elementor-view-default elementor-position-top elementor-mobile-position-top elementor-widget elementor-widget-icon-box" data-id="ed9b598" data-element_type="widget" data-widget_type="icon-box.default">
-                                                        <div class="elementor-widget-container">
-                                                            <div class="elementor-icon-box-wrapper">
 
-                                                                <div class="elementor-icon-box-icon">
-                                                                    <span class="elementor-icon">
-            <svg aria-hidden="true" class="e-font-icon-svg e-fas-check-circle" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>            </span>
-                                                                </div>
 
-                                                                <div class="elementor-icon-box-content">
-
-                                                                    <h4 class="elementor-icon-box-title">
-                  <span>
-                     পাহাড়ি বন্য ফুলের মধু                  </span>
-               </h4>
-
-                                                                    <p class="elementor-icon-box-description">
-                                                                        ৫০০ গ্রাম </p>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-f62fc68" data-id="f62fc68" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-                                                <div class="elementor-widget-wrap elementor-element-populated">
-                                                    <div class="elementor-element elementor-element-8c28992 elementor-view-default elementor-position-top elementor-mobile-position-top elementor-widget elementor-widget-icon-box" data-id="8c28992" data-element_type="widget" data-widget_type="icon-box.default">
-                                                        <div class="elementor-widget-container">
-                                                            <div class="elementor-icon-box-wrapper">
-
-                                                                <div class="elementor-icon-box-icon">
-                                                                    <span class="elementor-icon">
-            <svg aria-hidden="true" class="e-font-icon-svg e-fas-check-circle" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>            </span>
-                                                                </div>
-
-                                                                <div class="elementor-icon-box-content">
-
-                                                                    <h4 class="elementor-icon-box-title">
-                  <span>
-                     কালোজিরা  ফুলের মধু                 </span>
-               </h4>
-
-                                                                    <p class="elementor-icon-box-description">
-                                                                        ৫০০ গ্রাম </p>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-981957c" data-id="981957c" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-                                                <div class="elementor-widget-wrap elementor-element-populated">
-                                                    <div class="elementor-element elementor-element-f9cf25d elementor-view-default elementor-position-top elementor-mobile-position-top elementor-widget elementor-widget-icon-box" data-id="f9cf25d" data-element_type="widget" data-widget_type="icon-box.default">
-                                                        <div class="elementor-widget-container">
-                                                            <div class="elementor-icon-box-wrapper">
-
-                                                                <div class="elementor-icon-box-icon">
-                                                                    <span class="elementor-icon">
-            <svg aria-hidden="true" class="e-font-icon-svg e-fas-check-circle" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>            </span>
-                                                                </div>
-
-                                                                <div class="elementor-icon-box-content">
-
-                                                                    <h4 class="elementor-icon-box-title">
-                  <span>
-                     সরিষা ফুলের মধু                  </span>
-               </h4>
-
-                                                                    <p class="elementor-icon-box-description">
-                                                                        ৫০০ গ্রাম </p>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="elementor-column elementor-col-25 elementor-inner-column elementor-element elementor-element-2f6c809" data-id="2f6c809" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-                                                <div class="elementor-widget-wrap elementor-element-populated">
-                                                    <div class="elementor-element elementor-element-eb5e3a7 elementor-view-default elementor-position-top elementor-mobile-position-top elementor-widget elementor-widget-icon-box" data-id="eb5e3a7" data-element_type="widget" data-widget_type="icon-box.default">
-                                                        <div class="elementor-widget-container">
-                                                            <div class="elementor-icon-box-wrapper">
-
-                                                                <div class="elementor-icon-box-icon">
-                                                                    <span class="elementor-icon">
-            <svg aria-hidden="true" class="e-font-icon-svg e-fas-check-circle" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg>            </span>
-                                                                </div>
-
-                                                                <div class="elementor-icon-box-content">
-
-                                                                    <h3 class="elementor-icon-box-title">
-                  <span>
-                     লিচু ফুলের মধু                   </span>
-               </h3>
-
-                                                                    <p class="elementor-icon-box-description">
-                                                                        ৫০০ গ্রাম </p>
-
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                     {{--
                     <section class="wd-negative-gap elementor-section elementor-top-section elementor-element elementor-element-29734c2 elementor-section-boxed elementor-section-height-default elementor-section-height-default animated fadeIn" data-id="29734c2" data-element_type="section"
                     data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;fadeIn&quot;,&quot;animation_delay&quot;:200,&quot;_ha_eqh_enable&quot;:false}">
                         <div class="elementor-container elementor-column-gap-default">
@@ -568,6 +449,7 @@
         </div>
     </div>
     </section>
+    --}}
 
 
       <!-- related-product-area-start -->
@@ -771,5 +653,45 @@
       var url_data = $(this).data('cart-url');
       window.location.href = url_data;
    });
+
+   $(document).ready(function() {
+     // Function to update total prices
+      function updateCart() {
+         let cartTotal = 0;
+         var delivery = $('input[name="optradio"]:checked').val();
+         delivery = parseInt(delivery);
+
+          // const unitPrice = parseFloat($(this).find('.unit-price').data('price'));
+          const unitPrice = parseFloat($("#unit-price").val());
+
+          const quantity = parseInt($('.quantity').val());
+          const productTotal = unitPrice * quantity;
+
+
+          // Add to cart total
+          cartTotal += productTotal;
+          allTotal = cartTotal + delivery;
+
+          // Update the product total in the table
+          $('.product-total').text(cartTotal.toFixed(2));
+
+         // Update the cart total
+         $('.cart-total, .final-total').text(allTotal.toFixed(2));
+      }
+
+      // Event listener for quantity changes
+      $("span.cart-plus, span.cart-minus").on("click", function() {
+         updateCart();
+      });
+
+      $('input[name="optradio"]').change(function() {
+         let loc_val = $(this).attr('data-type');
+         $("#delivery_location").val(loc_val);
+         updateCart();
+      });
+
+   });
+
+
 </script>
 @endsection

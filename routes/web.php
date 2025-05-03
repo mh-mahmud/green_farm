@@ -50,6 +50,7 @@ use App\Models\Promotion;
 Route::get('/', [FrontController::class, 'html'])->name('index');
 Route::get('products', [FrontController::class, 'products'])->name('products');
 Route::get('products/{id}/landing-page/{name}', [FrontController::class, 'product_landing_page'])->name('landing-page');
+Route::post('landing-page-checkout', [FrontController::class, 'landing_page_checkout'])->name('landing-checkout-store');
 Route::get('product-details/{id}', [FrontController::class, 'product_details'])->name('product-details');
 Route::get('contacts', [FrontController::class, 'contact_page'])->name('contact-us');
 Route::get('abouts', [FrontController::class, 'about_page'])->name('about-us');
