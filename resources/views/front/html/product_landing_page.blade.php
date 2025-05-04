@@ -2,15 +2,29 @@
 <link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/post-263154.css">
 <link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/checkout-styles.css">
 <link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/frontend.min.css">
-<link rel="stylesheet" type="text/css" href="https://falaqfood.com/wp-content/plugins/cartflows/assets/css/checkout-template.css?ver=2.1.10">
+<link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/checkout-template.css?ver=2.1.10">
 @php
-   $init_total = \App\Helpers\Helper::settings()->charge_inside_dhaka + $product->product_value;
+    $delivery_charge = 0;
+    if($product->id=='64') {
+        $delivery_charge = 100;
+    }
+    else if($product->id=='65') {
+        $delivery_charge = 150;
+    }
+    else if($product->id=='66') {
+        $delivery_charge = 250;
+    }
+    else if($product->id=='67') {
+        $delivery_charge = 500;
+    }
+   // $init_total = \App\Helpers\Helper::settings()->charge_inside_dhaka + $product->product_value;
+   $init_total = $delivery_charge + $product->product_value;
 @endphp
 
 
 @section('content')
 
-	<div class="free">
+    <div class="free">
       <!-- breadcrumb-area -->
       <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
@@ -134,11 +148,11 @@
                                  <label for="phone" style="font-weight:bold;font-size:19px;padding-bottom:10px;">Shipping <span style="color:red" class="required" aria-hidden="true">*</span></label>
 
                                  <div class="radio" style="padding-bottom:5px;border-bottom:1px solid #bbb;border-top:1px solid #ccc;maegin-top:10px;">
-                                   <label><input type="radio" data-type="inside_dhaka" name="optradio" value="{{\App\Helpers\Helper::settings()->charge_inside_dhaka}}" checked> Inside Dhaka: {{\App\Helpers\Helper::settings()->charge_inside_dhaka}} ৳</label>
+                                   <label><input type="radio" data-type="inside_dhaka" name="optradio" value="{{$delivery_charge}}" checked> Inside Dhaka: {{$delivery_charge}} ৳</label>
                                  </div>
 
                                  <div class="radio" style="padding-bottom:5px;border-bottom:1px solid #bbb !important">
-                                   <label><input type="radio" data-type="outside_dhaka" value="{{\App\Helpers\Helper::settings()->charge_outside_dhaka}}" name="optradio"> Outside Dhaka: {{\App\Helpers\Helper::settings()->charge_outside_dhaka}} ৳</label>
+                                   <label><input type="radio" data-type="outside_dhaka" value="{{$delivery_charge}}" name="optradio"> Outside Dhaka: {{$delivery_charge}} ৳</label>
                                  </div>
                                  <input type="hidden" name="delivery_location" id="delivery_location" value="inside_dhaka">
                               </div><br>
@@ -167,7 +181,7 @@
                                                    <div class="wcf-item-wrap">
                                                        <span class="wcf-display-title">{{$product->name}}</span>
                                                        <span class="wcf-display-title-quantity"><span class="dashicons dashicons-no-alt"></span>
-                                                       <span class="wcf-display-quantity">1</span></span>
+                                                       {{--<span class="wcf-display-quantity">1</span></span>--}}
                                                    </div>
 
                                                    <div class="wcf-qty">
@@ -204,8 +218,9 @@
                                        <div class="cart-page-total">
                                           <h2>Your total order</h2>
                                           <ul class="mb-20">
-                                             <li>Subtotal <span>Tk. <span class="product-total">{{ $product->product_value }}</span></span></li>
-                                             <li>Total <span>Tk. <span class="cart-total">{{ @$init_total }}</span></span></li>
+                                             <li style="border:1px solid #ddd">Subtotal <span>Tk. <span class="product-total">{{ $product->product_value }}</span></span></li>
+                                             <li style="border:1px solid #ddd">Delivery Charge <span>Tk. <span class="delivery-total">{{ $delivery_charge }}</span></span></li>
+                                             <li style="border:1px solid #ddd;font-weight:bold">Total <span>Tk. <span class="cart-total">{{ @$init_total }}/-</span></span></li>
                                           </ul>
                                          
                                           
@@ -214,8 +229,8 @@
                                  </div>
                               </div>
 
-                              <div style="border: 2px solid #ccc;margin-top:20px;background-color:#fff;">
-                                 <p style="padding:20px;">Payment Type: CASH ON DELIVERY</p>
+                              <div style="border: 1px solid #ccc;margin-top:20px;background-color:#fff;">
+                                 <p style="padding-top:10px;margin-left:35%;font-size:14px">PAYMENT TYPE: CASH ON DELIVERY</p>
                               </div>
 
 
@@ -266,19 +281,19 @@
                            <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
                                <img src="{{url('/')}}/uploads/products/mango/mango-1.jpeg">
                                
-                               <a href="" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
+                               <a href="{{ url('/') }}/products/64/landing-page/mango" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
                            </div>
                            <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
                                <img src="{{url('/')}}/uploads/products/mango/mango-2.jpeg">
-                               <a href="" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
+                               <a href="{{ url('/') }}/products/65/landing-page/mango" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
                            </div>
                            <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
-                               <img src="{{url('/')}}/uploads/products/mango/mango-2.jpeg">
-                               <a href="" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
+                               <img src="{{url('/')}}/uploads/products/mango/mango-3.jpeg">
+                               <a href="{{ url('/') }}/products/66/landing-page/mango" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
                            </div>
                            <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
                                <img src="{{url('/')}}/uploads/products/mango/mango-4.jpeg">
-                               <a href="" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
+                               <a href="{{ url('/') }}/products/67/landing-page/mango" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
                            </div>
                        </div>
 
@@ -288,8 +303,8 @@
                             data-widget_type="video.default">
                                 <div class="elementor-widget-container">
                                     <div class="elementor-wrapper elementor-open-inline">
-                                        <iframe class="elementor-video" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="লিচু, সরিষা, কালোজিরা ফুলের মধুসহ ৪ ধরণের মধু পাচ্ছেন মাত্র ১৩০০ টাকায় | Falaq Food"
-                                        width="640" height="360" src="https://www.youtube.com/embed/1s75_ZI9IO0?controls=1&amp;rel=0&amp;playsinline=0&amp;cc_load_policy=0&amp;autoplay=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Ffalaqfood.com&amp;widgetid=1&amp;forigin=https%3A%2F%2Ffalaqfood.com%2Fstep%2Fhoney-combo%2F%3Futm_medium%3Dpaid%26utm_source%3Dfb%26utm_id%3D120221651767020660%26utm_content%3D120221651767060660%26utm_term%3D120221651766990660%26utm_campaign%3D120221651767020660%23orders&amp;aoriginsup=1&amp;vf=1"
+                                        <iframe class="elementor-video" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Green Farm Mango Food"
+                                        width="640" height="360" src="https://www.youtube.com/embed/1s75_ZI9IO0?controls=1&amp;rel=0&amp;playsinline=0&amp;cc_load_policy=0&amp;autoplay=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fgreenfarm.com&amp;widgetid=1&amp;forigin=https%3A%2F%2Fgreenfarm.com.bd.com%2Fstep%2Fhoney-combo%2F%3Futm_medium%3Dpaid%26utm_source%3Dfb%26utm_id%3D120221651767020660%26utm_content%3D120221651767060660%26utm_term%3D120221651766990660%26utm_campaign%3D120221651767020660%23orders&amp;aoriginsup=1&amp;vf=1"
                                         id="widget2"></iframe>
                                     </div>
                                 </div>
@@ -401,83 +416,7 @@
                                     </section>
 
 
-                     {{--
-                    <section class="wd-negative-gap elementor-section elementor-top-section elementor-element elementor-element-29734c2 elementor-section-boxed elementor-section-height-default elementor-section-height-default animated fadeIn" data-id="29734c2" data-element_type="section"
-                    data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;fadeIn&quot;,&quot;animation_delay&quot;:200,&quot;_ha_eqh_enable&quot;:false}">
-                        <div class="elementor-container elementor-column-gap-default">
-                            <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-4705ae7" data-id="4705ae7" data-element_type="column">
-                                <div class="elementor-widget-wrap elementor-element-populated">
-                                    <div class="elementor-element elementor-element-f3a16f3 elementor-widget__width-inherit ha-has-bg-overlay elementor-widget elementor-widget-heading" data-id="f3a16f3" data-element_type="widget" data-settings="{&quot;motion_fx_motion_fx_scrolling&quot;:&quot;yes&quot;,&quot;motion_fx_devices&quot;:[&quot;desktop&quot;,&quot;tablet_extra&quot;,&quot;tablet&quot;,&quot;mobile_extra&quot;,&quot;mobile&quot;]}"
-                                    data-widget_type="heading.default">
-                                        <div class="elementor-widget-container">
-                                            <h3 class="elementor-heading-title elementor-size-default">আরোও খুঁটিনাটি জেনে নিই চলুন</h3> </div>
-                                    </div>
-                                    <section class="elementor-section elementor-inner-section elementor-element elementor-element-ca1874f elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="ca1874f" data-element_type="section" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
-                                        <div class="elementor-container elementor-column-gap-default">
-                                            <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-3248561" data-id="3248561" data-element_type="column">
-                                                <div class="elementor-widget-wrap elementor-element-populated">
-                                                    <div class="elementor-element elementor-element-ddcdfe0 elementor-widget elementor-widget-wd_text_block" data-id="ddcdfe0" data-element_type="widget" data-widget_type="wd_text_block.default">
-                                                        <div class="elementor-widget-container">
-                                                            <div class="wd-text-block reset-last-child text-left">
 
-                                                                <p>� হানিকম্বো, এই কম্বো প্যাকেজটিতে আপনি এক অর্ডারের মাধ্যমে একসাথে ৪ টি ভিন্ন ভিন্ন মধুর স্বাদ নিতে পারবেন । বিশেষ করে যারা এক জিনিস বার বার খেতে পছন্দ করেন না , তাদের জন্য এই কম্বোটি বেশ
-                                                                    সহায়ক। সকাল / বিকেল / সন্ধ্যায় বা রাতে আপনি একেক সময় একেক মধু খেতে পারেন। চিনির বিকল্প হিসেবে মধু খাওয়া শুরু করেছেন , সেক্ষেত্রে অল্টারনেট করে ভিন্ন ভিন্ন টেস্ট গ্রহণ করুন।</p>
-                                                                <p>� হানিকম্বো, মধু লাভার কিংবা যারা আগে মধু টেস্ট করেনি তাদের জন্য বেটার অপশন। কোন মধুটা আপনার রুচির সাথে মানানসই তা আপনি মধুকম্বো ব্যবহারের মাধ্যমে অনুমান করতে পারবেন ।</p>
-                                                                <p>� বোতলের ছিপি / ক্যাপ – সিকিউরিটি সিল দিয়ে ইনটেক্ট করা থাকবে
-                                                                    <br>পণ্য ডেলিভারির সবকিছু চেক করে রিসিভ করবেন । ফালাক ফুড সবসময় আপনার পাশে আছে ইনশাআল্লাহ</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="elementor-element elementor-element-a4e896e elementor-widget elementor-widget-wd_text_block" data-id="a4e896e" data-element_type="widget" data-widget_type="wd_text_block.default">
-                                                        <div class="elementor-widget-container">
-                                                            <div class="wd-text-block reset-last-child text-center">
-
-                                                                <p><a href="https://facebook.com/groups/falaqfoodcircle/" target="_blank" rel="noopener"><strong>আমাদের কাস্টমার রিভিউ গুলো দেখতে FB Group এ Join হতে পারেন।</strong></a></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="elementor-element elementor-element-3ef7fe9 elementor-widget elementor-widget-wd_button" data-id="3ef7fe9" data-element_type="widget" data-widget_type="wd_button.default">
-                                                        <div class="elementor-widget-container">
-                                                            <div class="wd-button-wrapper text-center">
-                                                                <a class="btn btn-style-default btn-shape-rectangle btn-size-default btn-icon-pos-right" href="https://facebook.com/groups/falaqfoodcircle/" target="_blank">
-                                                                    <span class="wd-btn-text" data-elementor-setting-key="text">
-               Facebook Group          </span>
-
-                                                                    <span class="wd-btn-icon">
-                  <svg class="wd-icon e-font-icon-svg e-fas-arrow-right" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg>             </span>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </section>
-                                    <div class="elementor-element elementor-element-c23424d elementor-align-center ha-has-bg-overlay elementor-widget elementor-widget-button animated zoomIn" data-id="c23424d" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;}"
-                                    data-widget_type="button.default">
-                                        <div class="elementor-widget-container">
-                                            <div class="elementor-button-wrapper">
-                                                <a class="elementor-button elementor-button-link elementor-size-md" href="#orders" id="01">
-                                                    <span class="elementor-button-content-wrapper">
-                  <span class="elementor-button-icon">
-            <svg aria-hidden="true" class="e-font-icon-svg e-fas-shopping-cart" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg"><path d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z"></path></svg>        </span>
-                                                    <span class="elementor-button-text">অর্ডার করুন</span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                </div>
-
-            </article>
-        </div>
-    </div>
-    </section>
-    --}}
 
 
       <!-- related-product-area-start -->
@@ -664,7 +603,7 @@
       </div>
       --}}
       <!-- related-product-area-end -->
-	</div>
+    </div>
 
 @endsection
 
