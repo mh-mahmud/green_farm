@@ -123,7 +123,7 @@
                               </div><br>
                               <div class="form-group">
                                  <label for="phone">মোবাইল নাম্বার <span style="color:red" class="required" aria-hidden="true">*</span></label>
-                                 <input required type="text" class="form-control" name="phone_number" id="phone">
+                                 <input required type="text" placeholder="11 সংখ্যার মোবাইল নাম্বার লিখুন" class="form-control" name="phone_number" id="phone">
                               </div><br>
                               <div class="form-group">
                                  <label for="address">আপনার ঠিকানা <span style="color:red" class="required" aria-hidden="true">*</span></label>
@@ -152,6 +152,8 @@
                                <div class="wcf-product-option-wrap wcf-yp-skin-cards wcf-product-option-after-customer">
                                    <h3 id="your_products_heading"> Your Products </h3>
                                    <div class="wcf-qty-options">
+
+
 
                                        <div class="wcf-qty-row wcf-qty-row-157258"  style="border:1px solid #ddd;width:100%;">
 
@@ -189,6 +191,11 @@
                                                </div>
                                            </div>
                                        </div>
+
+
+
+
+
                                    </div>
                                </div>
 
@@ -254,6 +261,27 @@
                             </div>
                         </div>
                     </section>
+
+                       <div class="row" style="margin-top:20px">
+                           <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
+                               <img src="{{url('/')}}/uploads/products/mango/mango-1.jpeg">
+                               
+                               <a href="" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
+                           </div>
+                           <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
+                               <img src="{{url('/')}}/uploads/products/mango/mango-2.jpeg">
+                               <a href="" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
+                           </div>
+                           <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
+                               <img src="{{url('/')}}/uploads/products/mango/mango-2.jpeg">
+                               <a href="" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
+                           </div>
+                           <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
+                               <img src="{{url('/')}}/uploads/products/mango/mango-4.jpeg">
+                               <a href="" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
+                           </div>
+                       </div>
+
                     <div class="wd-negative-gap elementor-element elementor-element-61f7857 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="61f7857" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
                         <div class="e-con-inner">
                             <div class="elementor-element elementor-element-aa72ab5 elementor-widget elementor-widget-video" data-id="aa72ab5" data-element_type="widget" data-settings="{&quot;youtube_url&quot;:&quot;https:\/\/www.youtube.com\/watch?v=1s75_ZI9IO0&quot;,&quot;autoplay&quot;:&quot;yes&quot;,&quot;video_type&quot;:&quot;youtube&quot;,&quot;controls&quot;:&quot;yes&quot;}"
