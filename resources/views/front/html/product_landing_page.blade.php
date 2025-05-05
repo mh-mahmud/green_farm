@@ -228,9 +228,9 @@
                                        </div>
                                  </div>
                               </div>
-
-                              <div style="border: 1px solid #ccc;margin-top:20px;background-color:#fff;">
-                                 <p style="padding-top:10px;margin-left:35%;font-size:14px">PAYMENT TYPE: CASH ON DELIVERY</p>
+                              <span style="font-size:12px;">Payment Type:-</span>
+                              <div style="border: 1px solid #ccc;margin-top:0px;background-color:#fff;">
+                                 <span style="padding-top:10px;margin-left:2%;font-size:13px">CASH ON DELIVERY</span>
                               </div>
 
 
@@ -347,8 +347,7 @@
                </h3>
 
                                                                     <p class="elementor-icon-box-description">
-                                                                        আমাদের পণ্য ভেজাল প্রমান করতে পারলে ফালাক ফুড দিবে এক লক্ষ টাকা । </p>
-
+                                                                        আমাদের পণ্য ভেজাল প্রমান করতে পারলে  গ্রীন ফার্ম  দিবে এক লক্ষ টাকা । </p>
                                                                 </div>
 
                                                             </div>
