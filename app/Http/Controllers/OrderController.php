@@ -27,12 +27,13 @@ class OrderController extends Controller
     }
 
     // for landing
-    public function index()
+    public function landing_order_index()
     {
         $orders = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
             ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
             ->orderBy('landing_page_orders.id', 'desc')
             ->paginate(config('constants.ROW_PER_PAGE'));
+
         return view('orders.landing_index', compact('orders'));
     }
 

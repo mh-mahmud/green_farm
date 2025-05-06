@@ -552,6 +552,7 @@ class FrontController extends Controller
             $delivery_charge = $request->optradio * $request->quantity;
             $final_price = $total_price + $delivery_charge;
             $order = new LandingPageOrder();
+            $order->product_id = $request->product_id;
             $order->user_id = (Auth::user()!=null) ? Auth::user()->id : null;
             $order->session_id = (Auth::user() == null) ? $request->cart_session_id : null;
             $order->full_name = $request->full_name;

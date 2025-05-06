@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @php
 use Carbon\Carbon;
+
 @endphp
 
 @section('content')
@@ -125,7 +126,8 @@ use Carbon\Carbon;
             </div>
             <!--end::Wrapper-->
             <!--begin::Button-->
-            <a href="{{ route('orders-create') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Create</a>
+
+            {{--<a href="{{ route('orders-create') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Create</a>--}}
 
             <!--end::Button-->
         </div>
@@ -175,7 +177,7 @@ use Carbon\Carbon;
                 <!--begin::Header-->
                 <div class="d-flex justify-content-between align-items-start card-header border-0 p-1">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder fs-3 mb-1">Orders List</span>
+                        <span class="card-label fw-bolder fs-3 mb-1">Landing Page Orders</span>
                         <!-- <span class="text-muted mt-1 fw-bold fs-7">Agent data here</span> -->
                     </h3>
 
@@ -220,10 +222,18 @@ use Carbon\Carbon;
                             <thead>
                                 <tr class="fw-bolder text-muted bg-light bd-cyan">
                                     <th class="ps-4 min-w-50px">SL</th>
-                                    <th class="min-w-150px">Order No</th>
-                                    <th class="min-w-150px">Phone</th>
-                                    <th class="min-w-150px">Customer Name</th>
-                                    <th class="min-w-150px">Total</th>
+                                    <th class="min-w-80px">Order No</th>
+                                    <th class="min-w-100px">Customer</th>
+                                    <th class="min-w-100px">Phone</th>
+                                    <th class="min-w-150px">Product Name</th>
+                                    <th class="min-w-150px">Billing Address</th>
+
+                                    <th class="min-w-80px">Price</th>
+                                    <th class="min-w-50px">Qty</th>
+                                    <th class="min-w-80px">Delivery</th>
+                                    <th class="min-w-80px">Total</th>
+
+
                                     <th class="min-w-150px">Order Status</th>
                                     <th class="min-w-150px">Payment Status</th>
                                     <th class="min-w-150px">Delivery Status</th>
@@ -238,9 +248,15 @@ use Carbon\Carbon;
                                 <tr>
                                     <td class="ps-5 text-dark fs-6">{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}</td>
                                     <td class="text-dark fs-6">{{ $order->custom_order_id }}</td>
+                                    <td class="text-dark fs-6">{{ $order->full_name }}</td>
                                     <td class="text-dark fs-6">{{ $order->order_phone_number }}</td>
-                                    <td class="text-dark fs-6">{{ $order->first_name }} {{ $order->last_name }}</td>
-                                    <td class="text-dark fs-6">{{ $order->total_price }}</td>
+                                    <td class="text-dark fs-6">{{ $order->name }}</td>
+                                    <td class="text-dark fs-6">{{ $order->billing_address }}</td>
+
+                                    <td class="text-dark fs-6">{{ $order->unit_price }}</td>
+                                    <td class="text-dark fs-6">{{ $order->quantity }}</td>
+                                    <td class="text-dark fs-6">{{ $order->delivery_charge }}</td>
+                                    <td class="text-dark fs-6">{{ $order->final_price }}</td>
 
                                     <td class="text-dark fs-6">{{ $order->order_status }}</td>
                                     <td class="text-dark fs-6">{{ $order->payment_status }}</td>
@@ -248,11 +264,7 @@ use Carbon\Carbon;
                                     <td class="text-dark fs-6">{{ $order->created_at }}</td>
                                     <td>
                                         <div class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
-                                        <a href="{{ route('orders-show', $order->lukaku) }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                        <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24" /><path d="M3,12 C3,12 5.45454545,6 12,6 C16.9090909,6 21,12 21,12 C21,12 16.9090909,18 12,18 C5.45454545,18 3,12 3,12 Z" fill="black" fill-rule="nonzero" opacity="0.7" /><path d="M12,15 C10.3431458,15 9,13.6568542 9,12 C9,10.3431458 10.3431458,9 12,9 C13.6568542,9 15,10.3431458 15,12 C15,13.6568542 13.6568542,15 12,15 Z" fill="black" opacity="0.7" /></g></svg>
-                                        </span>
-                                        </a>
+                                        <a href="{{ route('orders-show', $order->lukaku) }}" class="btn btn-success btn-sm">details</a>
 
                                             <form action="{{ route('orders-destroy', $order->lukaku) }}" method="POST" style="display: inline;">
                                                 @csrf
