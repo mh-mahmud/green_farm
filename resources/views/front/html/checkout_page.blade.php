@@ -177,7 +177,10 @@
                                     </thead>
                                     <tbody>
 
-                                    @php $total = []; @endphp
+                                    @php
+                                    $total = [];
+
+                                    @endphp
                                        @foreach($carts as $cart)
                                         <tr class="cart_item">
                                             <td class="product-name">

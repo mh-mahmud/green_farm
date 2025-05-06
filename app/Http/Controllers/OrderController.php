@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\OrderService;
 use App\Models\Product;
 use App\Models\Customer;
+use App\Models\LandingPageOrder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\Helper;
@@ -23,6 +24,16 @@ class OrderController extends Controller
     {
         $orders = $this->orderService->getAllOrders();
         return view('orders.index', compact('orders'));
+    }
+
+    // for landing
+    public function index()
+    {
+        $orders = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
+            ->orderBy('landing_page_orders.id', 'desc')
+            ->paginate(config('constants.ROW_PER_PAGE'));
+        return view('orders.landing_index', compact('orders'));
     }
 
     public function create()

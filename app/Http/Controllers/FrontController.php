@@ -240,6 +240,7 @@ class FrontController extends Controller
     }
 
     public function checkout_page() {
+
         if(Auth::user() && Auth::user()->user_type=='admin') {
             return redirect()->back()->with('error', 'You are logged in as an admin. As a system user, you can not checkout.');
         }
@@ -251,6 +252,8 @@ class FrontController extends Controller
         else if($session_id != null) {
             $carts = Cart::where('session_id', $session_id)->get();
         }
+
+        //dd($carts);
         
         return view('front.html.checkout_page', compact('carts', 'session_id'));
     }
@@ -546,7 +549,8 @@ class FrontController extends Controller
 
             // save to order table
             $total_price = $request->quantity * $request->unit_price;
-            $final_price = $total_price + $request->optradio;
+            $delivery_charge = $request->optradio * $request->quantity;
+            $final_price = $total_price + $delivery_charge;
             $order = new LandingPageOrder();
             $order->user_id = (Auth::user()!=null) ? Auth::user()->id : null;
             $order->session_id = (Auth::user() == null) ? $request->cart_session_id : null;
@@ -565,7 +569,7 @@ class FrontController extends Controller
             // $order->order_note = $request->order_note;
             $order->order_status = "PROCESSING";
             $order->payment_type = "Cash on Delivery";
-            $order->delivery_charge = $request->optradio;
+            $order->delivery_charge = $delivery_charge;
             $order->possible_delivery_date = date("Y-m-d h:i:s", time() + 86400 + 86400);
             $order->save();
 

@@ -103,9 +103,20 @@
                            <span class="cart-plus"><i class="far fa-plus"></i></span>
                         </div> -->
                         <div class="tpproduct-details__cart ml-0" style="width:100%">
-                           <button style="background-color:#332D2D;width:100%" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> Add To Cart</button>
+                           
 
-                           <button style="background-color:#14A44D;width:100%;margin-top:20px" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart2"><i class="fal fa-shopping-cart"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+                           @if($product->product_sell_type=='landing_page')
+                              <button style="background-color:#332D2D;width:100%" data-cart-url="{{ URL::to('products/'.$product->id.'/landing-page/'.$product->name) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> Add To Cart</button>
+
+                              <button style="background-color:#14A44D;width:100%;margin-top:20px" data-cart-url="{{ URL::to('products/'.$product->id.'/landing-page/'.$product->name) }}" id="add-to-cart2"><i class="fal fa-shopping-cart"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+                           @else
+                              <button style="background-color:#332D2D;width:100%" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> Add To Cart</button>
+
+                              <button style="background-color:#14A44D;width:100%;margin-top:20px" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart2"><i class="fal fa-shopping-cart"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+                           @endif
+
+
+                           
                         </div>
 
                         {{--

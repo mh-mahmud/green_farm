@@ -312,6 +312,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 	// Orders Routes
 	Route::get('/orders', [OrderController::class, 'index'])->name('orders-index')->middleware(['check-permission']);
+	Route::get('/landing-page-orders', [OrderController::class, 'landing_order_index'])->name('landing-orders-index')->middleware(['check-permission']);
 	Route::get('/orders/create', [OrderController::class, 'create'])->name('orders-create')->middleware(['check-permission']);
 	Route::post('/orders', [OrderController::class, 'store'])->name('orders-store');
 	Route::get('/orders/{id?}', [OrderController::class, 'show'])->name('orders-show')->middleware(['check-permission']);

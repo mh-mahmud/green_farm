@@ -127,7 +127,11 @@
 
                                  <!-- <div class="tpproduct__cart"> -->
 
-                                    <a class="btn btn-warning" href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                                    @if($product->product_sell_type=='landing_page')
+                                    <a class="btn btn-danger" href="{{ URL::to('products/'.$product->id.'/landing-page/'.$product->name) }}"><i class="fal fa-shopping-cart"></i> Order Now</a>
+                                    @else
+                                    <a class="btn btn-warning" href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i> Add To Cart</a>
+                                    @endif
                                  <!-- </div> -->
                               </div>
                            </div>
