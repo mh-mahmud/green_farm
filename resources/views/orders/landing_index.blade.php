@@ -182,7 +182,7 @@ use Carbon\Carbon;
                     </h3>
 
                     <div class="d-flex flex-wrap gap-2">
-                        <form action="{{ route('orders-search') }}" method="POST" class="d-flex">
+                        <form action="{{ route('landing-search') }}" method="POST" class="d-flex">
                             @csrf
                             <!--begin::Input group-->
                             <div class="d-flex align-items-center position-relative">
@@ -201,10 +201,11 @@ use Carbon\Carbon;
                                 <!--end::Svg Icon-->
                                 <input type="text" name="search"
                                     class="form-control form-control-sm form-control-solid w-250px ps-15"
-                                    value="{{ request('search') }}" placeholder="Search by Invoice No">
+                                    value="{{ request('landing-search') }}" placeholder="Search by order id, phone">
                             </div>
                             <!--end::Input group-->
                             <button type="submit" class="btn btn-primary btn-sm ms-2">Search</button>
+                            <a href="{{ route('landing-orders-index') }}" class="btn btn-success btn-sm ms-2">Refresh</a>
                         </form>
                     </div>
 

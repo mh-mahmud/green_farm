@@ -138,15 +138,15 @@ class OrderController extends Controller
         $orders = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
             ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
             ->where('order_status', '!=', 'DELETED')
-            ->orWhere('landing_page_orders.full_name', 'LIKE', "%$searchTerm%")
-            ->orWhere('landing_page_orders.billing_address', 'LIKE', "%$searchTerm%")
-            ->orWhere('landing_page_orders.billing_address', 'LIKE', "%$searchTerm%")
-            ->orWhere('landing_page_orders.custom_order_id', 'LIKE', "%$searchTerm%")
-            ->orWhere('landing_page_orders.order_phone_number', 'LIKE', "%$searchTerm%")
+            ->where(function($query) use ($searchTerm) {
+                $query->orWhere('landing_page_orders.full_name', 'LIKE', "%$searchTerm%")
+                      ->orWhere('landing_page_orders.billing_address', 'LIKE', "%$searchTerm%")
+                      ->orWhere('landing_page_orders.custom_order_id', 'LIKE', "%$searchTerm%")
+                      ->orWhere('landing_page_orders.order_phone_number', 'LIKE', "%$searchTerm%");
+            })
             ->orderBy('landing_page_orders.id', 'desc')
             ->paginate(config('constants.ROW_PER_PAGE'));
-
-        $orders = $this->orderService->searchOrders($request);
+        // dd($searchTerm);
         return view('orders.landing_index', compact('orders'));
     }
 
@@ -176,6 +176,21 @@ class OrderController extends Controller
         $order->update();
 
         return redirect()->back()->with('success', 'Order updated successfully!');
+    }
+
+    public function landing_order_show($id)
+    {
+        $order = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
+            ->where('landing_page_orders.id', $id)
+            ->where('landing_page_orders.order_status', '!=', 'DELETED')
+            ->orderBy('landing_page_orders.id', 'desc')
+            ->first();
+        // dd($order);
+        return view('orders.landing_show', [
+            'order' => $order,
+            'order_id' => $id
+        ]);
     }
 
     
