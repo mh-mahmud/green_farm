@@ -26,17 +26,6 @@ class OrderController extends Controller
         return view('orders.index', compact('orders'));
     }
 
-    // for landing
-    public function landing_order_index()
-    {
-        $orders = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
-            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
-            ->orderBy('landing_page_orders.id', 'desc')
-            ->paginate(config('constants.ROW_PER_PAGE'));
-
-        return view('orders.landing_index', compact('orders'));
-    }
-
     public function create()
     {
         
@@ -115,6 +104,78 @@ class OrderController extends Controller
         }
         $orders = $this->orderService->searchOrders($request);
         return view('orders.index', compact('orders'));
+    }
+
+    // landing page order
+    public function landing_order_index()
+    {
+        $orders = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
+            ->where('order_status', '!=', 'DELETED')    
+            ->orderBy('landing_page_orders.id', 'desc')
+            ->paginate(config('constants.ROW_PER_PAGE'));
+
+        return view('orders.landing_index', compact('orders'));
+    }
+
+    public function landing_destroy($id)
+    {
+        $order = LandingPageOrder::findOrFail($id);
+        $order->order_status = "DELETED";
+        $order->save();
+        return redirect()->route('landing-orders-index')->with('success', 'Order deleted successfully!');
+    }
+
+    public function landing_search(Request $request)
+    {
+        $searchTerm = trim($request->input('search'));
+        if (empty($searchTerm)) {
+            return redirect()->route('landing-orders-index')->with('error', 'Search field cannot be blank.');
+        }
+
+        $searchTerm = trim($request->input('search'));
+
+        $orders = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
+            ->where('order_status', '!=', 'DELETED')
+            ->orWhere('landing_page_orders.full_name', 'LIKE', "%$searchTerm%")
+            ->orWhere('landing_page_orders.billing_address', 'LIKE', "%$searchTerm%")
+            ->orWhere('landing_page_orders.billing_address', 'LIKE', "%$searchTerm%")
+            ->orWhere('landing_page_orders.custom_order_id', 'LIKE', "%$searchTerm%")
+            ->orWhere('landing_page_orders.order_phone_number', 'LIKE', "%$searchTerm%")
+            ->orderBy('landing_page_orders.id', 'desc')
+            ->paginate(config('constants.ROW_PER_PAGE'));
+
+        $orders = $this->orderService->searchOrders($request);
+        return view('orders.landing_index', compact('orders'));
+    }
+
+    public function landing_edit($id)
+    {
+        $order = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
+            ->where('landing_page_orders.id', $id)
+            ->where('landing_page_orders.order_status', '!=', 'DELETED')
+            ->orderBy('landing_page_orders.id', 'desc')
+            ->paginate(config('constants.ROW_PER_PAGE'));
+        return view('orders.landing_edit', compact('order'));
+    }
+
+    public function landing_update(Request $request, $id)
+    {
+        $order = LandingPageOrder::findOrFail($id);
+        $order->payment_status = $request->payment_status;
+        $order->payment_type = $request->payment_type;
+        $order->pay_amount = $request->pay_amount;
+        $order->delivery_note = $request->delivery_note;
+        $order->order_status = $request->order_status;
+        $order->cancel_reason = $request->cancel_reason;
+        $order->delivery_status = $request->delivery_status;
+        $order->delivery_date = $request->delivery_date;
+        $order->cancel_date = $request->cancel_date;
+        $order->update();
+
+        return redirect()->back()->with('success', 'Order updated successfully!');
     }
 
     

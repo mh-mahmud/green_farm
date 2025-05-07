@@ -264,9 +264,9 @@ use Carbon\Carbon;
                                     <td class="text-dark fs-6">{{ $order->created_at }}</td>
                                     <td>
                                         <div class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
-                                        <a href="{{ route('orders-show', $order->lukaku) }}" class="btn btn-success btn-sm">details</a>
+                                        <a href="{{ route('landing-order-show', $order->lukaku) }}" class="btn btn-success btn-sm">details</a>
 
-                                            <form action="{{ route('orders-destroy', $order->lukaku) }}" method="POST" style="display: inline;">
+                                            <form action="{{ route('landing-order-destroy', $order->lukaku) }}" method="POST" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"

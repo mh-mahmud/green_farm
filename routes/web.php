@@ -311,8 +311,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 	// Orders Routes
-	Route::get('/landing-page-orders', [OrderController::class, 'landing_order_index'])->name('landing-orders-index')->middleware(['check-permission']);
-	
 	Route::get('/orders', [OrderController::class, 'index'])->name('orders-index')->middleware(['check-permission']);
 	Route::get('/orders/create', [OrderController::class, 'create'])->name('orders-create')->middleware(['check-permission']);
 	Route::post('/orders', [OrderController::class, 'store'])->name('orders-store');
@@ -321,8 +319,13 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/orders/{id?}', [OrderController::class, 'update'])->name('orders-update');
 	Route::post('/orders/search', [OrderController::class, 'search'])->name('orders-search');
 	Route::delete('/orders/{id?}', [OrderController::class, 'destroy'])->name('orders-destroy')->middleware(['check-permission']);
-	
-	
+
+	Route::get('/landing-page-orders', [OrderController::class, 'landing_order_index'])->name('landing-orders-index')->middleware(['check-permission']);
+	Route::get('/orders/{id?}/edit', [OrderController::class, 'edit'])->name('orders-edit')->middleware(['check-permission']);
+	Route::post('/orders/{id?}', [OrderController::class, 'update'])->name('orders-update');
+	Route::get('/landing-show/{id?}', [OrderController::class, 'landing_order_show'])->name('landing-order-show')->middleware(['check-permission']);
+	Route::delete('/landing-order-destroy/{id?}', [OrderController::class, 'landing_order_destroy'])->name('landing-order-destroy')->middleware(['check-permission']);
+
 	// blogger category routes
 	Route::get('blog-category-list', [BloggerCategoryController::class, 'index'])->name('blogger-category-list')->middleware(['check-permission']);
 	Route::get('blog-category/create', [BloggerCategoryController::class, 'create'])->name('blogger-category-create')->middleware(['check-permission']);
