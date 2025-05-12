@@ -126,7 +126,14 @@ class ProductService
                 $dataObj->product_code          = $data['product_code'];
                 $dataObj->category_id           = $data['category_id'];
                 $dataObj->brand_id              = $data['brand_id'];
-                $dataObj->product_type          = $data['product_type'];
+                if($data['product_type']=="Landing Page") {
+                    $dataObj->product_type = "landing_page";
+                    $dataObj->product_sell_type = "landing_page";
+                }
+                else {
+                    $dataObj->product_type = $data['product_type'];
+                    $dataObj->product_sell_type = "";
+                }
                 $dataObj->product_cost          = $data['product_cost'];
                 $dataObj->product_value         = $data['product_value'];
                 $dataObj->discount_price        = $data['discount_price'];
@@ -232,7 +239,14 @@ class ProductService
                 $dataObj->product_code          = $data['product_code'];
                 $dataObj->category_id           = $data['category_id'];
                 $dataObj->brand_id              = $data['brand_id'];
-                $dataObj->product_type          = $data['product_type'];
+                if($data['product_type']=="Landing Page") {
+                    $dataObj->product_type = "landing_page";
+                    $dataObj->product_sell_type = "landing_page";
+                }
+                else {
+                    $dataObj->product_type = $data['product_type'];
+                    $dataObj->product_sell_type = "";
+                }
                 $dataObj->product_cost          = $data['product_cost'];
                 $dataObj->product_value         = $data['product_value'];
                 $dataObj->discount_price         = $data['discount_price'];

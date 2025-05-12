@@ -4,19 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/frontend.min.css">
 <link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/checkout-template.css?ver=2.1.10">
 @php
-    $delivery_charge = 0;
-    if($product->id=='64') {
-        $delivery_charge = 100;
-    }
-    else if($product->id=='65') {
-        $delivery_charge = 150;
-    }
-    else if($product->id=='66') {
-        $delivery_charge = 250;
-    }
-    else if($product->id=='67') {
-        $delivery_charge = 500;
-    }
+    $delivery_charge = $product->delivery_charge;
    // $init_total = \App\Helpers\Helper::settings()->charge_inside_dhaka + $product->product_value;
    $init_total = $delivery_charge + $product->product_value;
 @endphp
@@ -49,8 +37,7 @@
                         <div class="e-con-inner">
                             <div class="elementor-element elementor-element-470a780 elementor-widget__width-inherit ha-has-bg-overlay elementor-widget elementor-widget-heading" data-id="470a780" data-element_type="widget" data-settings="{&quot;motion_fx_motion_fx_scrolling&quot;:&quot;yes&quot;,&quot;motion_fx_devices&quot;:[&quot;desktop&quot;,&quot;tablet_extra&quot;,&quot;tablet&quot;,&quot;mobile_extra&quot;,&quot;mobile&quot;]}"
                             data-widget_type="heading.default">
-                                <div class="elementor-widget-container">
-                                    <!-- <h2 class="elementor-heading-title elementor-size-default">হানি কম্বো – একসাথে চারটি ভিন্ন মধু</h2> -->
+                                <div class="elementor-widget-container" style="width:100%">
                                     <h2 class="elementor-heading-title elementor-size-default">{{ $product->name }}</h2>
                                  </div>
                             </div>
@@ -61,7 +48,7 @@
                         <div class="elementor-container elementor-column-gap-default">
                             <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-92d3267" data-id="92d3267" data-element_type="column">
                                 <div class="elementor-widget-wrap elementor-element-populated">
-                                    <section class="elementor-section elementor-inner-section elementor-element elementor-element-7979dc9 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7979dc9" data-element_type="section"
+                                    {{--<section class="elementor-section elementor-inner-section elementor-element elementor-element-7979dc9 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="7979dc9" data-element_type="section"
                                     data-settings="{&quot;_ha_eqh_enable&quot;:false}">
                                         <div class="elementor-container elementor-column-gap-default">
                                             <div class="elementor-column elementor-col-50 elementor-inner-column elementor-element elementor-element-bf5e32c" data-id="bf5e32c" data-element_type="column">
@@ -83,7 +70,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </section>
+                                    </section>--}}
                                     <section class="elementor-section elementor-inner-section elementor-element elementor-element-1b5a1ad elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="1b5a1ad" data-element_type="section"
                                     data-settings="{&quot;background_background&quot;:&quot;classic&quot;,&quot;_ha_eqh_enable&quot;:false}">
                                         <div class="elementor-container elementor-column-gap-default">
@@ -228,6 +215,7 @@
                                        </div>
                                  </div>
                               </div>
+
                               <span style="font-size:12px;">Payment Type:-</span>
                               <div style="border: 1px solid #ccc;margin-top:0px;background-color:#fff;">
                                  <span style="padding-top:10px;margin-left:2%;font-size:13px">CASH ON DELIVERY</span>
@@ -277,6 +265,7 @@
                         </div>
                     </section>
 
+                    {{--
                        <div class="row" style="margin-top:20px">
                            <div class="col-md-3" style="border:1px solid #ddd;padding:20px">
                                <img src="{{url('/')}}/uploads/products/mango/mango-1.jpeg">
@@ -296,6 +285,7 @@
                                <a href="{{ url('/') }}/products/67/landing-page/mango" style="width:100%;margin-top:10px" class=" btn btn-success tp-btn  banner-animation">ORDER NOW</a>
                            </div>
                        </div>
+                    --}}
 
                     <div class="wd-negative-gap elementor-element elementor-element-61f7857 e-flex e-con-boxed e-con e-parent e-lazyloaded" data-id="61f7857" data-element_type="container" data-settings="{&quot;_ha_eqh_enable&quot;:false}">
                         <div class="e-con-inner">
@@ -632,6 +622,7 @@
 
           const quantity = parseInt($('.quantity').val());
           const productTotal = unitPrice * quantity;
+          delivery = delivery * quantity;
 
 
           // Add to cart total
@@ -640,6 +631,7 @@
 
           // Update the product total in the table
           $('.product-total').text(cartTotal.toFixed(2));
+          $('.delivery-total').text(delivery);
 
          // Update the cart total
          $('.cart-total, .final-total').text(allTotal.toFixed(2));

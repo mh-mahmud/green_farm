@@ -14,6 +14,7 @@ return [
         'Home Made',
         'Organic',
         'Imported',
+        'Landing Page',
     ],  
     'TASK_STATUS' => [
         0 => 'PENDING',
