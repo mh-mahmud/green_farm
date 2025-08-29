@@ -132,6 +132,7 @@
                                     @else
                                     <a class="btn btn-warning" href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i> Add To Cart</a>
                                     @endif
+                                    
                                  <!-- </div> -->
                               </div>
                            </div>
@@ -151,13 +152,16 @@
       <!-- banner-area-start -->
       
       <section class="banner-area pb-20">
-         <div class="container">
+        <div class="tpbanneritem__thumb mb-20">  
+        <img src="{{url('/')}}/assets/theme/assets/img/banner/green-farm.jpg" alt="banner-img">
+        </div>
+         {{--<div class="container">
             <div class="row">
                <div class="col-xl-12 col-lg-12 col-md-12">
                   <div class="tpbanneritems p-relative">
                      <div class="tpbanneritem__thumb mb-20">
                         <img src="{{url('/')}}/assets/theme/assets/img/banner/green-farm.jpg" alt="banner-img">
-                        {{--
+                        
                         <div class="tpbanneritem__content">
                            <p style="color:red;">&nbsp;</p>
                            <h5 class="tpbanneritem__title mb-60" style="color:#FFF">Green Farm <br> Products</h5>
@@ -165,12 +169,12 @@
                               <a class="tp-btn green-btn banner-animation" href="{{ route('all-products') }}">Shop Now <i class="fal fa-long-arrow-right"></i></a>
                            </div>
                         </div>
-                        --}}
+                        
                      </div>
                   </div>
                </div>
             </div>
-         </div>
+         </div>--}}
       </section>
       
       <!-- banner-area-end -->

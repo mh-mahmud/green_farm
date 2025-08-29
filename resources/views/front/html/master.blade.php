@@ -15,7 +15,7 @@ $set_whats_app_link = $sett->whats_app_link;
 $footer_msg = $sett->footer_message;
 $top_header_message = $sett->top_header_message;
 
-$cats = Category::where('parent_id', '=', null)->orderBy('id', 'asc')->get();
+$cats = Category::where('status', 1)->where('parent_id', '=', null)->orderBy('id', 'asc')->get();
 if(Auth::user() != null) {
    $carts = Cart::where('user_id', Auth::user()->id)->get();
 }
