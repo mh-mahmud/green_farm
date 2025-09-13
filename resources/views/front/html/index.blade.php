@@ -74,6 +74,14 @@
       </section>
       <!-- slider-area-end -->
 
+<style type="text/css">
+.box, .box-image, .box-text {
+    transition: opacity .3s, transform .3s, background-color .3s;
+}
+.has-hover .bg, .has-hover [class*=image-] img {
+    transition: filter .6s, opacity .6s, transform .6s, box-shadow .3s;
+}
+</style>
 
 
       <!-- product-area-start -->
@@ -93,13 +101,14 @@
 
                      @foreach($products as $product)
                      <div class="col">
-                        <div class=" tpproduct pb-15 mb-30" style="border: 1px solid #ddd;">
+                        <div class="box has-hover tpproduct pb-15 mb-30" style="border: 1px solid #ddd;">
                            <div class="tpproduct__thumb p-relative">
                               @if($product->stock_status == "Out of Stock")
                                  <span class="tpproduct__thumb-discount">{{$product->stock_status}}</span>
                               @endif
                               
-
+                              <!-- image -->
+                              <div class="box-image">
                               @if(file_exists(public_path('/uploads/products/'.$product->img_path)) )
                               <a href="{{route('product-details', $product->id)}}">
                                  <img style="max-height: 350px;padding:20px" src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="product-thumb">
@@ -110,9 +119,15 @@
                                     <img style="max-height: 350px;border:1px solid #ddd;padding:20px" src="{{url('/')}}/uploads/blank.png" alt="product-thumb">
                                  </a>
                               @endif
+                              </div>
+
+
                               <div class="tpproduct__thumb-action">
                                  <!-- <a class="comphare" href="#"><i class="fal fa-exchange"></i></a> -->
                                  <!-- <a class="quckview" href="#"><i class="fal fa-eye"></i></a> -->
+
+                                 <a href="#quick-view" class="quick-view quick-view-added" role="button" data-prod="113417" aria-haspopup="dialog" aria-expanded="false" data-flatsome-role-button="attached">Quick View</a>
+
                                  <!-- <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a> -->
                               </div>
                            </div>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en">
 @php
 use App\Models\Category;
 use App\Models\Cart;
@@ -32,10 +32,6 @@ else {
 
 <body>
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRX7XV9F"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
    <!-- preloader -->
    <!-- <div id="preloader">
@@ -71,9 +67,6 @@ else {
             </div>
          </div>
       </div>
-      
-
-      
       <div class="logo-area green-logo-area mt-30 d-none d-xl-block">
          <div class="container">
             <div class="row align-items-center">
@@ -268,7 +261,7 @@ else {
                                  </div>
                                  <div class="menu-contact__info">
                                     @if(Auth::user())
-                                    <a href="{{ route('customer-dashboard') }}"><i class="fal fa-tachometer-alt"></i></a>
+                                    <a href="{{ route('customer-dashboard') }}"><i class="fal fa-tachometer-alt"></i> Dashboard</a>
                                     @else
                                     <a href="{{ route('user-login') }}">Login</a>
                                     @endif
@@ -461,7 +454,7 @@ else {
          <span class="tpsideinfo__search-title mb-20">What Are You Looking For?</span>
          <form action="{{ route('product-search') }}" method="POST">
             @csrf
-            <input name="search_product" type="text" required placeholder="Search Products...">
+            <input required name="search_product" type="text" placeholder="Search Products...">
             <button type="submit"><i class="fal fa-search"></i></button>
          </form>
       </div>
