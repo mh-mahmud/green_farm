@@ -603,6 +603,8 @@ else {
    <script src="{{url('/')}}/assets/theme/assets/js/ajax-form.js"></script>
    <script src="{{url('/')}}/assets/theme/assets/js/meanmenu.js"></script>
    <script src="{{url('/')}}/assets/theme/assets/js/main.js"></script>
+
    @yield('custom_js')
+
 </body>
 </html>

@@ -1,6 +1,115 @@
 @extends('front.html.master')
 @section('content')
 
+<style>
+   /* Modal Overlay */
+   .modal {
+     position: fixed;
+     z-index: 9999;
+     left: 0; top: 0;
+     width: 100%; height: 100%;
+     background: rgba(0,0,0,0.6);
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+   .modal-dialog {
+     max-width: 900px;
+     width: 90%;
+   }
+   .modal-content {
+     background: #fff;
+     border-radius: 10px;
+     overflow: hidden;
+     position: relative;
+   }
+   .close-another {
+     position: absolute;
+     top: 15px; right: 20px;
+     font-size: 25px;
+     cursor: pointer !important;
+     color: #333;
+     border: 1px solid red;
+   }
+   .modal-body {
+     display: flex;
+     gap: 25px;
+     padding: 20px;
+   }
+   .modal-image img {
+     width: 350px;
+     border-radius: 8px;
+     object-fit: cover;
+   }
+   .modal-info {
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+   }
+   .modal-info h2 {
+     font-size: 24px;
+     margin-bottom: 10px;
+   }
+   .modal-price {
+     font-size: 20px;
+     font-weight: bold;
+     color: #d32f2f;
+     margin-bottom: 15px;
+   }
+   .modal-desc {
+     font-size: 15px;
+     color: #666;
+     margin-bottom: 20px;
+   }
+   .modal-actions {
+     display: flex;
+     align-items: center;
+     gap: 15px;
+   }
+   .modal-actions input {
+     width: 60px;
+     padding: 6px;
+     text-align: center;
+     font-size: 16px;
+   }
+   .modal-actions button {
+     background: #d32f2f;
+     color: #fff;
+     border: none;
+     padding: 10px 18px;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: 0.3s;
+   }
+   .modal-actions button:hover {
+     background: #b71c1c;
+   }
+   .is-divider {
+       background-color: #e8e8e8;
+   }
+
+   .is-divider {
+       background-color: rgba(0, 0, 0, .1);
+       display: block;
+       height: 3px;
+       margin: 1em 0;
+       max-width: 30px;
+       width: 100%;
+   }
+   .product_meta {
+       font-size: .8em;
+       margin-bottom: 1em;
+   }
+   .product_meta>span {
+       border-top: 1px dotted #ddd;
+       display: block;
+       padding: 5px 0;
+   }
+</style>
+
+
+
    <div class="free">
       <!-- slider-area-start -->
       <section class="slider-area pb-25">
@@ -126,7 +235,17 @@
                                  <!-- <a class="comphare" href="#"><i class="fal fa-exchange"></i></a> -->
                                  <!-- <a class="quckview" href="#"><i class="fal fa-eye"></i></a> -->
 
-                                 <a href="#quick-view" class="quick-view quick-view-added" role="button" data-prod="113417" aria-haspopup="dialog" aria-expanded="false" data-flatsome-role-button="attached">Quick View</a>
+                                 <a href="#quick-view"
+                                    class="quick-view-btn quick-view-added"
+                                    role="button"
+                                    data-stock_status="{{$product->stock_status}}"
+                                    aria-haspopup="dialog"
+                                    aria-expanded="false"
+                                    data-name="{{ $product->name }}"
+                                    data-price="Price: {{$product->product_value}} Tk"
+                                    data-image="{{$product->img_path}}" 
+                                    
+                                    data-flatsome-role-button="attached">Quick View</a>
 
                                  <!-- <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a> -->
                               </div>
@@ -262,6 +381,46 @@
 
    </div>
 
+
+<!-- Quick View Modal -->
+<!-- Quick View Modal -->
+<div id="quickViewModal" class="modal" style="display:none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- <span class="close-another">&times;</span> -->
+      <div class="modal-body">
+        
+        <!-- Left: Product Image -->
+        <div class="modal-image">
+          <img id="qvImage" src="" alt="Product Image">
+        </div>
+
+        <!-- Right: Product Info -->
+        <div class="modal-info">
+          <h2 id="qvName"></h2>
+          <div class="is-divider small"></div>
+          <p class="modal-price" id="qvPrice"></p>
+          <p class="modal-desc" id="qvDescription"></p>
+
+          <div class="modal-actions">
+            <input type="number" id="qvQty" value="1" min="1">
+            <button id="addToCartBtn">🛒 Add to Cart</button>
+          </div>
+          <button style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+
+         <div class="product_meta">
+            <span class="sku_wrapper">SKU: <span class="sku" data-o_content="111-IM-BG-AV-">111-IM-BG-AV-500</span></span>
+            <span class="posted_in">Categories: <a href="https://hffoodservice.com/product-category/ghee-and-oil/" rel="tag">ঘি ও তেল | Ghee &amp; Oil</a>, <a href="https://hffoodservice.com/product-category/popular/" rel="tag">পপুলার | Popular</a></span>
+         </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
 @section('custom_js')
 <script type="text/javascript">
@@ -294,9 +453,32 @@
 
 
    });
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  // Open modal with product data
+  $(".quick-view-btn").click(function(){
+    $("#qvName").text($(this).data("name"));
+    $("#qvPrice").text($(this).data("price"));
+    $("#qvDescription").html($(this).data("description"));
+    var img_link = "uploads/products/"+$(this).data("image");
 
+    console.log(img_link);
+    $("#qvImage").attr("src", img_link);
+    $("#quickViewModal").fadeIn();
+  });
 
+  // Close modal
+  $(".close-another").on("click", function(){
+    $("#quickViewModal").fadeOut();
+  });
 
-
+  // Outside click close
+  $(window).click(function(e){
+    if($(e.target).is("#quickViewModal")) {
+      $("#quickViewModal").fadeOut();
+    }
+  });
+});
 </script>
 @endsection
