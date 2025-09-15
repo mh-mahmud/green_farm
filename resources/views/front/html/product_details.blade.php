@@ -1,6 +1,18 @@
 @extends('front.html.master')
 @section('content')
+<style type="text/css">
 
+   .zoom-image {
+     transition: transform 0.3s ease;
+     width: 100%;
+     height: auto;
+   }
+
+   .zoom-image:hover {
+     transform: scale(1.5);
+     cursor: zoom-in;
+   }
+</style>
 	<div class="free">
       <!-- breadcrumb-area -->
       <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
@@ -44,8 +56,8 @@
 
                         <div class="tab-content" id="v-pills-tabContent">
 
-                          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                           <img src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="">
+                          <div class=" tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                              <img id="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="kulkarnii" style="cursor: zoom-in;">
                           </div>
 
                           @if(!empty($product->img_path_2))
@@ -572,6 +584,9 @@
 @endsection
 
 @section('custom_js')
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-zoom/1.7.21/jquery.zoom.min.js"></script> -->
+
+
 <script>
    $(document).ready(function() {
       $('.cat-menu__category .category-menu').css('display', 'none');
@@ -584,5 +599,40 @@
       var url_data = $(this).data('cart-url');
       window.location.href = url_data;
    });
+
+   // zoom the image
+   // $(document).ready(function(){
+   //     $('#zoomView').zoom();
+   // });
+
+
 </script>
+
+
+<!-- <script src="https://unpkg.com/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    mediumZoom('#zoomImage', {
+        margin: 24,
+        background: 'rgba(0,0,0,0.6)',
+        scrollOffset: 0
+    });
+});
+</script> -->
+
+
+<!-- if cdn is not avaiable, go to zoom plugin folder: public/assets/elevatezoom-master/ -->
+<!-- jQuery first -->
+<script src="https://www.jqueryscript.net/demo/Jquery-Image-Zoom-Plugin-elevatezoom/jquery-1.8.3.min.js"></script>
+<!-- elevateZoom plugin -->
+<script src="https://www.jqueryscript.net/demo/Jquery-Image-Zoom-Plugin-elevatezoom/jquery.elevateZoom-2.1.0.min.js"></script>
+
+<!-- Init -->
+<script>
+   $('#zoomImage').elevateZoom();
+</script>
+
+
+
 @endsection

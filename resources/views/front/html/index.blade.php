@@ -200,7 +200,7 @@
             <div class="row">
                <div class="col-lg-4 col-md-6 col-12">
                   <div class="tpsection mb-40">
-                     <h4 class="tpsection__title">ALL PRODUCTS</h4>
+                     <h4 class="tpsection__title">আমাদের পণ্য</h4>
                   </div>
                </div>
                

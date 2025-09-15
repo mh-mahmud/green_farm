@@ -4,6 +4,7 @@
    <title>গ্রীন ফার্ম</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="facebook-domain-verification" content="jnhciiw164mrihe0lx6joeh1k9ypvk" />
 
    <!-- Place favicon.ico in the root directory -->
    <link rel="shortcut icon" type="image/x-icon" href="{{url('/')}}/assets/theme/assets/img/logo/favicon.jpg">
