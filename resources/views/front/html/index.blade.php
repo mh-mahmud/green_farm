@@ -291,7 +291,7 @@
       
       <section class="banner-area pb-20">
         <div class="tpbanneritem__thumb mb-20">  
-        <img src="{{url('/')}}/assets/theme/assets/img/banner/green-farm.jpg" alt="banner-img">
+        <img style="width:100%;" src="{{url('/')}}/assets/theme/assets/img/banner/green-farm.jpg" alt="banner-img">
         </div>
          {{--<div class="container">
             <div class="row">
