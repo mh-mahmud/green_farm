@@ -34,7 +34,8 @@
    .modal-body {
      display: flex;
      gap: 25px;
-     padding: 20px;
+   /*     padding: 20px;*/
+     padding: 30px;
    }
    .modal-image img {
      width: 350px;
@@ -243,7 +244,10 @@
                                     aria-expanded="false"
                                     data-name="{{ $product->name }}"
                                     data-price="Price: {{$product->product_value}} Tk"
-                                    data-image="{{$product->img_path}}" 
+                                    data-image="{{$product->img_path}}"
+                                    data-sku="{{$product->product_code}}"
+                                    data-category="{{$product->category->category_name}}"
+                                    data-stock_status="{{$product->stock_status}}"
                                     
                                     data-flatsome-role-button="attached">Quick View</a>
 
@@ -409,8 +413,9 @@
           <button style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
 
          <div class="product_meta">
-            <span class="sku_wrapper">SKU: <span class="sku" data-o_content="111-IM-BG-AV-">111-IM-BG-AV-500</span></span>
-            <span class="posted_in">Categories: <a href="https://hffoodservice.com/product-category/ghee-and-oil/" rel="tag">ঘি ও তেল | Ghee &amp; Oil</a>, <a href="https://hffoodservice.com/product-category/popular/" rel="tag">পপুলার | Popular</a></span>
+            <span class="sku_wrapper">Stock Status: <span id="stock-status"></span></span>
+            <span class="sku_wrapper">SKU: <span id="skuname"></span></span>
+            <span class="posted_in">Category: <span id="catname"></span></span>
          </div>
         </div>
 
@@ -461,9 +466,15 @@ $(document).ready(function(){
     $("#qvName").text($(this).data("name"));
     $("#qvPrice").text($(this).data("price"));
     $("#qvDescription").html($(this).data("description"));
+
+    $("#catname").text($(this).data("category"));
+    $("#skuname").text($(this).data("sku"));
+    $("#stock-status").text($(this).data("stock_status"));
+
     var img_link = "uploads/products/"+$(this).data("image");
 
-    console.log(img_link);
+    console.log($(this).data("category"));
+    console.log($(this).data("sku"));
     $("#qvImage").attr("src", img_link);
     $("#quickViewModal").fadeIn();
   });
