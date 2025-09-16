@@ -210,6 +210,55 @@ class FrontController extends Controller
         return redirect()->route('add-to-cart-details')->with('success', 'Product added to the cart successfully.');
     }
 
+    public function add_to_cart_modal(Request $request) {
+
+        if(Session::get('car-clinic-visitor')==null) {
+
+            $session_value = str_pad(mt_rand(1, 9999999999999), 10);
+            Session::put('car-clinic-visitor', $session_value);
+        }
+
+        $cookie_id = Session::get('car-clinic-visitor');
+        $product_id = $request->modal_product_id;
+        $user_id = Auth::user()==null ? null : Auth::user()->id;
+        $product_data = Product::find($product_id);
+        $session_id = Auth::user()==null ? $cookie_id : null;
+        $product_quantity = $request->quantity;
+        $discount = 0;
+
+        // check if product is already in cart
+        $chk_cart = !empty(Auth::user()) ? Cart::where('user_id', $user_id)->where('product_id', $product_id)->first() : Cart::where('session_id', $session_id)->where('product_id', $product_id)->first();
+        // dd($chk_cart);
+        if(!empty($chk_cart)) {
+            $chk_cart->quantity += 1;
+            $chk_cart->total_price = $chk_cart->quantity*$product_data->product_value;
+            $chk_cart->update();
+        }
+        else {
+
+            $cart = new Cart;
+            $cart->user_id = $user_id;
+            $cart->session_id = $session_id;
+            $cart->product_id = $product_id;
+            $cart->product_image = $product_data->img_path;
+            $cart->product_name = $product_data->name;
+            $cart->unit_price = $product_data->product_value;
+            $cart->quantity = $product_quantity;
+            $cart->total_price = $product_quantity*$product_data->product_value;
+            $cart->discount = $discount;
+            $cart->final_price = $cart->total_price - $discount;
+            $cart->save();
+
+        }
+        return redirect()->route('add-to-cart-details')->with('success', 'Product added to the cart successfully.');
+    }
+
+    public function direct_cash_on_delivery($product_id) {
+        $this->add_to_cart($product_id);
+        return redirect()->route('checkout');
+
+    }
+
     public function add_to_cart_details() {
         $session_id = Session::get('car-clinic-visitor');
         $carts = [];

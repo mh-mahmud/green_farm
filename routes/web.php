@@ -9,18 +9,14 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LeadsFormController;
-use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\DynamicTableController;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\SmsController;
+
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LogController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceController;
@@ -63,15 +59,46 @@ Route::post('post_login', [AuthController::class, 'postLogin'])->name('login.pos
 Route::post('post_user_login', [AuthController::class, 'postUserLogin'])->name('user.login.post');
 Route::post('post_user_register', [AuthController::class, 'postUserRegister'])->name('user.register.post');
 
-Route::get('send-pending-email', [EmailController::class, 'sendPendingEmail'])->name('send-pending-email');
 Route::get('product-category/{category}', [FrontController::class, 'product_category_wise'])->name('product-category-wise');
 Route::get('product-brand/{brand}', [FrontController::class, 'product_brand_wise'])->name('product-brand-wise');
 Route::get('track-your-order', [FrontController::class, 'track_your_order'])->name('track-your-order');
 Route::post('track-your-order', [FrontController::class, 'post_track_your_order'])->name('post-track-your-order');
 Route::get('all-products', [FrontController::class, 'all_products'])->name('all-products');
 Route::get('user-carts', [FrontController::class, 'user_cart'])->name('user-carts');
+
+
+
+
+
+
+
+
+
+
 Route::get('add-to-cart/{product_id}', [FrontController::class, 'add_to_cart'])->name('add-to-cart');
+Route::get('direct-cash-on-delivery/{product_id}', [FrontController::class, 'direct_cash_on_delivery'])->name('direct-cash-on-delivery');
+Route::post('add-to-cart-modal', [FrontController::class, 'add_to_cart_modal'])->name('add-to-cart-modal');
 Route::get('add-to-cart-details', [FrontController::class, 'add_to_cart_details'])->name('add-to-cart-details');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::get('add-to-wishlist/{product_id}', [FrontController::class, 'add_to_wishlist'])->name('add-to-wishlist');
 Route::get('my-wishlist', [FrontController::class, 'my_wishlist'])->name('my-wishlist');
 Route::post('/wishlist/add', [FrontController::class, 'add_wishlist'])->name('wishlist.add');
@@ -132,21 +159,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-    //promotion route
-	Route::get('/promotion', [PromotionController::class, 'index'])->name('promotion-index')->middleware(['check-permission']);
-	Route::get('/promotion/create', [PromotionController::class, 'create'])->name('promotion-create')->middleware(['check-permission']);
-	Route::post('/promotion', [PromotionController::class, 'store'])->name('promotion-store');
-	Route::get('/promotion/{id?}', [PromotionController::class, 'show'])->name('promotion-show')->middleware(['check-permission']);
-	Route::get('/promotion/{id?}/edit', [PromotionController::class, 'edit'])->name('promotion-edit')->middleware(['check-permission']);
-	Route::put('/promotion/{id}', [PromotionController::class, 'update'])->name('promotion-update');
-	Route::delete('/promotion/{id?}', [PromotionController::class, 'destroy'])->name('promotion-destroy');
-	Route::post('/promotion/search', [PromotionController::class, 'search'])->name('promotion-search');
-
-
-
-
-
-
 	
 
 	
@@ -190,46 +202,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('role-delete/{id}',   [UserController::class, 'role_destroy'])->name('role-destroy')->middleware(['check-permission']);
 	Route::post('/role/search', [UserController::class, 'role_search'])->name('role-search')->middleware(['check-permission']);
 
-	// Email template routes start
-	Route::get('email-template', [EmailController::class, 'emailTemplateList'])->name('email-template')->middleware(['check-permission']);
-	Route::get('email-template/create', [EmailController::class, 'templateCreate'])->name('email-template-create')->middleware(['check-permission']);
-	Route::post('email-template/store', [EmailController::class, 'templateStore'])->name('email-template-store');
-	Route::get('email-template/edit/{id?}', [EmailController::class, 'templateEdit'])->name('email-template-edit')->middleware(['check-permission']);
-	Route::get('email-template/show/{id?}', [EmailController::class, 'templateShow'])->name('email-template-show')->middleware(['check-permission']);
-	Route::put('email-template/update/{id}', [EmailController::class, 'templateUpdate'])->name('email-template-update');
-	Route::delete('email-template/delete/{id?}', [EmailController::class, 'templateDelete'])->name('email-template-delete')->middleware(['check-permission']);
-	// Email template routes end
 
-	// Send email routes start
-	Route::get('send-email', [EmailController::class, 'sendEmail'])->name('send-email')->middleware(['check-permission']);
-	Route::post('send-email-process', [EmailController::class, 'sendEmailPro'])->name('send-email-process');
-
-	Route::get('send-email-list', [EmailController::class, 'sendEmailList'])->name('send-email-list')->middleware(['check-permission']);
-	Route::get('send-bulk-email', [EmailController::class, 'sendBulkEmail'])->name('send-bulk-email')->middleware(['check-permission']);
-	Route::post('send-bulk-email-process', [EmailController::class, 'sendBulkEmailPro'])->name('send-bulk-email-process');
-	Route::get('send-email/show/{id?}', [EmailController::class, 'getEmailSendById'])->name('send-email-show')->middleware(['check-permission']);
-
-	// Send email routes end
 
 	// Sms template routes start
-	Route::get('sms-template', [SmsController::class, 'smsTemplateList'])->name('sms-template')->middleware(['check-permission']);
-	Route::get('sms-template/create', [SmsController::class, 'templateCreate'])->name('sms-template-create')->middleware(['check-permission']);
-	Route::post('sms-template/store', [SmsController::class, 'templateStore'])->name('sms-template-store');
 
-	Route::get('sms-template/edit/{id?}', [SmsController::class, 'templateEdit'])->name('sms-template-edit')->middleware(['check-permission']);
-
-	Route::get('sms-template/show/{id?}', [SmsController::class, 'templateShow'])->name('sms-template-show')->middleware(['check-permission']);
-	Route::put('sms-template/update/{id}', [SmsController::class, 'templateUpdate'])->name('sms-template-update');
-	Route::delete('sms-template/delete/{id?}', [SmsController::class, 'templateDelete'])->name('sms-template-delete')->middleware(['check-permission']);
-	// SMS template routes end
-
-	// Send SMS routes start
-	Route::get('send-sms', [smsController::class, 'sendSms'])->name('send-sms')->middleware(['check-permission']);
-	Route::post('send-sms-process', [smsController::class, 'sendSmsPro'])->name('send-sms-pro');
-	Route::get('send-sms-list', [smsController::class, 'sendSmsList'])->name('send-sms-list')->middleware(['check-permission']);
-	Route::get('send-bulk-sms', [smsController::class, 'sendBulkSms'])->name('send-bulk-sms')->middleware(['check-permission']);
-	Route::post('send-bulk-sms-process', [smsController::class, 'sendBulkSmsPro'])->name('send-bulk-sms-pro');
-	Route::get('send-sms/show/{id?}', [SmsController::class, 'getSmsSendById'])->name('send-sms-show')->middleware(['check-permission']);
 
 	// Send SMS routes end
 
@@ -247,22 +223,6 @@ Route::group(['middleware' => ['auth']], function () {
 	// Product routes end
 
 
-
-
-	// Country routes start
-	Route::get('country-list', [countryController::class, 'countryList'])->name('country-list');
-	Route::get('add-country', [countryController::class, 'countryCreate'])->name('add-country');
-	Route::post('add-country-pro', [countryController::class, 'countryStore'])->name('add-country-pro');
-	Route::delete('country-delete/{id?}', [countryController::class, 'countryDelete'])->name('country-delete');
-
-	// Country routes end
-
-	// Currency routes start
-	Route::get('currency-list', [CurrencyController::class, 'currencyList'])->name('currency-list');
-	Route::get('add-currency', [CurrencyController::class, 'currencyCreate'])->name('add-currency');
-	Route::post('add-currency-pro', [CurrencyController::class, 'currencyStore'])->name('add-currency-pro');
-	Route::delete('currency-delete/{id?}', [CurrencyController::class, 'currencyDelete'])->name('currency-delete');
-	// Currency routes end
 
 
 

@@ -248,7 +248,8 @@
                                     data-sku="{{$product->product_code}}"
                                     data-category="{{$product->category->category_name}}"
                                     data-stock_status="{{$product->stock_status}}"
-                                    data-href="{{ route('add-to-cart', $product->id) }}"
+                                    data-href="{{ route('direct-cash-on-delivery', $product->id) }}"
+                                    data-product-id-m="{{$product->id}}"
                                     
                                     data-flatsome-role-button="attached">Quick View</a>
 
@@ -520,12 +521,17 @@
           <p class="modal-desc" id="qvDescription"></p>
 
           <div class="modal-actions">
-            <form id="modal-form" method="GET" action="">
-               <input type="number" id="qvQty" value="1" min="1">
+            <form method="POST" action="{{ route('add-to-cart-modal') }}">
+               @csrf
+               <input id="modal_product_id" type="hidden" name="modal_product_id" value="">
+               <input name="quantity" type="number" id="qvQty" value="1" min="1">
                <button type="submit" id="addToCartBtn">🛒 Add to Cart</button>
             </form>
           </div>
-          <button style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+
+         <form id="dcashondelivery" method="GET" action="">
+            <button style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+         </form>
 
          <div class="product_meta">
             <span class="sku_wrapper">Stock Status: <span id="stock-status"></span></span>
@@ -546,37 +552,35 @@
 <script type="text/javascript">
    $(".wishlist").on("click", function(e) {
       e.preventDefault();
-      // var pro_id = $(this).data("product_id");
-      // alert(pro_id);
 
-      let productId = $(this).data("product_id"); // Get the product ID from the data-id attribute
+      let productId = $(this).data("product_id");
 
       $.ajax({
-        url: '{{ route("wishlist.add") }}', // Laravel route for adding to wishlist
+        url: '{{ route("wishlist.add") }}',
         type: 'POST',
         data: {
-            _token: $('meta[name="csrf-token"]').attr('content'), // CSRF token
+            _token: $('meta[name="csrf-token"]').attr('content'),
             product_id: productId,
         },
         success: function(response) {
             if (response.status === 'success') {
-                alert(response.message); // Success message
+                alert(response.message);
             } else {
-                alert(response.message); // Error message
+                alert(response.message);
             }
         },
         error: function(xhr) {
-            console.error(xhr.responseText); // Log the error
+            console.error(xhr.responseText);
             alert('Something went wrong!');
         }
       });
    });
 
-   $("#addToCartBtn").on("click", function(e) {
-      e.preventDefault();
+   // $("#addToCartBtn").on("click", function(e) {
+   //    e.preventDefault();
 
-      alert("ami asi");
-   });
+   //    alert("ami asi");
+   // });
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -589,7 +593,8 @@ $(document).ready(function(){
     $("#catname").text($(this).data("category"));
     $("#skuname").text($(this).data("sku"));
     $("#stock-status").text($(this).data("stock_status"));
-    $("#modal-form").attr("action", $(this).data("href"));
+    $("#dcashondelivery").attr("action", $(this).data("href"));
+    $("#modal_product_id").attr("value", $(this).data("product-id-m"));
 
     var img_link = "uploads/products/"+$(this).data("image");
 
