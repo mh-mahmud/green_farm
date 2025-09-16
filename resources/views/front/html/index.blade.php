@@ -75,7 +75,7 @@
      font-size: 16px;
    }
    .modal-actions button {
-     background: #d32f2f;
+     background: #333;
      color: #fff;
      border: none;
      padding: 10px 18px;
@@ -248,6 +248,7 @@
                                     data-sku="{{$product->product_code}}"
                                     data-category="{{$product->category->category_name}}"
                                     data-stock_status="{{$product->stock_status}}"
+                                    data-href="{{ route('add-to-cart', $product->id) }}"
                                     
                                     data-flatsome-role-button="attached">Quick View</a>
 
@@ -260,10 +261,6 @@
                                  <div class="tpproduct__priceinfo-list--" style="margin-bottom:20px;">
                                     <span>Tk {{$product->product_value}}</span>
                                  </div>
-
-                                 <!-- <button type="button" class="btn btn-warning">Warning</button> -->
-
-                                 <!-- <div class="tpproduct__cart"> -->
 
                                     @if($product->product_sell_type=='landing_page')
                                     <a class="btn btn-danger" href="{{ URL::to('products/'.$product->id.'/landing-page/'.$product->name) }}"><i class="fal fa-shopping-cart"></i> Order Now</a>
@@ -287,34 +284,148 @@
       </section>
       <!-- product-area-end -->
 
-      <!-- banner-area-start -->
-      
-      <section class="banner-area pb-20">
-        <div class="tpbanneritem__thumb mb-20">  
-        <img style="width:100%;" src="{{url('/')}}/assets/theme/assets/img/banner/green-farm.jpg" alt="banner-img">
-        </div>
-         {{--<div class="container">
+      <!-- testimonial-area-start -->
+      <section class="testimonial-area pt-65 mb-80">
+         <div class="container">
             <div class="row">
-               <div class="col-xl-12 col-lg-12 col-md-12">
-                  <div class="tpbanneritems p-relative">
-                     <div class="tpbanneritem__thumb mb-20">
-                        <img src="{{url('/')}}/assets/theme/assets/img/banner/green-farm.jpg" alt="banner-img">
-                        
-                        <div class="tpbanneritem__content">
-                           <p style="color:red;">&nbsp;</p>
-                           <h5 class="tpbanneritem__title mb-60" style="color:#FFF">Green Farm <br> Products</h5>
-                           <div class="tpbanneritem__btn">
-                              <a class="tp-btn green-btn banner-animation" href="{{ route('all-products') }}">Shop Now <i class="fal fa-long-arrow-right"></i></a>
-                           </div>
-                        </div>
-                        
+               <div class="col-lg-6 col-md-6">
+                  <div class="tpsection mb-35">
+                     <h4 class="tpsection__title">User Feedbacks</h4>
+                  </div>
+               </div>
+               <div class="col-lg-6 col-md-6">
+                  <div class="tptestiarrow d-flex align-items-center justify-content-end">
+                     <div class="tptestiarrow__prv"><i class="far fa-long-arrow-left"></i>Prev</div>
+                        <div class="tptestiarrow__nxt">Next<i class="far fa-long-arrow-right"></i></div>
+                  </div>
+               </div>
+            </div>
+            <div class="swiper-container testi-active">
+               <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                     <div class="review-image-slide">
+                        <img src="https://hffoodservice.com/wp-content/uploads/2025/07/Review-5-1-681x800.jpg.webp">
+                     </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                     <div class="review-image-slide">
+                        <img src="https://hffoodservice.com/wp-content/uploads/2025/07/Review-6-2-681x800.jpg.webp">
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="review-image-slide">
+                        <img src="https://hffoodservice.com/wp-content/uploads/2025/07/Review-7-2-681x800.jpg.webp">
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="review-image-slide">
+                        <img src="https://hffoodservice.com/wp-content/uploads/2025/07/Review-7-2-681x800.jpg.webp">
                      </div>
                   </div>
                </div>
             </div>
-         </div>--}}
+         </div>
       </section>
-      
+      {{--
+      <section class="testimonial-area pt-65 mb-80">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-6 col-md-6">
+                  <div class="tpsection mb-35">
+                     <h4 class="tpsection__title">User Feedbacks</h4>
+                  </div>
+               </div>
+               <div class="col-lg-6 col-md-6">
+                  <div class="tptestiarrow d-flex align-items-center justify-content-end">
+                     <div class="tptestiarrow__prv"><i class="far fa-long-arrow-left"></i>Prev</div>
+                        <div class="tptestiarrow__nxt">Next<i class="far fa-long-arrow-right"></i></div>
+                  </div>
+               </div>
+            </div>
+            <div class="swiper-container testi-active">
+               <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                     <div class="tptesti text-center">
+                        <div class="tptesti__icon mb-25">
+                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="16" viewBox="0 0 22 16">
+                              <image id="testi-icon-01.svg" width="22" height="16" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAQCAYAAAAS7Y8mAAABcElEQVQ4jbXUPWtVQRDG8V9uJr4mSBRM4RvYJEEMiqLYhWAjCFamEVut/A52IZAyjYXmA4igRcBYCIqNFoKFkhSCVUBQQVAQTbyyYS9clj2HiDiwnGXmmf/szu6egYhQ2F5cx1VMYA8uYLUU9tkUbmIaY3hQUlPgHg5gGffxCesNwB2Yxy28xaP8XZNWnMe1iOhGxFJEjPX5m8ZQRKxExLeImC01vcnJDJ3bBrA3FiPia0SM1+K9Hj/HT1xs6WO/ncNLXMLjmiCBJ/EOZ/B6m+DUy0M42yTo4DI+/AV0Zz7kO22i1IdTucDttIMi/hvfsYTP2bcfwxl+uML8gTeRoUk4U4C7GMmFn/SBO7ngCRyp5JzG08gP4AWuVKofx/ucUO70Bl5Vcu7iYCcnDTa0aleDvy2WinY7LYn/ZP8dnA6jZr9acjca/Fus3q3Yh6MV0bEWcLpqtZzRrYeX/1zn8axhR1+KlW/iIxbyvLTdePgHAXhADHlkJs8AAAAASUVORK5CYII="/>
+                           </svg>
+                        </div>
+                        <div class="tptesti__content pb-5">
+                           <p>“ Providing insight-driven transfor- mation to investment banks, wealth and asset mana, exchanges, Finance. Must explain to you how all this mistaken. ”
+                           </p>
+                        </div>
+                        <div class="tptesti__avata d-flex align-items-center justify-content-center">
+                           <div class="tptesti__avata-icon mr-20">
+                              <img src="https://testingbot.com/free-online-tools/random-avatar/70?u=u837kfei139jm" alt="avata">
+                           </div>
+                           <div class="tptesti__avata-content text-start">
+                              <h5 class="tptesti__avata-content-title">Miranda H. Halim</h5>
+                              <p>Manager</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="tptesti text-center">
+                        <div class="tptesti__icon mb-25">
+                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="16" viewBox="0 0 22 16">
+                              <image id="testi-icon-01.svg" width="22" height="16" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAQCAYAAAAS7Y8mAAABcElEQVQ4jbXUPWtVQRDG8V9uJr4mSBRM4RvYJEEMiqLYhWAjCFamEVut/A52IZAyjYXmA4igRcBYCIqNFoKFkhSCVUBQQVAQTbyyYS9clj2HiDiwnGXmmf/szu6egYhQ2F5cx1VMYA8uYLUU9tkUbmIaY3hQUlPgHg5gGffxCesNwB2Yxy28xaP8XZNWnMe1iOhGxFJEjPX5m8ZQRKxExLeImC01vcnJDJ3bBrA3FiPia0SM1+K9Hj/HT1xs6WO/ncNLXMLjmiCBJ/EOZ/B6m+DUy0M42yTo4DI+/AV0Zz7kO22i1IdTucDttIMi/hvfsYTP2bcfwxl+uML8gTeRoUk4U4C7GMmFn/SBO7ngCRyp5JzG08gP4AWuVKofx/ucUO70Bl5Vcu7iYCcnDTa0aleDvy2WinY7LYn/ZP8dnA6jZr9acjca/Fus3q3Yh6MV0bEWcLpqtZzRrYeX/1zn8axhR1+KlW/iIxbyvLTdePgHAXhADHlkJs8AAAAASUVORK5CYII="/>
+                           </svg>
+                        </div>
+                        <div class="tptesti__content pb-5">
+                           <p>“We are the preferred choice by many car owners because our experience and knowledge is self-evident.For your car we will do everything – advice ”
+                           </p>
+                        </div>
+                        <div class="tptesti__avata d-flex align-items-center justify-content-center">
+                           <div class="tptesti__avata-icon mr-20">
+                              <img src="https://testingbot.com/free-online-tools/random-avatar/70?u=u837kfei139pi" alt="avata">
+                           </div>
+                           <div class="tptesti__avata-content text-start">
+                              <h5 class="tptesti__avata-content-title">Cameron William</h5>
+                              <p>Head Of Idea</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="tptesti text-center">
+                        <div class="tptesti__icon mb-25">
+                           <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="16" viewBox="0 0 22 16">
+                              <image id="testi-icon-01.svg" width="22" height="16" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAQCAYAAAAS7Y8mAAABcElEQVQ4jbXUPWtVQRDG8V9uJr4mSBRM4RvYJEEMiqLYhWAjCFamEVut/A52IZAyjYXmA4igRcBYCIqNFoKFkhSCVUBQQVAQTbyyYS9clj2HiDiwnGXmmf/szu6egYhQ2F5cx1VMYA8uYLUU9tkUbmIaY3hQUlPgHg5gGffxCesNwB2Yxy28xaP8XZNWnMe1iOhGxFJEjPX5m8ZQRKxExLeImC01vcnJDJ3bBrA3FiPia0SM1+K9Hj/HT1xs6WO/ncNLXMLjmiCBJ/EOZ/B6m+DUy0M42yTo4DI+/AV0Zz7kO22i1IdTucDttIMi/hvfsYTP2bcfwxl+uML8gTeRoUk4U4C7GMmFn/SBO7ngCRyp5JzG08gP4AWuVKofx/ucUO70Bl5Vcu7iYCcnDTa0aleDvy2WinY7LYn/ZP8dnA6jZr9acjca/Fus3q3Yh6MV0bEWcLpqtZzRrYeX/1zn8axhR1+KlW/iIxbyvLTdePgHAXhADHlkJs8AAAAASUVORK5CYII="/>
+                           </svg>
+                        </div>
+                        <div class="tptesti__content pb-5">
+                           <p>“ Wualitative and quantitative data from customers on their likes, dislikes,
+                              impressions, and requests about popular product. ”
+                           </p>
+                        </div>
+                        <div class="tptesti__avata d-flex align-items-center justify-content-center">
+                           <div class="tptesti__avata-icon mr-20">
+                              <img src="https://testingbot.com/free-online-tools/random-avatar/70?u=u837kfei139kn" alt="avata">
+                           </div>
+                           <div class="tptesti__avata-content text-start">
+                              <h5 class="tptesti__avata-content-title">Robertia</h5>
+                              <p>CEO</p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      --}}
+      <!-- testimonial-area-end -->
+
+      <!-- banner-area-start -->
+      {{--
+      <section class="banner-area pb-20">
+        <div class="tpbanneritem__thumb mb-20">  
+        <img style="width:100%;" src="{{url('/')}}/assets/theme/assets/img/banner/green-farm.jpg" alt="banner-img">
+        </div>
+      </section>--}}
       <!-- banner-area-end -->
 
 
@@ -383,6 +494,8 @@
       </section>
       <!-- white-product-area-end -->
 
+
+
    </div>
 
 
@@ -407,8 +520,10 @@
           <p class="modal-desc" id="qvDescription"></p>
 
           <div class="modal-actions">
-            <input type="number" id="qvQty" value="1" min="1">
-            <button id="addToCartBtn">🛒 Add to Cart</button>
+            <form id="modal-form" method="GET" action="">
+               <input type="number" id="qvQty" value="1" min="1">
+               <button type="submit" id="addToCartBtn">🛒 Add to Cart</button>
+            </form>
           </div>
           <button style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
 
@@ -455,8 +570,12 @@
             alert('Something went wrong!');
         }
       });
+   });
 
+   $("#addToCartBtn").on("click", function(e) {
+      e.preventDefault();
 
+      alert("ami asi");
    });
 </script>
 <script type="text/javascript">
@@ -470,6 +589,7 @@ $(document).ready(function(){
     $("#catname").text($(this).data("category"));
     $("#skuname").text($(this).data("sku"));
     $("#stock-status").text($(this).data("stock_status"));
+    $("#modal-form").attr("action", $(this).data("href"));
 
     var img_link = "uploads/products/"+$(this).data("image");
 

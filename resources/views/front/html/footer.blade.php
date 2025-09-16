@@ -43,6 +43,8 @@
                         </div>
                      </div>
                   </div>
+
+                  {{--
                   <div class="col-lg-2 col-md-4 col-sm-6">
                      <div class="footer-widget footer-col-4 mb-40">
                         <h4 class="footer-widget__title mb-30">Social Network</h4>
@@ -55,7 +57,30 @@
                         </div>
                      </div>
                   </div>
+                  --}}
+                  <div class="col-lg-2 col-md-4 col-sm-6">
+                     <div class="footer-widget footer-col-4 mb-40">
+                        <h4 class="footer-widget__title mb-30">Like Us On Facebook</h4>
+                        <div class="footer-widget__links">
+                           <!-- <iframe src="https://www.facebook.com/profile.php?id=61558593165818"></iframe> -->
+                              <div id="fb-root"></div>
+                              <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"></script>
 
+                              <div class="fb-page" 
+                                   data-href="https://www.facebook.com/profile.php?id=61558593165818" 
+                                   data-tabs="timeline" 
+                                   data-width="400" 
+                                   data-height="100" 
+                                   data-small-header="false" 
+                                   data-adapt-container-width="true" 
+                                   data-hide-cover="false" 
+                                   data-show-facepile="true">
+                              </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  
                   {{--
                   <div class="col-lg-3 col-md-4 col-sm-6">
                      <div class="footer-widget footer-col-5 mb-40">
@@ -70,6 +95,7 @@
                      </div>
                   </div>
                   --}}
+                  
 
                </div>
             </div>

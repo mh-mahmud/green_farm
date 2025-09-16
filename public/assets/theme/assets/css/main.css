@@ -1610,11 +1610,12 @@ input[type=color] {
 }
 .menu-contact ul li {
   display: inline-block;
-  margin-right: 40px;
+/*  margin-right: 40px;*/
+  margin-right: 15px;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
   .menu-contact ul li {
-    margin-right: 22px;
+    margin-right: 15px;
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -1632,16 +1633,33 @@ input[type=color] {
 .menu-contact__icon {
   color: var(--tp-text-primary);
   font-size: 15px;
-  margin-right: 8px;
+  margin-right: 4px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .menu-contact__icon {
     margin-right: 4px;
   }
 }
+
+/*code for review image option*/
+.review-image-slide img {
+  width:100%;
+  height: auto;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .review-image-slide img {
+    max-width:360px;
+  }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .review-image-slide img {
+    max-width:400px !important;
+  }
+}
+
 .menu-contact__info a {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .menu-contact__info a {
