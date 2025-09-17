@@ -107,6 +107,17 @@
        display: block;
        padding: 5px 0;
    }
+
+   .tpproduct {
+     border: 1px solid #ddd;
+     transition: all 0.3s ease-in-out; /* smooth hover animation */
+   }
+
+   .tpproduct:hover {
+     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* shadow effect */
+     transform: translateY(-10px); /* optional: lifts the box slightly */
+     border-color: #ccc; /* optional: changes border on hover */
+   }
 </style>
 
 
@@ -184,15 +195,6 @@
       </section>
       <!-- slider-area-end -->
 
-<style type="text/css">
-.box, .box-image, .box-text {
-    transition: opacity .3s, transform .3s, background-color .3s;
-}
-.has-hover .bg, .has-hover [class*=image-] img {
-    transition: filter .6s, opacity .6s, transform .6s, box-shadow .3s;
-}
-</style>
-
 
       <!-- product-area-start -->
       <section class="product-area pt-65 pb-40">
@@ -211,7 +213,7 @@
 
                      @foreach($products as $product)
                      <div class="col">
-                        <div class="box has-hover tpproduct pb-15 mb-30" style="border: 1px solid #ddd;">
+                        <div class="box tpproduct pb-15 mb-30" style="border: 1px solid #ddd;">
                            <div class="tpproduct__thumb p-relative">
                               @if($product->stock_status == "Out of Stock")
                                  <span class="tpproduct__thumb-discount">{{$product->stock_status}}</span>
@@ -236,7 +238,7 @@
                                  <!-- <a class="comphare" href="#"><i class="fal fa-exchange"></i></a> -->
                                  <!-- <a class="quckview" href="#"><i class="fal fa-eye"></i></a> -->
 
-                                 <a href="#quick-view"
+                                 <a href=""
                                     class="quick-view-btn quick-view-added"
                                     role="button"
                                     data-stock_status="{{$product->stock_status}}"
@@ -501,7 +503,6 @@
 
 
 <!-- Quick View Modal -->
-<!-- Quick View Modal -->
 <div id="quickViewModal" class="modal" style="display:none;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -576,45 +577,42 @@
       });
    });
 
-   // $("#addToCartBtn").on("click", function(e) {
-   //    e.preventDefault();
-
-   //    alert("ami asi");
-   // });
 </script>
 <script type="text/javascript">
-$(document).ready(function(){
-  // Open modal with product data
-  $(".quick-view-btn").click(function(){
-    $("#qvName").text($(this).data("name"));
-    $("#qvPrice").text($(this).data("price"));
-    $("#qvDescription").html($(this).data("description"));
+   $(document).ready(function() {
+      // Open modal with product data
+      $(".quick-view-btn").click(function(e) {
+         e.preventDefault();
 
-    $("#catname").text($(this).data("category"));
-    $("#skuname").text($(this).data("sku"));
-    $("#stock-status").text($(this).data("stock_status"));
-    $("#dcashondelivery").attr("action", $(this).data("href"));
-    $("#modal_product_id").attr("value", $(this).data("product-id-m"));
+         $("#qvName").text($(this).data("name"));
+         $("#qvPrice").text($(this).data("price"));
+         $("#qvDescription").html($(this).data("description"));
 
-    var img_link = "uploads/products/"+$(this).data("image");
+         $("#catname").text($(this).data("category"));
+         $("#skuname").text($(this).data("sku"));
+         $("#stock-status").text($(this).data("stock_status"));
+         $("#dcashondelivery").attr("action", $(this).data("href"));
+         $("#modal_product_id").attr("value", $(this).data("product-id-m"));
 
-    console.log($(this).data("category"));
-    console.log($(this).data("sku"));
-    $("#qvImage").attr("src", img_link);
-    $("#quickViewModal").fadeIn();
-  });
+         var img_link = "uploads/products/"+$(this).data("image");
 
-  // Close modal
-  $(".close-another").on("click", function(){
-    $("#quickViewModal").fadeOut();
-  });
+         console.log($(this).data("category"));
+         console.log($(this).data("sku"));
+         $("#qvImage").attr("src", img_link);
+         $("#quickViewModal").fadeIn();
+      });
 
-  // Outside click close
-  $(window).click(function(e){
-    if($(e.target).is("#quickViewModal")) {
-      $("#quickViewModal").fadeOut();
-    }
-  });
-});
+     // Close modal
+     $(".close-another").on("click", function(){
+       $("#quickViewModal").fadeOut();
+     });
+
+     // Outside click close
+     $(window).click(function(e){
+       if($(e.target).is("#quickViewModal")) {
+         $("#quickViewModal").fadeOut();
+       }
+     });
+   });
 </script>
 @endsection

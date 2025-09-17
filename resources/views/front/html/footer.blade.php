@@ -8,7 +8,7 @@
                   <div class="col-lg-e3 col-md-4 col-sm-6">
                      <div class="footer-widget footer-col-1 mb-40">
                         <div class="footer-logo mb-30">
-                           <a href="{{ route('index') }}"><img style="width:120px" src="{{url('/')}}/assets/theme/assets/img/logo/logo.webp" alt="Green Farm Logo"></a>
+                           <a href="{{ route('index') }}"><img style="width:120px" src="{{url('/')}}/assets/theme/assets/img/logo/green-farm-logo.png" alt="Green Farm Logo"></a>
                         </div>
                         <div class="footer-content">
                            {!! $footer_msg !!}
@@ -69,7 +69,7 @@
                               <div class="fb-page" 
                                    data-href="https://www.facebook.com/profile.php?id=61558593165818" 
                                    data-tabs="timeline" 
-                                   data-width="400" 
+                                   data-width="330" 
                                    data-height="100" 
                                    data-small-header="false" 
                                    data-adapt-container-width="true" 
