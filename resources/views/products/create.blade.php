@@ -87,6 +87,17 @@
                                             <div class="col-md-6">
                                                 <div class="fv-row mb-3">
                                                     <!--begin::Label-->
+                                                    <label class="form-label fw-bolder text-dark">Serial<span class="text-danger">*</span></label>
+                                                    <input class="form-control form-control-sm form-control-solid" type="text" name="product_serial" autocomplete="off" value="{{ old('product_serial') }}" />
+                                                    @if ($errors->has('product_serial'))
+                                                        <span class="text-danger">{{ $errors->first('product_serial') }}</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="fv-row mb-3">
+                                                    <!--begin::Label-->
                                                     <label class="form-label fw-bolder text-dark">Category<span class="text-danger">*</span></label>
                                                     <select class="form-control form-control-sm form-control-solid" name="category_id" aria-label="Default select example">
                                                         <option value=''>Select</option>

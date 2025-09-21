@@ -121,6 +121,7 @@
 							<th class="min-w-110px">Category Name</th>
 							<th class="min-w-110px">Brand</th>
 							<th class="min-w-110px">Code</th>
+							<th class="min-w-110px">Serial</th>
 							<th class="min-w-110px">Type</th>
 							<th class="min-w-110px">Price</th>
 							<th class="min-w-110px">Status</th>
@@ -136,6 +137,7 @@
 							<td class="text-dark fs-6">{{ @$product->category->category_name }}</td>
 							<td class="text-dark fs-6">{{ @$product->brand->brand_name }}</td>
 							<td class="text-dark fs-6">{{ $product->product_code }}</td>
+							<td class="text-dark fs-6">{{ $product->product_serial }}</td>
 							<td class="text-dark fs-6">{{ $product->product_type }}</td>
 							<td class="text-dark fs-6">{{ $product->product_value }}</td>
 		                    <td>

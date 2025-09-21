@@ -32,7 +32,7 @@
       <section class="product-area pt-80 pb-25">
          <div class="container">
             <div class="row">
-               <div class="col-lg-5 col-md-12">
+               <div class="col-lg-6 col-md-5">
                   <div class="tpproduct-details__nab pr-50 mb-40">
                      <div class="d-flex align-items-start">
                         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -52,12 +52,18 @@
                            </button>
                            @endif
 
+                           @if(!empty($product->img_path_4))
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages-4" aria-selected="false">
+                           <img src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" alt="">
+                           </button>
+                           @endif
+
                         </div>
 
-                        <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-content" id="v-pills-tabContent" style="border:1px solid #ddd;width:100%;">
 
                           <div class=" tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                              <img id="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="kulkarnii" style="cursor: zoom-in;">
+                              <img style="width:100% !important" id="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="kulkarnii" style="cursor: zoom-in;">
                           </div>
 
                           @if(!empty($product->img_path_2))
@@ -71,25 +77,32 @@
                            <img src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" alt="">
                           </div>
                           @endif
+
+                          @if(!empty($product->img_path_4))
+                          <div class="tab-pane fade" id="v-pills-messages-4" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                           <img src="{{url('/')}}/uploads/products/{{$product->img_path_4}}" alt="">
+                          </div>
+                          @endif
                           
                         </div>
                       </div>
                   </div>
                </div>
-               <div class="col-lg-6 col-md-8">
+               <div class="col-lg-6 col-md-5">
                   <div class="tpproduct-details__content">
 
-                     {{--
+                     
                      <div class="tpproduct-details__tag-area d-flex align-items-center mb-5">
                         <span class="tpproduct-details__tag">{{$product->category->category_name}}</span>
                         <div class="tpproduct-details__rating">
                            <a href="#"><i class="fas fa-star"></i></a>
                            <a href="#"><i class="fas fa-star"></i></a>
                            <a href="#"><i class="fas fa-star"></i></a>
+                           <a href="#"><i class="fas fa-star"></i></a>
                         </div>
-                        <a class="tpproduct-details__reviewers">{{ $product->total_sell }}+ Total Sell</a>
+                        {{--<a class="tpproduct-details__reviewers">{{ $product->total_sell }}+ Total Sell</a>--}}
                      </div>
-                     --}}
+                     
                      <div class="tpproduct-details__title-area d-flex align-items-center flex-wrap mb-5">
                         <h3 class="tpproduct-details__title">{{$product->name}}</h3>
                         @if($product->stock_status=="In Stock")

@@ -33,9 +33,9 @@ class ProductService
         }
 
         if (isset($data['paginate']) && $data['paginate'] == false) {
-            return $sql->orderBy('id', 'DESC')->get();
+            return $sql->orderBy('product_serial', 'ASC')->get();
         } else {
-            return $sql->orderBy('id', 'DESC')->paginate(config('constants.ROW_PER_PAGE'));
+            return $sql->orderBy('product_serial', 'ASC')->paginate(config('constants.ROW_PER_PAGE'));
         }
 
     }

@@ -75,15 +75,20 @@
 
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
-                                    <!--begin::Label-->
                                     <label class="form-label fw-bolder text-dark">Product Code/SKU<span class="text-danger">*</span></label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input class="form-control form-control-sm form-control-solid"
-                                           type="text" name="product_code" autocomplete="off" value="{{ $product->product_code }}" />
-                                    <!--end::Input-->
+                                    <input class="form-control form-control-sm form-control-solid" type="text" name="product_code" autocomplete="off" value="{{ $product->product_code }}" />
                                     @if ($errors->has('product_code'))
                                         <span class="text-danger">{{ $errors->first('product_code') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Serial<span class="text-danger">*</span></label>
+                                    <input class="form-control form-control-sm form-control-solid" type="text" name="product_serial" autocomplete="off" value="{{ $product->product_serial }}" />
+                                    @if ($errors->has('product_serial'))
+                                        <span class="text-danger">{{ $errors->first('product_serial') }}</span>
                                     @endif
                                 </div>
                             </div>
