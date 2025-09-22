@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Slider;
+use App\Models\Review;
 
 class SliderService
 {
@@ -111,7 +112,7 @@ class SliderService
 
 
     # Review code below
-    public function review_index()
+    public function getAll_reviews()
     {
         return Review::orderBy('created_at', 'desc')->paginate(config('constants.ROW_PER_PAGE'));
     }
@@ -130,15 +131,15 @@ class SliderService
             $fileNameToStore = '';
         }
         
-        $review = new review([
+        $review = new Review([
             'review_title' => $request->review_title,
             'review_image' => $fileNameToStore,
             'status' => $request->status
         ]);
 
-        $slider->save();
+        $review->save();
         // $user->agent()->save($agent);
-        return $slider;
+        return $review;
     }
 
     public function get_review($id)
@@ -149,36 +150,35 @@ class SliderService
 
     public function getReviewsEditData($id)
     {
-        $slider = Slider::findOrFail($id);
-        return compact('slider');
+        $review = Review::findOrFail($id);
+        return compact('review');
     }
 
 
     public function update_review($request, $id)
     {
-        $slider = Slider::findOrFail($id);
-        $slider->slider_title = $request->slider_title;
-        $slider->slider_description = $request->slider_description;
-        $slider->status = $request->status;
+        $review = Review::findOrFail($id);
+        $review->review_title = $request->review_title;
+        $review->status = $request->status;
 
-        if ($request->hasFile('slider_image')) {
+        if ($request->hasFile('review_image')) {
            
-            if ($slider->slider_image) {
-                $previousImagePath = getcwd().'/public/uploads/sliders/'.$slider->slider_image;
+            if ($review->review_image) {
+                $previousImagePath = getcwd().'/public/uploads/reviews/'.$review->review_image;
                 if (file_exists($previousImagePath)) {
                     @unlink($previousImagePath);
                 }
             }
-            $fileNameWithExt = $request->file('slider_image')->getClientOriginalName();
+            $fileNameWithExt = $request->file('review_image')->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('slider_image')->getClientOriginalExtension();
+            $extension = $request->file('review_image')->getClientOriginalExtension();
             $fileNameToStore = $fileName.'_'.time().'.'.$extension;
-            $path = $request->file('slider_image')->move(getcwd().'/public/uploads/sliders', $fileNameToStore);
-            $slider->slider_image = $fileNameToStore;
+            $path = $request->file('review_image')->move(getcwd().'/public/uploads/reviews', $fileNameToStore);
+            $review->review_image = $fileNameToStore;
                
         }
-        $slider->save();
-        return $slider;
+        $review->save();
+        return $review;
     }
 
     public function delete_review($id)

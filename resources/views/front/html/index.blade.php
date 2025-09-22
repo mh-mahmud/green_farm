@@ -305,27 +305,16 @@
             </div>
             <div class="swiper-container testi-active">
                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                     <div class="review-image-slide">
-                        <img src="https://hffoodservice.com/wp-content/uploads/2025/07/Review-5-1-681x800.jpg.webp">
-                     </div>
-                  </div>
 
+                  @foreach ($reviews as $review)
                   <div class="swiper-slide">
                      <div class="review-image-slide">
-                        <img src="https://hffoodservice.com/wp-content/uploads/2025/07/Review-6-2-681x800.jpg.webp">
+                        <img src="{{ asset('uploads/reviews/' . $review->review_image) }}" alt="{{ $review->review_title }}">
                      </div>
                   </div>
-                  <div class="swiper-slide">
-                     <div class="review-image-slide">
-                        <img src="https://hffoodservice.com/wp-content/uploads/2025/07/Review-7-2-681x800.jpg.webp">
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="review-image-slide">
-                        <img src="https://hffoodservice.com/wp-content/uploads/2025/07/Review-7-2-681x800.jpg.webp">
-                     </div>
-                  </div>
+                  @endforeach
+
+
                </div>
             </div>
          </div>

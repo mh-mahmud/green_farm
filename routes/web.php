@@ -247,6 +247,16 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::delete('slider/{id?}', [SliderController::class, 'destroy'])->name('slider-destroy')->middleware(['check-permission']);
 	Route::put('slider/{id}/update-slider-image', [SliderController::class, 'updateSliderImage'])->name('update-slider-image');
 
+	// reviews routes
+	Route::get('reviews', [SliderController::class, 'review_index'])->name('review-list')->middleware(['check-permission']);
+    Route::get('review/create', [SliderController::class, 'review_create'])->name('review-create')->middleware(['check-permission']);
+	Route::post('review', [SliderController::class, 'review_store'])->name('review-store');
+	Route::get('review/{id?}', [SliderController::class, 'review_show'])->name('review-show')->middleware(['check-permission']);
+	Route::get('review/{id?}/edit', [SliderController::class, 'review_edit'])->name('review-edit')->middleware(['check-permission']);
+	Route::put('review/{id?}', [SliderController::class, 'review_update'])->name('review-update');
+	Route::delete('review/{id?}', [SliderController::class, 'review_destroy'])->name('review-destroy')->middleware(['check-permission']);
+	Route::put('review/{id}/update-review-image', [SliderController::class, 'updateReviewImage'])->name('update-review-image');
+
 	// brand routes
 	Route::get('brands', [BrandController::class, 'index'])->name('brand-list')->middleware(['check-permission']);
     Route::get('brand/create', [BrandController::class, 'create'])->name('brand-create')->middleware(['check-permission']);

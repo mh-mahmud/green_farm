@@ -18,6 +18,7 @@ use App\Models\Career;
 use App\Models\Wishlist;
 use App\Models\Settings;
 use App\Models\ContactForm;
+use App\Models\Review;
 use Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -30,12 +31,13 @@ class FrontController extends Controller
     public function html() {
         $brands = Brand::where('status', 1)->get(['brand_name', 'brand_image']);
         $blogs = Blog::where('status', 1)->orderBy('created_at', 'desc')->limit(4)->get();
-        // dd($blogs);
+
         $sliders = Slider::where('status', 1)->get(['slider_title', 'slider_image']);
+        $reviews = Review::where('status', 1)->get(['review_title', 'review_image']);
         $products = Product::with('category')->where('status', 1)->inRandomOrder()->limit(30)->get();
         $top_sell = Product::where('status', 1)->orderBy('total_sell', 'desc')->limit(5)->get();
         $cats = Category::where('status', 1)->get();
-        return view('front.html.index', compact('brands', 'products', 'cats', 'sliders', 'top_sell', 'blogs'));
+        return view('front.html.index', compact('brands', 'reviews', 'products', 'cats', 'sliders', 'top_sell', 'blogs'));
     }
 
     public function blogs() {

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Slider;
+use App\Models\Review;
 use Carbon\Carbon;
 use App\Services\SliderService;
 
@@ -133,7 +134,7 @@ class SliderController extends Controller
     {
         
         $reviews = $this->sliderService->getAll_reviews();
-        return view('reviews.index', compact('sliders'));
+        return view('reviews.index', compact('reviews'));
     }
 
     public function review_create() {
@@ -160,8 +161,8 @@ class SliderController extends Controller
    
     public function review_show($id)
     {
-        $reviewData = $this->sliderService->get_review($id);
-        return view('reviews.show', $reviewsData);
+        $review = $this->sliderService->get_review($id);
+        return view('reviews.show', $review);
     }
 
 
@@ -192,6 +193,26 @@ class SliderController extends Controller
         } catch (\Exception $e) {
            return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function updateReviewImage($id)
+    {
+        $review = Review::findOrFail($id);
+        if ($review->review_image) {
+            // path to the image file
+            $imagePath =getcwd().'/uploads/reviews/'.$review->review_image;
+            // delete the file if it exists
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+            //Update the review record to remove the profile image
+            $review->review_image = null;
+            $review->save();
+    
+            return response()->json(['success' => true]);
+        }
+    
+        return response()->json(['success' => false, 'message' => 'No review image found']);
     }
 
 }
