@@ -126,6 +126,7 @@ class ProductService
                 $dataObj->product_code          = $data['product_code'];
                 $dataObj->category_id           = $data['category_id'];
                 $dataObj->brand_id              = $data['brand_id'];
+                $dataObj->product_serial        = $data['product_serial'];
                 if($data['product_type']=="Landing Page") {
                     $dataObj->product_type = "landing_page";
                     $dataObj->product_sell_type = "landing_page";
@@ -232,11 +233,30 @@ class ProductService
             $request->file('img_path_3')->move(getcwd().'/public/uploads/products', $fileNameToStore_3);
         }
 
+        $fileNameToStore_4 = '';
+        if ($request->hasFile('img_path_4')) {
+            $fileNameWithExt = $request->file('img_path_4')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('img_path_4')->getClientOriginalExtension();
+            $fileNameToStore_4 = $fileName.'_'.time().'.'.$extension;
+            $request->file('img_path_4')->move(getcwd().'/public/uploads/products', $fileNameToStore_4);
+        }
+
+        $fileNameToStore_5 = '';
+        if ($request->hasFile('img_path_5')) {
+            $fileNameWithExt = $request->file('img_path_5')->getClientOriginalName();
+            $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('img_path_5')->getClientOriginalExtension();
+            $fileNameToStore_5 = $fileName.'_'.time().'.'.$extension;
+            $request->file('img_path_5')->move(getcwd().'/public/uploads/products', $fileNameToStore_5);
+        }
+
         try {
-            return  DB::transaction(function () use ($data, $fileNameToStore, $fileNameToStore_2, $fileNameToStore_3, $request, $id) {
+            return  DB::transaction(function () use ($data, $fileNameToStore, $fileNameToStore_2, $fileNameToStore_3, $fileNameToStore_4, $fileNameToStore_5, $request, $id) {
                 $dataObj                        = Product::findOrFail($id);;
                 $dataObj->name                  = $data['name'];
                 $dataObj->product_code          = $data['product_code'];
+                $dataObj->product_serial        = $data['product_serial'];
                 $dataObj->category_id           = $data['category_id'];
                 $dataObj->brand_id              = $data['brand_id'];
                 if($data['product_type']=="Landing Page") {
@@ -257,6 +277,8 @@ class ProductService
                 $dataObj->img_path              = $request->hasFile('img_path') ? $fileNameToStore : $dataObj->img_path;
                 $dataObj->img_path_2            = $request->hasFile('img_path_2') ? $fileNameToStore_2 : $dataObj->img_path_2;
                 $dataObj->img_path_3            = $request->hasFile('img_path_3') ? $fileNameToStore_3 : $dataObj->img_path_3;
+                $dataObj->img_path_4            = $request->hasFile('img_path_4') ? $fileNameToStore_4 : $dataObj->img_path_4;
+                $dataObj->img_path_5            = $request->hasFile('img_path_5') ? $fileNameToStore_5 : $dataObj->img_path_5;
                 $dataObj->stock_status          = $data['stock_status'];
                 $dataObj->stock_quantity        = $data['stock_quantity'];
                 //$dataObj->max_purchase_limit    = $data['max_purchase_limit'];

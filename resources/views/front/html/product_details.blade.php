@@ -53,8 +53,10 @@
                            @endif
 
                            @if(!empty($product->img_path_4))
-                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages-4" aria-selected="false">
-                           <img src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" alt="">
+                          <button class="nav-link" id="v-pills-messages-tab2" data-bs-toggle="pill" data-bs-target="#v-pills-messages-4" type="button" role="tab" aria-controls="v-pills-messages-4" aria-selected="false">
+
+                           <img src="{{url('/')}}/uploads/products/{{$product->img_path_4}}" alt="">
+
                            </button>
                            @endif
 
@@ -63,24 +65,24 @@
                         <div class="tab-content" id="v-pills-tabContent" style="border:1px solid #ddd;width:100%;">
 
                           <div class=" tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                              <img style="width:100% !important" id="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="kulkarnii" style="cursor: zoom-in;">
+                              <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="" style="cursor: zoom-in;">
                           </div>
 
                           @if(!empty($product->img_path_2))
                           <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                           <img src="{{url('/')}}/uploads/products/{{$product->img_path_2}}" alt="">
+                           <img class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_2}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_2}}" alt="" style="cursor: zoom-in;">
                           </div>
                           @endif
 
                           @if(!empty($product->img_path_3))
                           <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                           <img src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" alt="">
+                           <img class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_3}}" alt="" style="cursor: zoom-in;">
                           </div>
                           @endif
 
                           @if(!empty($product->img_path_4))
-                          <div class="tab-pane fade" id="v-pills-messages-4" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                           <img src="{{url('/')}}/uploads/products/{{$product->img_path_4}}" alt="">
+                          <div class="tab-pane fade" id="v-pills-messages-4" role="tabpanel" aria-labelledby="v-pills-messages-tab2">
+                           <img class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_4}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_4}}" alt="" style="cursor: zoom-in;">
                           </div>
                           @endif
                           
@@ -643,7 +645,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <!-- Init -->
 <script>
-   $('#zoomImage').elevateZoom();
+   $('.zoomImage').elevateZoom();
 </script>
 
 

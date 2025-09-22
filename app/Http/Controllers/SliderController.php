@@ -28,7 +28,7 @@ class SliderController extends Controller
         return view('sliders.index', compact('sliders'));
     }
 
-    function create() {
+    public function create() {
         return view('sliders.create');
     }
 
@@ -56,7 +56,7 @@ class SliderController extends Controller
         return view('sliders.show', $sliderData);
     }
 
-   
+
     public function edit($id)
     {
         $sliderData = $this->sliderService->getSliderEditData($id);
@@ -126,6 +126,72 @@ class SliderController extends Controller
         }
     
         return response()->json(['success' => false, 'message' => 'No slider image found']);
+    }
+
+    # write here review functionalities
+    public function review_index()
+    {
+        
+        $reviews = $this->sliderService->getAll_reviews();
+        return view('reviews.index', compact('sliders'));
+    }
+
+    public function review_create() {
+        return view('reviews.create');
+    }
+
+    public function review_store(Request $request)
+    {
+        
+        $validator = Validator::make($request->all(), [
+            'review_title' => 'required',
+            'review_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+           
+        ]);
+       
+        // If validation fails,return error
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $user = $this->sliderService->create_review($request);
+        return redirect()->route('review-list')->with('success', 'Review created successfully.');
+    }
+
+   
+    public function review_show($id)
+    {
+        $reviewData = $this->sliderService->get_review($id);
+        return view('reviews.show', $reviewsData);
+    }
+
+
+    public function review_edit($id)
+    {
+        $reviewData = $this->sliderService->getReviewsEditData($id);
+        return view('reviews.edit', $reviewData);
+    }
+
+
+    public function review_update(Request $request, $id)
+    {
+        
+        $request->validate([
+            'review_title' => 'required',
+            'review_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $this->sliderService->update_review($request, $id);
+        return redirect()->route('review-list')->with('success', 'Review updated successfully.');
+    }
+
+    public function review_destroy($id)
+    {
+        try {
+            $this->sliderService->delete_review($id);
+            return redirect()->route('review-list')->with('success', 'Review deleted successfully.');
+        } catch (\Exception $e) {
+           return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 }

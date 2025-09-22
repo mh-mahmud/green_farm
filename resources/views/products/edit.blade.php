@@ -244,7 +244,7 @@
                                 </div>
                             </div>
 
-                            {{--
+                            
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 4</label>
@@ -263,6 +263,7 @@
                                 </div>
                             </div>
 
+                            {{--
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 5</label>
@@ -281,6 +282,7 @@
                                 </div>
                             </div>
 
+                            
                             <div class="col-md-6">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 6</label>
