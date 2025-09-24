@@ -1,18 +1,19 @@
 @extends('front.html.master')
 @section('content')
-<style type="text/css">
+   <style type="text/css">
 
-   .zoom-image {
-     transition: transform 0.3s ease;
-     width: 100%;
-     height: auto;
-   }
+      .zoom-image {
+        transition: transform 0.3s ease;
+        width: 100%;
+        height: auto;
+      }
 
-   .zoom-image:hover {
-     transform: scale(1.5);
-     cursor: zoom-in;
-   }
-</style>
+      .zoom-image:hover {
+        transform: scale(1.5);
+        cursor: zoom-in;
+      }
+   </style>
+   <link rel="stylesheet" href="{{url('/')}}/assets/dist/css/easyzoom.css" />
 	<div class="free">
       <!-- breadcrumb-area -->
       <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
@@ -64,25 +65,27 @@
 
                         <div class="tab-content" id="v-pills-tabContent" style="border:1px solid #ddd;width:100%;">
 
-                          <div class=" tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                              <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path}}" alt="" style="cursor: zoom-in;">
+                          <div class="easyzoom tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                           
+                              <a href="{{url('/')}}/uploads/products/{{$product->img_path}}"><img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" style="cursor: zoom-in;"></a>
+
                           </div>
 
                           @if(!empty($product->img_path_2))
-                          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                           <img class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_2}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_2}}" alt="" style="cursor: zoom-in;">
+                          <div class="easyzoom tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                           <a href="{{url('/')}}/uploads/products/{{$product->img_path_2}}"><img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_2}}" style="cursor: zoom-in;"></a>
                           </div>
                           @endif
 
                           @if(!empty($product->img_path_3))
                           <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                           <img class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_3}}" alt="" style="cursor: zoom-in;">
+                           <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_3}}" alt="" style="cursor: zoom-in;">
                           </div>
                           @endif
 
                           @if(!empty($product->img_path_4))
                           <div class="tab-pane fade" id="v-pills-messages-4" role="tabpanel" aria-labelledby="v-pills-messages-tab2">
-                           <img class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_4}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_4}}" alt="" style="cursor: zoom-in;">
+                           <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_4}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_4}}" alt="" style="cursor: zoom-in;">
                           </div>
                           @endif
                           
@@ -624,29 +627,13 @@
 </script>
 
 
-<!-- <script src="https://unpkg.com/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-
+<script src="{{url('/')}}/assets/dist/easyzoom.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function(){
-    mediumZoom('#zoomImage', {
-        margin: 24,
-        background: 'rgba(0,0,0,0.6)',
-        scrollOffset: 0
-    });
+$(document).ready(function() {
+    var $easyzoom = $('.easyzoom').easyZoom();
 });
-</script> -->
-
-
-<!-- if cdn is not avaiable, go to zoom plugin folder: public/assets/elevatezoom-master/ -->
-<!-- jQuery first -->
-<script src="https://www.jqueryscript.net/demo/Jquery-Image-Zoom-Plugin-elevatezoom/jquery-1.8.3.min.js"></script>
-<!-- elevateZoom plugin -->
-<script src="https://www.jqueryscript.net/demo/Jquery-Image-Zoom-Plugin-elevatezoom/jquery.elevateZoom-2.1.0.min.js"></script>
-
-<!-- Init -->
-<script>
-   $('.zoomImage').elevateZoom();
 </script>
+
 
 
 
