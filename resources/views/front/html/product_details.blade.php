@@ -13,8 +13,8 @@
         cursor: zoom-in;
       }
    </style>
-   <link rel="stylesheet" href="{{url('/')}}/assets/dist/css/easyzoom.css" />
-	<div class="free">
+   <!-- <link rel="stylesheet" href="{{url('/')}}/assets/dist/css/easyzoom.css" /> -->
+   <div class="free">
       <!-- breadcrumb-area -->
       <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
@@ -33,7 +33,7 @@
       <section class="product-area pt-80 pb-25">
          <div class="container">
             <div class="row">
-               <div class="col-lg-6 col-md-5">
+               <div class="col-sm-12 col-lg-6 col-md-12">
                   <div class="tpproduct-details__nab pr-50 mb-40">
                      <div class="d-flex align-items-start">
                         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -63,29 +63,31 @@
 
                         </div>
 
-                        <div class="tab-content" id="v-pills-tabContent" style="border:1px solid #ddd;width:100%;">
+                        <div class="tab-content" id="v-pills-tabContent" style="width:100%;">
 
-                          <div class="easyzoom tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                          <div class=" tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                            
-                              <a href="{{url('/')}}/uploads/products/{{$product->img_path}}"><img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" style="cursor: zoom-in;"></a>
+                              <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path}}" style="cursor: zoom-in;" data-extm="large1.jpg">
 
                           </div>
 
                           @if(!empty($product->img_path_2))
-                          <div class="easyzoom tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                           <a href="{{url('/')}}/uploads/products/{{$product->img_path_2}}"><img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_2}}" style="cursor: zoom-in;"></a>
+                          <div class=" tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+                           <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_2}}" style="cursor: zoom-in;">
+
                           </div>
                           @endif
 
                           @if(!empty($product->img_path_3))
                           <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                           <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_3}}" alt="" style="cursor: zoom-in;">
+                           <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_3}}" style="cursor: zoom-in;">
                           </div>
                           @endif
 
                           @if(!empty($product->img_path_4))
                           <div class="tab-pane fade" id="v-pills-messages-4" role="tabpanel" aria-labelledby="v-pills-messages-tab2">
-                           <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_4}}" data-zoom-image="{{url('/')}}/uploads/products/{{$product->img_path_4}}" alt="" style="cursor: zoom-in;">
+                           <img style="width:100% !important" class="zoomImage" src="{{url('/')}}/uploads/products/{{$product->img_path_4}}" style="cursor: zoom-in;">
                           </div>
                           @endif
                           
@@ -93,7 +95,7 @@
                       </div>
                   </div>
                </div>
-               <div class="col-lg-6 col-md-5">
+               <div class="col-sm-12 col-lg-6 col-md-12">
                   <div class="tpproduct-details__content">
 
                      
@@ -597,7 +599,7 @@
       </div>
       --}}
       <!-- related-product-area-end -->
-	</div>
+   </div>
 
 @endsection
 
@@ -627,12 +629,33 @@
 </script>
 
 
-<script src="{{url('/')}}/assets/dist/easyzoom.js"></script>
+<script src="{{url('/')}}/assets/dist-js/extm.js"></script>
 <script>
-$(document).ready(function() {
-    var $easyzoom = $('.easyzoom').easyZoom();
+$(document).ready(function () {
+    // initialize for already visible images
+    $('.zoomImage').each(function () {
+        $(this).extm({
+            position: 'overlay',
+            lazy: true
+        });
+    });
+
+    // when a tab is shown, re-init zoom for its images
+    $('a[data-bs-toggle="pill"], button[data-bs-toggle="pill"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("data-bs-target"); // tab content id
+        $(target).find('.zoomImage').each(function () {
+            if (!$(this).data('extm-init')) {  // prevent duplicate init
+                $(this).extm({
+                    position: 'overlay',
+                    lazy: true
+                });
+                $(this).data('extm-init', true);
+            }
+        });
+    });
 });
 </script>
+
 
 
 
