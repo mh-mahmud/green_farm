@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\UnitDetail;
 
 class ProductController extends Controller {
 
@@ -32,7 +33,8 @@ class ProductController extends Controller {
     {
         $categories = Category::where('status', 1)->get(['id', 'category_name']);
         $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
-        return view('products.create', compact('categories', 'brands'));
+        $units = UnitDetail::pluck('unit_name', 'unit_code');
+        return view('products.create', compact('categories', 'brands', 'units'));
     }
 
     public function productStore(Request $request)
