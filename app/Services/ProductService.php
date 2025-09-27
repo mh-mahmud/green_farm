@@ -138,6 +138,7 @@ class ProductService
                 $dataObj->product_cost          = $data['product_cost'];
                 $dataObj->product_value         = $data['product_value'];
                 $dataObj->discount_price        = $data['discount_price'];
+                $dataObj->unit_wise_price         = json_encode($data['unit_price']);
                 $dataObj->description           = $data['description'];
                 //$dataObj->key_features          = $data['key_features'];
                 $dataObj->key_features          = "";
@@ -203,8 +204,8 @@ class ProductService
             'product_value.regex' => 'The product value must have at most 11 digits before the decimal point and up to 2 digits after the decimal point.',
         ]);
 
-
         $data = $request->all();
+
         $fileNameToStore = '';
         if ($request->hasFile('img_path')) {
             $fileNameWithExt = $request->file('img_path')->getClientOriginalName();
@@ -270,6 +271,7 @@ class ProductService
                 $dataObj->product_cost          = $data['product_cost'];
                 $dataObj->product_value         = $data['product_value'];
                 $dataObj->discount_price         = $data['discount_price'];
+                $dataObj->unit_wise_price         = json_encode($data['unit_price']);
                 $dataObj->description           = $data['description'];
                 //$dataObj->key_features          = $data['key_features'];
                 //$dataObj->club_point            = $data['club_point'];

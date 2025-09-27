@@ -23,3 +23,5 @@ CREATE TABLE IF NOT EXISTS `unit_details` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `products` ADD `unit_wise_price` JSON NULL DEFAULT NULL AFTER `discount_price`;

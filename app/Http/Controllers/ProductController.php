@@ -59,13 +59,15 @@ class ProductController extends Controller {
     {
         $categories = Category::where('status', 1)->get(['id', 'category_name']);
         $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
+        $units = UnitDetail::pluck('unit_name', 'unit_code');
         $product = $this->productService->getProductById($id);
-        return view('products.edit', compact('product', 'categories', 'brands'));
+        $unit_values = json_decode($product->unit_wise_price, true);
+
+        return view('products.edit', compact('product', 'categories', 'brands', 'units', 'unit_values'));
     }
 
     public function productUpdate(Request $request, $id)
     {
-        //dd($request->all());
         $result = $this->productService->productUpdate($request, $id);
         if($result->status == 208){
             return redirect()->route('product-list')->with('success', 'Product updated successfully.');

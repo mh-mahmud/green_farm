@@ -329,7 +329,7 @@
                                             <tr>
                                                 <td>{{ $val }}</td>
                                                 <td>
-                                                <input class="form-control form-control-sm form-control-solid" type="number" name="{{ $key }}" autocomplete="off" />
+                                                <input class="form-control form-control-sm form-control-solid" type="number" name="unit_price[{{$key}}]" autocomplete="off" />
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -342,22 +342,6 @@
                                 </div>
 
                                 
-
-                                {{--
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label fw-bolder text-dark" for="textarea">Key Features</label>
-                                        <textarea
-                                            class="form-control form-control-sm  form-control-solid editor"
-                                            id="key_features" name="key_features"
-                                            rows="3">{{ old('key_features') }}</textarea>
-                                        @if ($errors->has('key_features'))
-                                            <span
-                                                class="text-danger">{{ $errors->first('key_features') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                                --}}
                             </div>
 
 

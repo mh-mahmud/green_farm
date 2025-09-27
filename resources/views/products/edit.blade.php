@@ -36,7 +36,7 @@
 <!--end::Toolbar-->
 
 <!--**********************************
-                                Forms
+            Forms
 ***********************************-->
 <div class="container-xxl">
     <div class="row">
@@ -61,7 +61,7 @@
                         @method('PUT')
                         <input type="hidden" name="id" value="{{ $product->id }}">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <!--begin::Label-->
                                     <label class="form-label fw-bolder text-dark">product Name</label>
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Product Code/SKU<span class="text-danger">*</span></label>
                                     <input class="form-control form-control-sm form-control-solid" type="text" name="product_code" autocomplete="off" value="{{ $product->product_code }}" />
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Serial<span class="text-danger">*</span></label>
                                     <input class="form-control form-control-sm form-control-solid" type="text" name="product_serial" autocomplete="off" value="{{ $product->product_serial }}" />
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <!--begin::Label-->
                                     <label class="form-label fw-bolder text-dark">Category<span class="text-danger">*</span></label>
@@ -109,7 +109,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <!--begin::Label-->
                                     <label class="form-label fw-bolder text-dark">Brand Name</label>
@@ -125,7 +125,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <!--begin::Label-->
                                     <label class="form-label fw-bolder text-dark">Type of Product<span class="text-danger">*</span></label>
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Product Cost</label>
                                     <input class="form-control form-control-sm form-control-solid"
@@ -153,7 +153,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Product Price<span class="text-danger">*</span></label>
                                     <input class="form-control form-control-sm form-control-solid"
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Discount Price</label>
                                     <input class="form-control form-control-sm form-control-solid"
@@ -176,7 +176,7 @@
                             </div>
 
                             {{--
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Club Points</label>
                                     <input class="form-control form-control-sm form-control-solid"
@@ -188,7 +188,7 @@
                             </div>
                             --}}
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label  fw-bolder text-dark">product Image Upload</label>
                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path" autocomplete="off" />
@@ -208,7 +208,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 2</label>
                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_2" autocomplete="off" />
@@ -226,7 +226,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 3</label>
                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_3" autocomplete="off" />
@@ -245,7 +245,7 @@
                             </div>
 
                             
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 4</label>
                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_4" autocomplete="off" />
@@ -264,7 +264,7 @@
                             </div>
 
                             {{--
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 5</label>
                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_5" autocomplete="off" />
@@ -283,7 +283,7 @@
                             </div>
 
                             
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Image 6</label>
                                     <input class="form-control form-control-sm form-control-solid" type="file" name="img_path_6" autocomplete="off" />
@@ -302,7 +302,7 @@
                             </div>
                             --}}
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Stock Status</label>
                                     <select class=" form-control form-control-sm form-control-solid" name="stock_status" aria-label="Default select example">
@@ -316,7 +316,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Stock Quantity<span class="text-danger">*</span></label>
                                     <input class="form-control form-control-sm form-control-solid"
@@ -328,7 +328,7 @@
                             </div>
 
                             {{--
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Max Purchase Limit</label>
                                     <input class="form-control form-control-sm form-control-solid"
@@ -341,7 +341,7 @@
                             --}}
 
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <label class="form-label fw-bolder text-dark">Status</label>
                                     <select class="form-control form-control-sm form-control-solid" name="status" aria-label="Default select example">
@@ -351,7 +351,38 @@
                                 </div>
                             </div>
 
-                           <div class="col-md-6">
+                                <div class="col-md-3"></div>
+
+                                <div class="col-md-4" style="border:1px solid #aaa;margin-bottom:30px;margin-top:30px;">
+                                    <div class="form-group">
+                                        <label style="border-bottom:1px solid #aaa;margin-top:30px;" class="form-label fw-bolder text-dark" for="textarea">Unit wise Price<span class="text-danger">*</span></label>
+                                        <table class="table table-sm table-condensed table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                                            <thead>
+                                            <tr>
+                                                <th>Unit Name</th>
+                                                <th>Unit Price</th>
+                                            </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            @foreach($units as $key => $val)
+                                            <tr>
+                                                <td>{{ $val }}</td>
+                                                <td>
+                                                <input class="form-control form-control-sm form-control-solid" type="number" name="unit_price[{{$key}}]" autocomplete="off" value="{{ isset($unit_values[$key]) ? $unit_values[$key] : null }}" />
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                        @if ($errors->has('description'))
+                                            <span class="text-danger">{{ $errors->first('description') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                            <div class="row">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="form-label fw-bolder text-dark" for="textarea">Product Description<span class="text-danger">*</span></label>
                                     <textarea
@@ -377,22 +408,7 @@
                                     @endif
                                 </div>
                             </div>
-
-                            {{--
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label fw-bolder text-dark" for="textarea">Key Features</label>
-                                    <textarea
-                                        class="form-control form-control-sm  form-control-solid editor"
-                                        id="key_features" name="key_features"
-                                        rows="3">{{ $product->key_features }}</textarea>
-                                    @if ($errors->has('key_features'))
-                                        <span
-                                            class="text-danger">{{ $errors->first('key_features') }}</span>
-                                    @endif
-                                </div>
                             </div>
-                            --}}
 
 
                         </div>
