@@ -303,9 +303,13 @@ class FrontController extends Controller
             $carts = Cart::where('session_id', $session_id)->get();
         }
 
+        $settings = Settings::first();
+        $districts = json_decode($settings->districts);
+
         //dd($carts);
         
-        return view('front.html.checkout_page', compact('carts', 'session_id'));
+        // return view('front.html.checkout_page', compact('carts', 'session_id'));
+        return view('front.html.checkout', compact('carts', 'session_id', 'districts'));
     }
 
     public function track_your_order() {
