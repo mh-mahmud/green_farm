@@ -2,16 +2,16 @@
 @section('content')
    <style type="text/css">
 
-      .zoom-image {
-        transition: transform 0.3s ease;
-        width: 100%;
-        height: auto;
+      .unit {
+        cursor:pointer;
+        color:#222;
+        border:1px solid #ddd;
+        margin-right:10px;
+      }
+      .unit-select {
+         border:1px solid #333;
       }
 
-      .zoom-image:hover {
-        transform: scale(1.5);
-        cursor: zoom-in;
-      }
    </style>
    <!-- <link rel="stylesheet" href="{{url('/')}}/assets/dist/css/easyzoom.css" /> -->
    <div class="free">
@@ -119,9 +119,18 @@
                         @endif
                         
                      </div>
+
+                     @if(!empty($pro_unit))
+                     <div style="margin-bottom:30px;">
+                        @foreach($pro_values as $key=>$val)
+                        <span class="unit tpproduct-details__stock" data-unitprice="{{$val}}">{{ $units[$key] }}</span>
+                        @endforeach
+                     </div>
+                     @endif
+
                      <div class="tpproduct-details__price mb-30">
                         <!-- <del>$9.35</del> -->
-                        <span style="color:#14A44D;">Tk. {{$product->product_value}}</span>
+                        <span id="loka" style="color:#14A44D;">{{$product->product_value}}</span><span style="color:#14A44D;font-size:18px;">৳</span>
                      </div>
                      {{--
                      <div class="tpproduct-details__pera" style="max-width: 90%;">
@@ -620,10 +629,14 @@
       window.location.href = url_data;
    });
 
-   // zoom the image
-   // $(document).ready(function(){
-   //     $('#zoomView').zoom();
-   // });
+
+
+   $(".unit").on("click", function() {
+      $(".unit").removeClass('unit-select');
+      var unVal = $(this).data('unitprice');
+      $("span#loka").text(unVal);
+      $(this).addClass('unit-select');
+   });
 
 
 </script>

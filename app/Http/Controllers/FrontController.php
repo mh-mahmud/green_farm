@@ -19,6 +19,7 @@ use App\Models\Wishlist;
 use App\Models\Settings;
 use App\Models\ContactForm;
 use App\Models\Review;
+use App\Models\UnitDetail;
 use Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
@@ -104,8 +105,11 @@ class FrontController extends Controller
 
     public function product_details($id) {
         $product = Product::findOrFail($id);
+        $units = UnitDetail::pluck('unit_name', 'unit_code');
+        $pro_unit = json_decode($product->unit_wise_price, true);
+        $pro_values = !empty($pro_unit) ? array_filter($pro_unit) : $product->product_value;
         $settings = Settings::first();
-        return view('front.html.product_details', compact('product', 'settings'));
+        return view('front.html.product_details', compact('product', 'settings', 'pro_unit', 'units', 'pro_values'));
     }
 
     public function contact_page() {
@@ -468,7 +472,7 @@ class FrontController extends Controller
             $ship->email = $request->email;
             $ship->mobile = $request->mobile;
             $ship->city = $request->city;
-            $ship->state = $request->state;
+            $ship->state = $request->billing_state;
             $ship->zip = $request->zip;
             $ship->shipping_address = $request->shipping_address;
             $ship->shipping_address_2 = $request->shipping_address_2;
