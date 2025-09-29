@@ -16,6 +16,7 @@
    <!-- <link rel="stylesheet" href="{{url('/')}}/assets/dist/css/easyzoom.css" /> -->
    <div class="free">
       <!-- breadcrumb-area -->
+      {{--
       <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
             <div class="row align-items-center">
@@ -27,10 +28,11 @@
             </div>
          </div>
       </section>
+      --}}
       <!-- breadcrumb-area-end -->
 
       <!-- product-area-start -->
-      <section class="product-area pt-80 pb-25">
+      <section class="product-area pt-90 pb-25">
          <div class="container">
             <div class="row">
                <div class="col-sm-12 col-lg-6 col-md-12">
@@ -98,7 +100,7 @@
                <div class="col-sm-12 col-lg-6 col-md-12">
                   <div class="tpproduct-details__content">
 
-                     
+
                      <div class="tpproduct-details__tag-area d-flex align-items-center mb-5">
                         <span class="tpproduct-details__tag">{{$product->category->category_name}}</span>
                         <div class="tpproduct-details__rating">
@@ -120,29 +122,35 @@
                         
                      </div>
 
+                     <input type="hidden" id="product_id" value="{{$product->id}}">
                      @if(!empty($pro_unit))
                      <div style="margin-bottom:30px;">
+                        <input type="hidden" id="cart-weight">
                         @foreach($pro_values as $key=>$val)
-                        <span class="unit tpproduct-details__stock" data-unitprice="{{$val}}">{{ $units[$key] }}</span>
+                        <span data-weight="{{$key}}" class="unit tpproduct-details__stock" data-unitprice="{{$val}}">{{ $units[$key] }}</span>
                         @endforeach
                      </div>
                      @endif
 
                      <div class="tpproduct-details__price mb-30">
+                        <div class="tpproduct-details__quantity" style="padding:3px 8px 3px 8px">
+                           <span style="font-size:12px;color:#333" class="cart-minus"><i class="far fa-minus"></i></span>
+                           <input id="cart-qty" class="tp-cart-input" type="text" value="1">
+                           <span style="font-size:12px;color:#333" class="cart-plus"><i class="far fa-plus"></i></span>
+                        </div>
+
                         <!-- <del>$9.35</del> -->
-                        <span id="loka" style="color:#14A44D;">{{$product->product_value}}</span><span style="color:#14A44D;font-size:18px;">৳</span>
+                        <span id="loka" style="color:#14A44D;">{{$product->product_value}}/-</span><span style="color:#14A44D;font-size:18px;">৳</span>
+                        <input type="hidden" id="cart-val" value="{{$product->product_value}}">
                      </div>
-                     {{--
-                     <div class="tpproduct-details__pera" style="max-width: 90%;">
+
+
+                     {{--<div class="tpproduct-details__pera" style="max-width: 90%;">
                         <p>{!!$product->description!!}</p>
-                     </div>
-                     --}}
+                     </div>--}}
+
                      <div class="tpproduct-details__count d-flex align-items-center flex-wrap mb-25">
-                        <!-- <div class="tpproduct-details__quantity">
-                           <span class="cart-minus"><i class="far fa-minus"></i></span>
-                           <input class="tp-cart-input" type="text" value="1">
-                           <span class="cart-plus"><i class="far fa-plus"></i></span>
-                        </div> -->
+
                         <div class="tpproduct-details__cart ml-0" style="width:100%">
                            
 
@@ -622,7 +630,17 @@
    });
    $("#add-to-cart").on("click", function() {
       var url_data = $(this).data('cart-url');
-      window.location.href = url_data;
+      //window.location.href = url_data;
+
+      let productId = $("#product_id").val();
+      let unitWeight = $("#cart-weight").val();
+      let cartQty = $("#cart-qty").val();
+      let cartPrice = $("#cart-val").val();
+      
+      console.log(productId);
+      console.log(unitWeight);
+      console.log(cartQty);
+      console.log(cartPrice);
    });
    $("#add-to-cart2").on("click", function() {
       var url_data = $(this).data('cart-url');
@@ -633,9 +651,42 @@
 
    $(".unit").on("click", function() {
       $(".unit").removeClass('unit-select');
-      var unVal = $(this).data('unitprice');
-      $("span#loka").text(unVal);
+
+      var unitPrice = $(this).data('unitprice');
+      var unitWeight = $(this).data('weight');
+      $("#cart-weight").val(unitWeight);
+      $("#cart-val").val(unitPrice);
+
+      $("span#loka").text(unitPrice);
       $(this).addClass('unit-select');
+   });
+
+
+   // add to cart
+   $(".wishlist").on("click", function(e) {
+      e.preventDefault();
+
+      let productId = $(this).data("product_id");
+
+      $.ajax({
+        url: '{{ route("wishlist.add") }}',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            product_id: productId,
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert(response.message);
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+            alert('Something went wrong!');
+        }
+      });
    });
 
 
