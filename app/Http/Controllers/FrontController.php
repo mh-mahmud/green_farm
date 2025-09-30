@@ -171,7 +171,7 @@ class FrontController extends Controller
         return view('front.html.products', compact('products', 'count', 'page'));
     }
 
-    public function add_to_cart($product_id) {
+    public function add_to_cart($product_id, $product_quantity=1) {
 
             // return Session::forget('car-clinic-visitor');
             // dd(Session::get('car-clinic-visitor'));
@@ -186,7 +186,7 @@ class FrontController extends Controller
         $user_id = Auth::user()==null ? null : Auth::user()->id;
         $product_data = Product::find($product_id);
         $session_id = Auth::user()==null ? $cookie_id : null;
-        $product_quantity = 1;
+        $product_quantity = $product_quantity;
         $discount = 0;
 
         // check if product is already in cart
@@ -214,6 +214,54 @@ class FrontController extends Controller
 
         }
         return redirect()->route('add-to-cart-details')->with('success', 'Product added to the cart successfully.');
+    }
+
+    public function add_to_cart_ajax(Request $request) {
+
+        if(Session::get('car-clinic-visitor')==null) {
+            $session_value = str_pad(mt_rand(1, 9999999999999), 10);
+            Session::put('car-clinic-visitor', $session_value);
+        }
+
+        $cookie_id = Session::get('car-clinic-visitor');
+        $product_id = $request->productId;
+        $user_id = Auth::user()==null ? null : Auth::user()->id;
+        $product_data = Product::find($product_id);
+        $session_id = Auth::user()==null ? $cookie_id : null;
+        $product_quantity = $request->cartQty;
+        $discount = 0;
+
+        // check if product is already in cart
+        $chk_cart = !empty(Auth::user()) ? Cart::where('user_id', $user_id)->where('product_id', $product_id)->first() : Cart::where('session_id', $session_id)->where('product_id', $product_id)->first();
+
+        if(!empty($chk_cart)) {
+            $chk_cart->quantity += $request->cartQty;
+            $chk_cart->total_price = $chk_cart->quantity*$request->cartPrice;
+            $chk_cart->update();
+        }
+        else {
+
+            $cart = new Cart;
+            $cart->user_id = $user_id;
+            $cart->session_id = $session_id;
+            $cart->product_id = $product_id;
+            $cart->product_image = $product_data->img_path;
+            $cart->product_name = $product_data->name;
+            $cart->unit_price = $request->cartPrice;
+            $cart->unit_weight = $request->unitWeight;
+            $cart->quantity = $request->cartQty;
+            $cart->total_price = $request->cartQty*$request->cartPrice;
+            $cart->discount = $discount;
+            $cart->final_price = $cart->total_price - $discount;
+            $cart->save();
+
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Product added to cart successfully!',
+            'cart' => $cart
+        ]);
     }
 
     public function add_to_cart_modal(Request $request) {
@@ -259,10 +307,14 @@ class FrontController extends Controller
         return redirect()->route('add-to-cart-details')->with('success', 'Product added to the cart successfully.');
     }
 
-    public function direct_cash_on_delivery($product_id) {
-        $this->add_to_cart($product_id);
+    public function direct_cash_on_delivery($product_id, $product_quantity) {
+        $this->add_to_cart($product_id, $product_quantity);
         return redirect()->route('checkout');
+    }
 
+    public function prodetails_cash_on_delivery(Request $request) {
+        $this->add_to_cart($request->product_id, $request->quantity);
+        return redirect()->route('checkout');
     }
 
     public function add_to_cart_details() {
@@ -509,6 +561,7 @@ class FrontController extends Controller
                     'order_id' => $order->id,
                     'quantity' => $cart->quantity,
                     'unit_price' => $cart->unit_price,
+                    'unit_weight' => $cart->unit_weight,
                     'total' => $cart->total_price
                 ]);
             }

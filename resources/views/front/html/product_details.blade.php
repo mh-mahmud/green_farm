@@ -100,6 +100,7 @@
                <div class="col-sm-12 col-lg-6 col-md-12">
                   <div class="tpproduct-details__content">
 
+                     <div class="alert alert-success" role="alert" style="display:none"></div>
 
                      <div class="tpproduct-details__tag-area d-flex align-items-center mb-5">
                         <span class="tpproduct-details__tag">{{$product->category->category_name}}</span>
@@ -161,7 +162,12 @@
                            @else
                               <button style="background-color:#332D2D;width:100%" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart"><i class="fal fa-shopping-cart"></i> Add To Cart</button>
 
-                              <button style="background-color:#14A44D;width:100%;margin-top:20px" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart2"><i class="fal fa-shopping-cart"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+                              <form method="POST" action="{{ route('prodetails-cash-on-delivery') }}">
+                                 @csrf
+                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                 <input id="quantity-section-2" type="hidden" name="quantity" value="1">
+                                 <button style="background-color:#14A44D;width:100%;margin-top:20px" data-cart-url="{{ route('add-to-cart', $product->id) }}" id="add-to-cart2"><i class="fal fa-shopping-cart"></i> ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+                              </form>
                            @endif
 
 
@@ -641,10 +647,43 @@
       console.log(unitWeight);
       console.log(cartQty);
       console.log(cartPrice);
+
+      $.ajax({
+        url: '{{ route("ajax.add.cart") }}',
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            productId: productId,
+            unitWeight: unitWeight,
+            cartQty: cartQty,
+            cartPrice: cartPrice,
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+               $(".alert-success").show().text(response.message);
+               // $("#cartBox").addClass("tp-sidebar-opened");
+               setTimeout(function() {
+                  window.location.href = window.location.href;
+               }, 2000);
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function(xhr) {
+            console.error(xhr.responseText);
+            alert('Something went wrong!');
+        }
+      });
+
    });
    $("#add-to-cart2").on("click", function() {
       var url_data = $(this).data('cart-url');
       window.location.href = url_data;
+   });
+
+   // update cart count
+   $(".cart-plus, .cart-minus").on("click", function() {
+      $("#quantity-section-2").val($("#cart-qty").val());
    });
 
 

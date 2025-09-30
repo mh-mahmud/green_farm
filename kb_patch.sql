@@ -25,3 +25,6 @@ CREATE TABLE IF NOT EXISTS `unit_details` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ALTER TABLE `products` ADD `unit_wise_price` JSON NULL DEFAULT NULL AFTER `discount_price`;
+
+ALTER TABLE `carts` ADD `unit_weight` VARCHAR(255) NULL DEFAULT NULL AFTER `unit_price`;
+ALTER TABLE `order_details` ADD `unit_weight` VARCHAR(255) NULL DEFAULT NULL AFTER `unit_price`;

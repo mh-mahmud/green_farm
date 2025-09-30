@@ -77,8 +77,10 @@ Route::get('user-carts', [FrontController::class, 'user_cart'])->name('user-cart
 
 Route::get('add-to-cart/{product_id}', [FrontController::class, 'add_to_cart'])->name('add-to-cart');
 Route::get('direct-cash-on-delivery/{product_id}', [FrontController::class, 'direct_cash_on_delivery'])->name('direct-cash-on-delivery');
+Route::post('prodetails-cash-on-delivery', [FrontController::class, 'prodetails_cash_on_delivery'])->name('prodetails-cash-on-delivery');
 Route::post('add-to-cart-modal', [FrontController::class, 'add_to_cart_modal'])->name('add-to-cart-modal');
 Route::get('add-to-cart-details', [FrontController::class, 'add_to_cart_details'])->name('add-to-cart-details');
+Route::post('/add/ajax/cart', [FrontController::class, 'add_to_cart_ajax'])->name('ajax.add.cart');
 
 
 

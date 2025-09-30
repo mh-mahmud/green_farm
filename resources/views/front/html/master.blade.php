@@ -523,7 +523,7 @@ else {
    <!-- sidebar-menu-area-end -->
 
    <!-- header-cart-start -->
-   <div class="tpcartinfo tp-cart-info-area p-relative">
+   <div id="cartBox" class="tpcartinfo tp-cart-info-area p-relative">
       <button class="tpcart__close"><i class="fal fa-times" style="color:#FFF;"></i></button>
       <div class="tpcart">
          <h4 class="tpcart__title" style="background-color:#4FBB7A;color:#FFF;">Your Cart</h4>
