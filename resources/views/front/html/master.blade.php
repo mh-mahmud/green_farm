@@ -609,7 +609,7 @@ else {
    <script src="{{url('/')}}/assets/theme/assets/js/countdown.js"></script>
    <script src="{{url('/')}}/assets/theme/assets/js/ajax-form.js"></script>
    <script src="{{url('/')}}/assets/theme/assets/js/meanmenu.js"></script>
-   <script src="{{url('/')}}/assets/theme/assets/js/main.js"></script>
+   <script src="{{url('/')}}/assets/theme/assets/js/main.js?v=1.0.1"></script>
    @yield('custom_js')
 </body>
 </html>

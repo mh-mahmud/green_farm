@@ -1,7 +1,6 @@
 @extends('front.html.master')
 @section('content')
    <style type="text/css">
-
       .unit {
         cursor:pointer;
         color:#222;
@@ -11,7 +10,6 @@
       .unit-select {
          border:1px solid #333;
       }
-
    </style>
    <!-- <link rel="stylesheet" href="{{url('/')}}/assets/dist/css/easyzoom.css" /> -->
    <div class="free">

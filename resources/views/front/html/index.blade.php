@@ -1,7 +1,17 @@
 @extends('front.html.master')
 @section('content')
 
-<style>
+
+<style type="text/css">
+   .unit {
+     cursor:pointer;
+     color:#222;
+     border:1px solid #ddd;
+     margin-right:10px;
+   }
+   .unit-select {
+      border:1px solid #333;
+   }
    /* Modal Overlay */
    .modal {
      position: fixed;
@@ -200,10 +210,11 @@
       <section class="product-area pt-65 pb-40">
          <div class="container">
             <div class="row">
-               <div class="col-lg-4 col-md-6 col-12">
-                  <div class="tpsection mb-40">
+               <div class="col-lg-12 col-md-12 col-12">
+                  <div class="tpsection mb-40" style="text-align:center;">
                      <h4 class="tpsection__title">আমাদের পণ্য</h4>
                   </div>
+                  <!-- <h3 class="section-title section-title-center"><b aria-hidden="true"></b><span class="section-title-main" style="font-size:undefined%;">সকল পণ্য</span><b aria-hidden="true"></b></h3> -->
                </div>
                
             </div>
@@ -212,6 +223,18 @@
                   <div class="row row-cols-xxl-5 row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-2">
 
                      @foreach($products as $product)
+                     @php
+                        
+                        if(!empty($product->unit_wise_price)) {
+                           $pro_unit = json_decode($product->unit_wise_price, true);
+                           $pro_values = !empty($pro_unit) ? array_filter($pro_unit) : null;
+                           $pro_values = json_encode($pro_values);
+                        }
+                        else {
+                           $pro_values = null;
+                        }
+
+                     @endphp
                      <div class="col">
                         <div class="box tpproduct pb-15 mb-30" style="border: 1px solid #ddd;">
                            <div class="tpproduct__thumb p-relative">
@@ -252,6 +275,8 @@
                                     data-stock_status="{{$product->stock_status}}"
                                     data-href="{{ route('direct-cash-on-delivery', $product->id) }}"
                                     data-product-id-m="{{$product->id}}"
+                                    data-unitweight="{{ $pro_values }}"
+                                    data-unitdata="{{$units}}"
                                     
                                     data-flatsome-role-button="attached">Quick View</a>
 
@@ -498,36 +523,45 @@
       <!-- <span class="close-another">&times;</span> -->
       <div class="modal-body">
         
-        <!-- Left: Product Image -->
-        <div class="modal-image">
-          <img id="qvImage" src="" alt="Product Image">
-        </div>
+        <div class="row">
+           <div class="col-md-6">
+           <!-- Left: Product Image -->
+           <div class="modal-image">
+             <img id="qvImage" src="" alt="Product Image">
+           </div>
+           </div>
 
-        <!-- Right: Product Info -->
-        <div class="modal-info">
-          <h2 id="qvName"></h2>
-          <div class="is-divider small"></div>
-          <p class="modal-price" id="qvPrice"></p>
-          <p class="modal-desc" id="qvDescription"></p>
+           <div class="col-md-6">
+           <!-- Right: Product Info -->
+           <div class="modal-info">
+             <h2 id="qvName"></h2>
+             <div class="is-divider small"></div>
 
-          <div class="modal-actions">
-            <form method="POST" action="{{ route('add-to-cart-modal') }}">
-               @csrf
-               <input id="modal_product_id" type="hidden" name="modal_product_id" value="">
-               <input name="quantity" type="number" id="qvQty" value="1" min="1">
-               <button type="submit" id="addToCartBtn">🛒 Add to Cart</button>
+             <div id="weight-container" style="margin-bottom:20px"></div>
+
+             <p class="modal-price" id="qvPrice"></p>
+             <p class="modal-desc" id="qvDescription"></p>
+
+             <div class="modal-actions">
+               <form method="POST" action="{{ route('add-to-cart-modal') }}">
+                  @csrf
+                  <input id="modal_product_id" type="hidden" name="modal_product_id" value="">
+                  <input name="quantity" type="number" id="qvQty" value="1" min="1">
+                  <button type="submit" id="addToCartBtn">🛒 Add to Cart</button>
+               </form>
+             </div>
+
+            <form id="dcashondelivery" method="GET" action="">
+               <button style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
             </form>
-          </div>
 
-         <form id="dcashondelivery" method="GET" action="">
-            <button style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
-         </form>
-
-         <div class="product_meta">
-            <span class="sku_wrapper">Stock Status: <span id="stock-status"></span></span>
-            <span class="sku_wrapper">SKU: <span id="skuname"></span></span>
-            <span class="posted_in">Category: <span id="catname"></span></span>
-         </div>
+            <div class="product_meta">
+               <span class="sku_wrapper">Stock Status: <span id="stock-status"></span></span>
+               <span class="sku_wrapper">SKU: <span id="skuname"></span></span>
+               <span class="posted_in">Category: <span id="catname"></span></span>
+            </div>
+           </div>
+           </div>
         </div>
 
 
@@ -573,6 +607,23 @@
       $(".quick-view-btn").click(function(e) {
          e.preventDefault();
 
+         let unitWeights = $(this).data("unitweight"); // JSON already parsed by jQuery
+         let unitData    = $(this).data("unitdata");
+         let container = $("#weight-container");
+         container.empty();
+         container.append('<input type="hidden" id="cart-weight">');
+
+         $.each(unitWeights, function(key, price) {
+           if (unitData[key]) {
+               let span = `<span data-weight="${key}" 
+                                 class="unit tpproduct-details__stock" 
+                                 data-unitprice="${price}">
+                                 ${unitData[key]}
+                           </span>`;
+               container.append(span);
+           }
+         });
+
          $("#qvName").text($(this).data("name"));
          $("#qvPrice").text($(this).data("price"));
          $("#qvDescription").html($(this).data("description"));
@@ -588,6 +639,8 @@
          console.log($(this).data("category"));
          console.log($(this).data("sku"));
          $("#qvImage").attr("src", img_link);
+         unitWeights = null;
+         unitData = null;
          $("#quickViewModal").fadeIn();
       });
 

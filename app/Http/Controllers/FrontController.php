@@ -35,10 +35,14 @@ class FrontController extends Controller
 
         $sliders = Slider::where('status', 1)->get(['slider_title', 'slider_image']);
         $reviews = Review::where('status', 1)->get(['review_title', 'review_image']);
-        $products = Product::with('category')->where('status', 1)->inRandomOrder()->limit(30)->get();
+        $products = Product::with('category')->where('status', 1)->orderBy('product_serial', 'asc')->limit(30)->get();
+
+        $units = UnitDetail::pluck('unit_name', 'unit_code');
+        $units = json_encode($units);
+
         $top_sell = Product::where('status', 1)->orderBy('total_sell', 'desc')->limit(5)->get();
         $cats = Category::where('status', 1)->get();
-        return view('front.html.index', compact('brands', 'reviews', 'products', 'cats', 'sliders', 'top_sell', 'blogs'));
+        return view('front.html.index', compact('brands', 'reviews', 'products', 'cats', 'sliders', 'top_sell', 'blogs', 'units'));
     }
 
     public function blogs() {
@@ -307,7 +311,7 @@ class FrontController extends Controller
         return redirect()->route('add-to-cart-details')->with('success', 'Product added to the cart successfully.');
     }
 
-    public function direct_cash_on_delivery($product_id, $product_quantity) {
+    public function direct_cash_on_delivery($product_id, $product_quantity=1) {
         $this->add_to_cart($product_id, $product_quantity);
         return redirect()->route('checkout');
     }

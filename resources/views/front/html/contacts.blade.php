@@ -7,7 +7,7 @@
 @endphp
 
       <!-- breadcrumb-area -->
-      <section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
+      {{--<section class="breadcrumb__area pt-60 pb-60 tp-breadcrumb__bg" style="background-color:#FFE0B2;">
          <div class="container">
             <div class="row align-items-center">
                <div class="col-xl-12 col-lg-12 col-md-12 col-12">
@@ -17,7 +17,7 @@
                </div>
             </div>
          </div>
-      </section>
+      </section>--}}
       <!-- breadcrumb-area-end -->
           
       <!-- contact-area-start -->
