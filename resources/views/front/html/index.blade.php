@@ -537,6 +537,8 @@
              <h2 id="qvName"></h2>
              <div class="is-divider small"></div>
 
+
+             <div id="errmsg" style="display:none;color:#DC4C64;font-size:13px;">please, select a weight from the list</div>
              <div id="weight-container" style="margin-bottom:20px"></div>
 
              <p class="modal-price" id="qvPrice"></p>
@@ -546,6 +548,8 @@
                <form method="POST" action="{{ route('add-to-cart-modal') }}">
                   @csrf
                   <input id="modal_product_id" type="hidden" name="modal_product_id" value="">
+                  <input type="hidden" id="cart-weight" name="cart_weight">
+                  <input type="hidden" id="cart-val" name="cart_value">
                   <input name="quantity" type="number" id="qvQty" value="1" min="1">
                   <button type="submit" id="addToCartBtn">🛒 Add to Cart</button>
                </form>
@@ -607,11 +611,14 @@
       $(".quick-view-btn").click(function(e) {
          e.preventDefault();
 
-         let unitWeights = $(this).data("unitweight"); // JSON already parsed by jQuery
+         let unitWeights = $(this).data("unitweight");
          let unitData    = $(this).data("unitdata");
          let container = $("#weight-container");
          container.empty();
-         container.append('<input type="hidden" id="cart-weight">');
+         $("#cart-weight").val(null);
+         $("#cart-val").val(null);
+         $("#errmsg").hide();
+         // container.append('<input type="hidden" id="cart-weight">');
 
          $.each(unitWeights, function(key, price) {
            if (unitData[key]) {
@@ -655,6 +662,38 @@
          $("#quickViewModal").fadeOut();
        }
      });
+
+      $(document).on("click", ".unit", function() {
+         $("#errmsg").hide();
+         $(".unit").removeClass('unit-select');
+
+         var unitPrice = $(this).data('unitprice');
+         var unitWeight = $(this).data('weight');
+
+         console.log(unitPrice);
+         console.log(unitWeight);
+         $("#qvPrice").text("Price: "+unitPrice+" Tk");
+         $("#cart-weight").val(unitWeight);
+         $("#cart-val").val(unitPrice);
+
+         $("span#loka").text(unitPrice);
+         $(this).addClass('unit-select');
+      });
+
+      $("#addToCartBtn").on("click", function(e) {
+         $("#errmsg").hide();
+         let labib = $("#cart-weight").val();
+         if(!labib) {
+            alert("please, select a weight from list");
+            $("#errmsg").show();
+            return false;
+         }
+         console.log(labib);
+         console.log(bubu);
+
+      })
+
+
    });
 </script>
 @endsection

@@ -43,6 +43,7 @@
                                     <th class="product-thumbnail">Images</th>
                                     <th class="cart-product-name">Name</th>
                                     <th class="product-price">Unit Price</th>
+                                    <th class="product-price">Weight</th>
                                     <th class="product-quantity">Quantity</th>
                                     <th class="product-subtotal">Total</th>
                                     <th class="product-remove">Remove</th>
@@ -68,6 +69,9 @@
                                     <td class="product-price">
                                        <span class="unit-price" data-price="{{$cart->unit_price}}">Tk. {{ $cart->unit_price }}</span>
                                        <input type="hidden" name="unit_price[]" value="{{$cart->unit_price}}">
+                                    </td>
+                                    <td class="product-name">
+                                       {{ $cart->unit_weight }}
                                     </td>
                                     <td class="product-quantity">
                                           <span class="cart-minus">-</span>

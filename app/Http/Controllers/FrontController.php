@@ -289,7 +289,7 @@ class FrontController extends Controller
         // dd($chk_cart);
         if(!empty($chk_cart)) {
             $chk_cart->quantity += 1;
-            $chk_cart->total_price = $chk_cart->quantity*$product_data->product_value;
+            $chk_cart->total_price = $chk_cart->quantity*$request->cart_value;
             $chk_cart->update();
         }
         else {
@@ -300,9 +300,11 @@ class FrontController extends Controller
             $cart->product_id = $product_id;
             $cart->product_image = $product_data->img_path;
             $cart->product_name = $product_data->name;
-            $cart->unit_price = $product_data->product_value;
+            // $cart->unit_price = $product_data->product_value;
+            $cart->unit_price = $request->cart_value;
+            $cart->unit_weight = $request->cart_weight;
             $cart->quantity = $product_quantity;
-            $cart->total_price = $product_quantity*$product_data->product_value;
+            $cart->total_price = $product_quantity*$request->cart_value;
             $cart->discount = $discount;
             $cart->final_price = $cart->total_price - $discount;
             $cart->save();
