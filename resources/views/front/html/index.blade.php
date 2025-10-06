@@ -555,9 +555,20 @@
                </form>
              </div>
 
-            <form id="dcashondelivery" method="GET" action="">
-               <button style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+            <!-- <form id="dcashondelivery" method="GET" action="">
+               <button id="direct" style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+            </form> -->
+
+            <form method="POST" action="{{ route('prodetails-cash-on-delivery') }}">
+               @csrf
+               <input id="d-productid" type="hidden" name="product_id" value="">
+               <input id="unit-quantity" type="hidden" name="quantity" value="">
+               <input id="unit-weight" type="hidden" name="weight" value="">
+               <input id="unit-price" type="hidden" name="price" value="">
+               <button id="direct" style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
             </form>
+
+
 
             <div class="product_meta">
                <span class="sku_wrapper">Stock Status: <span id="stock-status"></span></span>
@@ -684,14 +695,34 @@
          $("#errmsg").hide();
          let labib = $("#cart-weight").val();
          if(!labib) {
-            alert("please, select a weight from list");
             $("#errmsg").show();
             return false;
          }
          console.log(labib);
          console.log(bubu);
 
-      })
+      });
+
+      $("#direct").on("click", function(e) {
+         //e.preventDefault();
+         $("#errmsg").hide();
+         let labib = $("#cart-weight").val();
+         let provalue = $("#cart-val").val();
+         let unitQuantity = $("#qvQty").val();
+         let productId = $("#modal_product_id").val();
+         if(!labib) {
+            $("#errmsg").show();
+            return false;
+         }
+         let action = $("#dcashondelivery").attr("action");
+         actionVal = action + "/" + labib + "/" + provalue+"/";
+         $("#dcashondelivery").attr("action", actionVal);
+
+         $("#d-productid").val(productId);
+         $("#unit-quantity").val(unitQuantity);
+         $("#unit-weight").val(labib);
+         $("#unit-price").val(provalue);
+      });
 
 
    });

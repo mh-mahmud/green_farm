@@ -175,7 +175,7 @@ class FrontController extends Controller
         return view('front.html.products', compact('products', 'count', 'page'));
     }
 
-    public function add_to_cart($product_id, $product_quantity=1) {
+    public function add_to_cart($product_id, $product_quantity=1, $unit_weight=null, $unit_price=null) {
 
             // return Session::forget('car-clinic-visitor');
             // dd(Session::get('car-clinic-visitor'));
@@ -195,10 +195,10 @@ class FrontController extends Controller
 
         // check if product is already in cart
         $chk_cart = !empty(Auth::user()) ? Cart::where('user_id', $user_id)->where('product_id', $product_id)->first() : Cart::where('session_id', $session_id)->where('product_id', $product_id)->first();
-        // dd($chk_cart);
+
         if(!empty($chk_cart)) {
-            $chk_cart->quantity += 1;
-            $chk_cart->total_price = $chk_cart->quantity*$product_data->product_value;
+            $chk_cart->quantity += $product_quantity;
+            $chk_cart->total_price = $chk_cart->quantity*$unit_price;
             $chk_cart->update();
         }
         else {
@@ -209,9 +209,11 @@ class FrontController extends Controller
             $cart->product_id = $product_id;
             $cart->product_image = $product_data->img_path;
             $cart->product_name = $product_data->name;
-            $cart->unit_price = $product_data->product_value;
+            $cart->unit_price = !empty($unit_price) ? $unit_price : $product_data->product_value;
+            $cart->unit_weight = $unit_weight;
             $cart->quantity = $product_quantity;
-            $cart->total_price = $product_quantity*$product_data->product_value;
+            // $cart->total_price = $product_quantity*$product_data->product_value;
+            $cart->total_price = $product_quantity*$cart->unit_price;
             $cart->discount = $discount;
             $cart->final_price = $cart->total_price - $discount;
             $cart->save();
@@ -319,7 +321,8 @@ class FrontController extends Controller
     }
 
     public function prodetails_cash_on_delivery(Request $request) {
-        $this->add_to_cart($request->product_id, $request->quantity);
+        // dd($request->all());
+        $this->add_to_cart($request->product_id, $request->quantity, $request->weight, $request->price);
         return redirect()->route('checkout');
     }
 

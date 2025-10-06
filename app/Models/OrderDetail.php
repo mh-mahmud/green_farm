@@ -17,6 +17,7 @@ class OrderDetail extends Model
         'quantity',
         'unit_price',
         'total',
+        'unit_weight',
         'delivery_status',
         'order_status'
     ];
