@@ -71,7 +71,7 @@
                                        <input type="hidden" name="unit_price[]" value="{{$cart->unit_price}}">
                                     </td>
                                     <td class="product-name">
-                                       {{ $cart->unit_weight }}
+                                       {{ @$units[$cart->unit_weight] }}
                                     </td>
                                     <td class="product-quantity">
                                           <span class="cart-minus">-</span>

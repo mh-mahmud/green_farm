@@ -337,8 +337,8 @@ class FrontController extends Controller
             $user_id = Auth::user()->id;
             $carts = Cart::where('user_id', $user_id)->get();
         }
-
-        return view('front.html.add_to_cart', compact('carts'));
+        $units = UnitDetail::pluck('unit_name', 'unit_code');
+        return view('front.html.add_to_cart', compact('carts', 'units'));
     }
 
     public function setCookie()
