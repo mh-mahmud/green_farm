@@ -298,6 +298,16 @@
                             </div>
                             --}}
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-bolder text-dark" for="textarea">Top Header Messages</label>
+                                    <textarea class="form-control form-control-sm  form-control-solid" name="top_header_message" rows="3">{{ $data->top_header_message }}</textarea>
+                                    @if ($errors->has('top_header_message'))
+                                        <span class="text-danger">{{ $errors->first('top_header_message') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
 
                            <div class="col-md-6">
                                 <div class="form-group">

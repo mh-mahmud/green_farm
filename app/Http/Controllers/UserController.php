@@ -386,6 +386,7 @@ class UserController extends Controller
         $settings->charge_outside_dhaka = $request->charge_outside_dhaka;
         $settings->about_us = $request->about_us;
         $settings->contact_address = $request->contact_address;
+        $settings->top_header_message = $request->top_header_message;
         $settings->return_policy = $request->return_policy;
         $settings->refund_policy = $request->refund_policy;
         $settings->terms_and_conditions = $request->terms_and_conditions;
