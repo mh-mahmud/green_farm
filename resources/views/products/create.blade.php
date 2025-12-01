@@ -311,6 +311,36 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <div class="fv-row mb-3">
+                                        <label class="form-label fw-bolder text-dark">Youtube URL</label>
+                                        <input class="form-control form-control-sm form-control-solid" type="text" name="youtube_url" autocomplete="off" value="{{ old('youtube_url') }}" />
+                                        @if ($errors->has('youtube_url'))
+                                            <span class="text-danger">{{ $errors->first('youtube_url') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="fv-row mb-3">
+                                        <label class="form-label fw-bolder text-dark">Delivery Charge (Dhaka)</label>
+                                        <input class="form-control form-control-sm form-control-solid" type="text" name="delivery_charge_inside_dhaka" autocomplete="off" value="{{ old('delivery_charge_inside_dhaka') }}" />
+                                        @if ($errors->has('delivery_charge_inside_dhaka'))
+                                            <span class="text-danger">{{ $errors->first('delivery_charge_inside_dhaka') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="fv-row mb-3">
+                                        <label class="form-label fw-bolder text-dark">Delivery Charge (Others)</label>
+                                        <input class="form-control form-control-sm form-control-solid" type="text" name="delivery_charge_outside_dhaka" autocomplete="off" value="{{ old('delivery_charge_outside_dhaka') }}" />
+                                        @if ($errors->has('delivery_charge_outside_dhaka'))
+                                            <span class="text-danger">{{ $errors->first('delivery_charge_outside_dhaka') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="col-md-3"></div>
 
                                 <div class="col-md-4" style="border:1px solid #aaa;margin-bottom:30px;margin-top:30px;">

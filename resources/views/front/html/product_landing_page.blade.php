@@ -6,7 +6,7 @@
 @php
     $delivery_charge = $product->delivery_charge;
    // $init_total = \App\Helpers\Helper::settings()->charge_inside_dhaka + $product->product_value;
-   $init_total = $delivery_charge + $product->product_value;
+   $init_total = $product->delivery_charge_inside_dhaka + $product->product_value;
 @endphp
 
 
@@ -135,11 +135,11 @@
                                  <label for="phone" style="font-weight:bold;font-size:19px;padding-bottom:10px;">Shipping <span style="color:red" class="required" aria-hidden="true">*</span></label>
 
                                  <div class="radio" style="padding-bottom:5px;border-bottom:1px solid #bbb;border-top:1px solid #ccc;maegin-top:10px;">
-                                   <label><input type="radio" data-type="inside_dhaka" name="optradio" value="{{$delivery_charge}}" checked> Inside Dhaka: {{$delivery_charge}} ৳</label>
+                                   <label><input type="radio" data-type="inside_dhaka" name="optradio" value="{{$product->delivery_charge_inside_dhaka}}" checked> Inside Dhaka: {{$product->delivery_charge_inside_dhaka}} ৳</label>
                                  </div>
 
                                  <div class="radio" style="padding-bottom:5px;border-bottom:1px solid #bbb !important">
-                                   <label><input type="radio" data-type="outside_dhaka" value="{{$delivery_charge}}" name="optradio"> Outside Dhaka: {{$delivery_charge}} ৳</label>
+                                   <label><input type="radio" data-type="outside_dhaka" value="{{$product->delivery_charge_outside_dhaka}}" name="optradio"> Outside Dhaka: {{$product->delivery_charge_outside_dhaka}} ৳</label>
                                  </div>
                                  <input type="hidden" name="delivery_location" id="delivery_location" value="inside_dhaka">
                               </div><br>
@@ -193,6 +193,14 @@
                                            </div>
                                        </div>
 
+                                       <!-- <div class="wcf-qty-row wcf-qty-row-157258"> -->
+                                        @if(!empty($product->description))
+                                        <div class="description">
+                                           <h3 id="your_products_heading"> Product Description </h3>
+                                           <div style="background-color:#fff;padding:25px;">{!! $product->description !!}</div>
+                                        </div>
+                                        @endif
+                                       <!-- </div> -->
 
 
 
@@ -206,7 +214,7 @@
                                           <h2>Your total order</h2>
                                           <ul class="mb-20">
                                              <li style="border:1px solid #ddd">Subtotal <span>Tk. <span class="product-total">{{ $product->product_value }}</span></span></li>
-                                             <li style="border:1px solid #ddd">Delivery Charge <span>Tk. <span class="delivery-total">{{ $delivery_charge }}</span></span></li>
+                                             <li style="border:1px solid #ddd">Delivery Charge <span>Tk. <span class="delivery-total">{{ $product->delivery_charge_inside_dhaka }}</span></span></li>
                                              <li style="border:1px solid #ddd;font-weight:bold">Total <span>Tk. <span class="cart-total">{{ @$init_total }}/-</span></span></li>
                                           </ul>
                                          
@@ -293,9 +301,15 @@
                             data-widget_type="video.default">
                                 <div class="elementor-widget-container">
                                     <div class="elementor-wrapper elementor-open-inline">
-                                        <iframe class="elementor-video" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Green Farm Mango Food"
+
+                                        <!-- <iframe class="elementor-video" frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Green Farm Mango Food"
                                         width="640" height="360" src="https://www.youtube.com/embed/1s75_ZI9IO0?controls=1&amp;rel=0&amp;playsinline=0&amp;cc_load_policy=0&amp;autoplay=1&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fgreenfarm.com&amp;widgetid=1&amp;forigin=https%3A%2F%2Fgreenfarm.com.bd.com%2Fstep%2Fhoney-combo%2F%3Futm_medium%3Dpaid%26utm_source%3Dfb%26utm_id%3D120221651767020660%26utm_content%3D120221651767060660%26utm_term%3D120221651766990660%26utm_campaign%3D120221651767020660%23orders&amp;aoriginsup=1&amp;vf=1"
-                                        id="widget2"></iframe>
+                                        id="widget2"></iframe> -->
+
+
+                                        {!! $product->youtube_url !!}
+
+                                        
                                     </div>
                                 </div>
                             </div>

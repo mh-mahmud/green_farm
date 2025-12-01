@@ -28,3 +28,6 @@ ALTER TABLE `products` ADD `unit_wise_price` JSON NULL DEFAULT NULL AFTER `disco
 
 ALTER TABLE `carts` ADD `unit_weight` VARCHAR(255) NULL DEFAULT NULL AFTER `unit_price`;
 ALTER TABLE `order_details` ADD `unit_weight` VARCHAR(255) NULL DEFAULT NULL AFTER `unit_price`;
+
+ALTER TABLE `products` ADD `youtube_url` TEXT NULL DEFAULT NULL AFTER `status`;
+ALTER TABLE `products` ADD `delivery_charge_inside_dhaka` DECIMAL(10,2) NULL DEFAULT NULL AFTER `youtube_url`, ADD `delivery_charge_outside_dhaka` DECIMAL(10,2) NULL DEFAULT NULL AFTER `delivery_charge_inside_dhaka`;

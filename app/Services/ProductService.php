@@ -150,7 +150,9 @@ class ProductService
                 $dataObj->img_path_3            = $fileNameToStore_3;
                 $dataObj->stock_status          = $data['stock_status'];
                 $dataObj->stock_quantity        = $data['stock_quantity'];
-                //$dataObj->max_purchase_limit    = $data['max_purchase_limit'];
+                $dataObj->youtube_url           = $data['youtube_url'];
+                $dataObj->delivery_charge_inside_dhaka = $data['delivery_charge_inside_dhaka'];
+                $dataObj->delivery_charge_outside_dhaka = $data['delivery_charge_outside_dhaka'];
                 $dataObj->max_purchase_limit    = 10;
                 $dataObj->status                = $data['status'];
                 $dataObj->created_by            = Auth::id();
