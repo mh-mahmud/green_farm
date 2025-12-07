@@ -351,35 +351,66 @@
                                 </div>
                             </div>
 
-                                <div class="col-md-3"></div>
-
-                                <div class="col-md-4" style="border:1px solid #aaa;margin-bottom:30px;margin-top:30px;">
-                                    <div class="form-group">
-                                        <label style="border-bottom:1px solid #aaa;margin-top:30px;" class="form-label fw-bolder text-dark" for="textarea">Unit wise Price<span class="text-danger">*</span></label>
-                                        <table class="table table-sm table-condensed table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
-                                            <thead>
-                                            <tr>
-                                                <th>Unit Name</th>
-                                                <th>Unit Price</th>
-                                            </tr>
-                                            </thead>
-
-                                            <tbody>
-                                            @foreach($units as $key => $val)
-                                            <tr>
-                                                <td>{{ $val }}</td>
-                                                <td>
-                                                <input class="form-control form-control-sm form-control-solid" type="number" name="unit_price[{{$key}}]" autocomplete="off" value="{{ isset($unit_values[$key]) ? $unit_values[$key] : null }}" />
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                        @if ($errors->has('description'))
-                                            <span class="text-danger">{{ $errors->first('description') }}</span>
-                                        @endif
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Youtube URL</label>
+                                    <input class="form-control form-control-sm form-control-solid" type="text" name="youtube_url" autocomplete="off" value="{{ $product->youtube_url }}" />
+                                    @if ($errors->has('youtube_url'))
+                                        <span class="text-danger">{{ $errors->first('youtube_url') }}</span>
+                                    @endif
                                 </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Delivery Charge (Dhaka)</label>
+                                    <input class="form-control form-control-sm form-control-solid" type="text" name="delivery_charge_inside_dhaka" autocomplete="off" value="{{ $product->delivery_charge_inside_dhaka }}" />
+                                    @if ($errors->has('delivery_charge_inside_dhaka'))
+                                        <span class="text-danger">{{ $errors->first('delivery_charge_inside_dhaka') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="fv-row mb-3">
+                                    <label class="form-label fw-bolder text-dark">Delivery Charge (Others)</label>
+                                    <input class="form-control form-control-sm form-control-solid" type="text" name="delivery_charge_outside_dhaka" autocomplete="off" value="{{ $product->delivery_charge_outside_dhaka }}" />
+                                    @if ($errors->has('delivery_charge_outside_dhaka'))
+                                        <span class="text-danger">{{ $errors->first('delivery_charge_outside_dhaka') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3"></div>
+
+                            <div class="col-md-4" style="border:1px solid #aaa;margin-bottom:30px;margin-top:30px;">
+                                <div class="form-group">
+                                    <label style="border-bottom:1px solid #aaa;margin-top:30px;" class="form-label fw-bolder text-dark" for="textarea">Unit wise Price<span class="text-danger">*</span></label>
+                                    <table class="table table-sm table-condensed table-row-bordered table-row-gray-100 align-middle gs-0 gy-3">
+                                        <thead>
+                                        <tr>
+                                            <th>Unit Name</th>
+                                            <th>Unit Price</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        @foreach($units as $key => $val)
+                                        <tr>
+                                            <td>{{ $val }}</td>
+                                            <td>
+                                            <input class="form-control form-control-sm form-control-solid" type="number" name="unit_price[{{$key}}]" autocomplete="off" value="{{ isset($unit_values[$key]) ? $unit_values[$key] : null }}" />
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                    @if ($errors->has('description'))
+                                        <span class="text-danger">{{ $errors->first('description') }}</span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="row">
                             <div class="col-md-6">
