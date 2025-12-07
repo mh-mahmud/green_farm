@@ -90,4 +90,69 @@ class ProductController extends Controller {
         }
     }
 
+    public function landing_productList(Request $request)
+    {
+        $products = $this->productService->landing_productList($request);
+        return view('products.landing-product-list', compact('products'));
+    }
+
+    public function landing_productCreate()
+    {
+        $categories = Category::where('status', 1)->get(['id', 'category_name']);
+        $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
+        $units = UnitDetail::pluck('unit_name', 'unit_code');
+        return view('products.landing-create', compact('categories', 'brands', 'units'));
+    }
+
+    public function landing_productStore(Request $request)
+    {
+        $result = $this->productService->landing_productStore($request);
+        if($result->status == 201){
+            return redirect()->route('landing-product-list')->with('success', 'Landing page created successfully.');
+        }else{
+            session()->flash('error', 'Can not Add!');
+        }
+    }
+
+    public function landing_productShow($id)
+    {
+        $product = $this->productService->getProductById($id);
+        return view('products.landing-product-show', compact('product'));
+    }
+
+    public function landing_productEdit($id)
+    {
+        $categories = Category::where('status', 1)->get(['id', 'category_name']);
+        $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
+        $units = UnitDetail::pluck('unit_name', 'unit_code');
+        $product = $this->productService->landing_getProductById($id);
+        $unit_values = json_decode($product->unit_wise_price, true);
+
+        return view('products.landing-edit', compact('product', 'categories', 'brands', 'units', 'unit_values'));
+    }
+
+    public function landing_productUpdate(Request $request, $id)
+    {
+        $result = $this->productService->landing_productUpdate($request, $id);
+        if($result->status == 208){
+            return redirect()->route('landing-product-list')->with('success', 'Page updated successfully.');
+
+        }else{
+            session()->flash('error', 'Can not Update!');
+        }
+
+    }
+
+
+    public function landing_productDelete($id)
+    {
+        $result = $this->productService->productDelete($id);
+        if($result->status == 200){
+            return redirect()->route('landing-product-list')->with('success', 'Landing page deleted successfully.');
+
+        }else{
+            session()->flash('error', 'Can not Delete !');
+        }
+    }
+
 }

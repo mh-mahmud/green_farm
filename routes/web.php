@@ -224,6 +224,16 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::put('product-update-pro/{id}', [ProductController::class, 'productUpdate'])->name('product-update-pro');
 	// Product routes end
 
+	// product landing page
+	Route::get('landing-product-list', [ProductController::class, 'landing_productList'])->name('landing-product-list')->middleware(['check-permission']);
+	Route::get('add-landing-product', [ProductController::class, 'landing_productCreate'])->name('add-landing-product')->middleware(['check-permission']);
+	Route::post('add-landing-product-pro', [ProductController::class, 'landing_productStore'])->name('add-landing-product-pro');
+	Route::delete('landing-product-delete/{id?}', [ProductController::class, 'landing_productDelete'])->name('landing-product-delete')->middleware(['check-permission']);
+	Route::get('landing-product-show/{id?}', [ProductController::class, 'landing_productShow'])->name('landing-product-show')->middleware(['check-permission']);
+	Route::get('landing-product-edit/{id?}', [ProductController::class, 'landing_productEdit'])->name('landing-product-edit')->middleware(['check-permission']);
+	Route::put('landing-product-update-pro/{id}', [ProductController::class, 'landing_productUpdate'])->name('landing-product-update-pro');
+	// product landing end
+
 
 
 
