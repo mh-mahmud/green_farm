@@ -125,7 +125,7 @@ class ProductController extends Controller {
         $categories = Category::where('status', 1)->get(['id', 'category_name']);
         $brands = Brand::where('status', 1)->get(['id', 'brand_name']);
         $units = UnitDetail::pluck('unit_name', 'unit_code');
-        $product = $this->productService->landing_getProductById($id);
+        $product = $this->productService->getProductById($id);
         $unit_values = json_decode($product->unit_wise_price, true);
 
         return view('products.landing-edit', compact('product', 'categories', 'brands', 'units', 'unit_values'));

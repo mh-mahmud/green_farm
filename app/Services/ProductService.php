@@ -427,8 +427,8 @@ class ProductService
                 $dataObj->product_code          = $data['product_code'];
                 $dataObj->category_id           = $data['category_id'];
                 $dataObj->brand_id              = $data['brand_id'];
-                $dataObj->product_serial        = $data['product_serial'];
-                if($data['product_type']=="Landing Page") {
+                $dataObj->product_serial        = 1;
+                if($data['product_type']=="landing_page") {
                     $dataObj->product_type = "landing_page";
                     $dataObj->product_sell_type = "landing_page";
                 }
@@ -564,7 +564,7 @@ class ProductService
                 $dataObj->product_serial        = $data['product_serial'];
                 $dataObj->category_id           = $data['category_id'];
                 $dataObj->brand_id              = $data['brand_id'];
-                if($data['product_type']=="Landing Page") {
+                if($data['product_type']=="landing_page") {
                     $dataObj->product_type = "landing_page";
                     $dataObj->product_sell_type = "landing_page";
                 }

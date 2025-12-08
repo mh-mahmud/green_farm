@@ -14,7 +14,7 @@
                              data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                              class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                             <!--begin::Title-->
-                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Products
+                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Landing Page
                                 <!--begin::Separator-->
                                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                                 <!--end::Separator-->
@@ -27,7 +27,7 @@
                         <!--begin::Actions-->
                         <div class="d-flex align-items-center py-1">
 
-                            <a href="{{ route('add-product') }}" class="btn btn-sm btn-success" id="kt_toolbar_primary_button">Create Product</a>
+                            <a href="{{ route('add-landing-product') }}" class="btn btn-sm btn-success" id="kt_toolbar_primary_button">Create Landing Page</a>
 
                             <!--end::Button-->
                         </div>
@@ -119,10 +119,7 @@
 						    <th class="ps-4 rounded-start min-w-40px">SL</th>
 							<th class="min-w-110px">Product Name</th>
 							<th class="min-w-110px">Category Name</th>
-							{{--<th class="min-w-110px">Brand</th>--}}
-							<th class="min-w-110px">Code</th>
-							<th class="min-w-110px">Serial</th>
-							<th class="min-w-110px">Type</th>
+							<th class="min-w-110px">Page URL</th>
 							<th class="min-w-110px">Price</th>
 							<th class="min-w-110px">Status</th>
 							<th class="min-w-100px text-end-new">Actions</th>
@@ -131,14 +128,15 @@
 
 						<tbody>
 						@foreach ($products as $product)
+						@php
+							$product_name = str_replace(" ", "-", $product->name);
+							$url_link = url('/') . '/products/'.$product->id . '/landing-page/'. $product_name;
+						@endphp
 						<tr>
 							<td class="ps-5 text-dark fs-6">{{($products->currentPage() - 1) * $products->perPage() + $loop->iteration}}</td>
 							<td class="text-dark fs-6">{{ $product->name }}</td>
 							<td class="text-dark fs-6">{{ @$product->category->category_name }}</td>
-							{{--<td class="text-dark fs-6">{{ @$product->brand->brand_name }}</td>--}}
-							<td class="text-dark fs-6">{{ $product->product_code }}</td>
-							<td class="text-dark fs-6">{{ $product->product_serial }}</td>
-							<td class="text-dark fs-6">{{ $product->product_type }}</td>
+							<td class="text-dark fs-6"><span style="background-color:#eee;padding:5px;border-radius:5px">{{ $url_link }}</span></td>
 							<td class="text-dark fs-6">{{ $product->product_value }}</td>
 		                    <td>
 								@if ($product->status == 1)
@@ -150,7 +148,7 @@
 							<td>
 								<div
                                     class="d-inline-flex justify-content-end gap-1 w-100 border-bottom-0">
-									<a href="{{ route('product-show', $product->id) }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+									<a href="{{ route('landing-product-show', $product->id) }}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
 
 										<span class="svg-icon svg-icon-3">
 											<svg xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +163,7 @@
 										</span>
 
 									</a>
-									<a href="{{ route('product-edit', $product->id) }}"
+									<a href="{{ route('landing-product-edit', $product->id) }}"
 									class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
 										<!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
 										<span class="svg-icon svg-icon-3">
@@ -181,7 +179,7 @@
 												</span>
 										<!--end::Svg Icon-->
 									</a>
-									<form action="{{ route('product-delete', $product->id) }}" method="POST" style="display: inline;">
+									<form action="{{ route('landing-product-delete', $product->id) }}" method="POST" style="display: inline;">
 										@csrf
 										@method('DELETE')
 										<button type="submit" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"  onclick="return confirmDelete()">

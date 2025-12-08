@@ -16,12 +16,12 @@
                              data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                              class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                             <!--begin::Title-->
-                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Product Details
+                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Page Details
                                 <!--begin::Separator-->
                                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                                 <!--end::Separator-->
                                 <!--begin::Description-->
-                                <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Product Details</small>
+                                <small class="text-muted fs-7 fw-bold my-1 ms-1">Show Page Details</small>
                                 <!--end::Description--></h1>
                             <!--end::Title-->
                         </div>
@@ -29,7 +29,7 @@
                         <!--begin::Actions-->
                         <div class="d-flex align-items-center py-1">
 
-                            <a href="{{ route('product-list') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Product List</a>
+                            <a href="{{ route('landing-product-list') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Landing Page List</a>
                             <!--end::Button-->
                         </div>
                         <!--end::Actions-->
@@ -47,7 +47,7 @@
             <div class="card mt-4">
                 <div class="card-header bg-light bd-cyan">
                     <div class="card-title">
-                        <h2>Product Details</h2>
+                        <h2>Landing Page Details</h2>
                     </div>
                 </div>
                 <!--begin::Body-->
@@ -63,6 +63,19 @@
                                     <img alt="Logo" src="{{ asset('uploads/noimage.jpg') }}"/>
                                 @endif
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
+                        <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-250px w-xxl-150px">Youtube Video</span>
+                        <div class="me-7 mb-4">
+                            @if($product->youtube_url)
+                            <div class="position-relative" style="width:900px;height:600px;overflow: scroll;">
+                                {!! $product->youtube_url !!}
+                            </div>
+                            @else
+                                <p>No video found</p>
+                            @endif
                         </div>
                     </div>
 

@@ -13,12 +13,12 @@
                              data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                              class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                             <!--begin::Title-->
-                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Product
+                            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Landing Page
                                 <!--begin::Separator-->
                                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                                 <!--end::Separator-->
                                 <!--begin::Description-->
-                                <small class="text-muted fs-7 fw-bold my-1 ms-1">Fill up the Product</small>
+                                <small class="text-muted fs-7 fw-bold my-1 ms-1">Fill up the Landing Page</small>
                                 <!--end::Description--></h1>
                             <!--end::Title-->
                         </div>
@@ -26,7 +26,7 @@
                         <!--begin::Actions-->
                         <div class="d-flex align-items-center py-1">
 
-                            <a href="{{ route('product-list') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Product List</a>
+                            <a href="{{ route('landing-product-list') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Page List</a>
                             <!--end::Button-->
                         </div>
                         <!--end::Actions-->
@@ -45,7 +45,7 @@
                                 <div class="card-header bg-light bd-cyan">
                                     <!--begin::Card title-->
                                     <div class="card-title m-0">
-                                        <h3 class="fw-bolder m-0">Product Create</h3>
+                                        <h3 class="fw-bolder m-0">Create Landing Page</h3>
                                     </div>
                                     <!--end::Card title-->
                                 </div>
@@ -58,7 +58,7 @@
 
                         <!-- Start Form-->
 
-                        <form class="g-form w-100" action="{{ route('add-product-pro') }}"  method="POST" enctype="multipart/form-data">
+                        <form class="g-form w-100" action="{{ route('add-landing-product-pro') }}"  method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-4">
@@ -87,17 +87,6 @@
                                 <div class="col-md-4">
                                 <div class="fv-row mb-3">
                                     <!--begin::Label-->
-                                    <label class="form-label fw-bolder text-dark">Serial<span class="text-danger">*</span></label>
-                                    <input class="form-control form-control-sm form-control-solid" type="text" name="product_serial" autocomplete="off" value="{{ old('product_serial') }}" />
-                                    @if ($errors->has('product_serial'))
-                                        <span class="text-danger">{{ $errors->first('product_serial') }}</span>
-                                    @endif
-                                </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                <div class="fv-row mb-3">
-                                    <!--begin::Label-->
                                     <label class="form-label fw-bolder text-dark">Category<span class="text-danger">*</span></label>
                                     <select class="form-control form-control-sm form-control-solid" name="category_id" aria-label="Default select example">
                                         <option value=''>Select</option>
@@ -116,7 +105,6 @@
                                     <!--begin::Label-->
                                     <label class="form-label fw-bolder text-dark"><span class="text-danger">*</span>Brand Name</label>
                                     <select class="form-control form-control-sm form-control-solid" name="brand_id" aria-label="Default select example">
-                                        <option value=''>Select</option>
                                         @foreach ($brands as $key => $val)
                                             <option value="{{ $val->id }}" {{ old('brand_id') === (string)$val->id ? 'selected' : '' }}>{{ $val->brand_name }}</option>
                                         @endforeach
@@ -131,12 +119,8 @@
                                     <div class="fv-row mb-3">
                                         <!--begin::Label-->
                                         <label class="form-label fw-bolder text-dark">Type of Product<span class="text-danger">*</span></label>
-                                        <select class="form-control form-control-sm form-control-solid"
-                                            id="assigned_to" name="product_type" aria-label="Default select example">
-                                            <option value='' {{ old('product_type', '') === '' ? 'selected' : '' }}>Select</option>
-                                            @foreach (config('constants.PRODUCT_TYPE') as $key => $type)
-                                                <option value="{{$type}}" {{ $type == 'Physical' ? 'selected' : '' }}>{{$type}}</option>
-                                            @endforeach
+                                        <select class="form-control form-control-sm form-control-solid" name="product_type" aria-label="Default select example">
+                                            <option value="landing_page">Landing Page</option>
                                         </select>
                                         @if ($errors->has('product_type'))
                                             <span class="text-danger">{{ $errors->first('product_type') }}</span>
@@ -311,7 +295,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="fv-row mb-3">
                                         <label class="form-label fw-bolder text-dark">Youtube URL</label>
                                         <input class="form-control form-control-sm form-control-solid" type="text" name="youtube_url" autocomplete="off" value="{{ old('youtube_url') }}" />

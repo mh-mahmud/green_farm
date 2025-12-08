@@ -13,12 +13,12 @@
             data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
             class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
             <!--begin::Title-->
-            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Product Edit Forms
+            <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Landing Page Edit Forms
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start ms-3 mx-2"></span>
                 <!--end::Separator-->
                 <!--begin::Description-->
-                <small class="text-muted fs-7 fw-bold my-1 ms-1">Fill up the Product Edit form</small>
+                <small class="text-muted fs-7 fw-bold my-1 ms-1">Fill up the Landing Page Edit form</small>
                 <!--end::Description-->
             </h1>
             <!--end::Title-->
@@ -26,7 +26,7 @@
         <!--end::Page title-->
         <!--begin::Actions-->
         <div class="d-flex align-items-center py-1">
-            <a href="{{ route('product-list') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Product List</a>
+            <a href="{{ route('landing-product-list') }}" class="btn btn-sm btn-primary" id="kt_toolbar_primary_button">Landing Page List</a>
             <!--end::Button-->
         </div>
         <!--end::Actions-->
@@ -46,7 +46,7 @@
                 <div class="card-header bg-light bd-cyan">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bolder m-0">Product Edit</h3>
+                        <h3 class="fw-bolder m-0">Edit Landing Page</h3>
                     </div>
                     <!--end::Card title-->
                 </div>
@@ -56,7 +56,7 @@
 
                     <!-- Start Form-->
 
-                    <form class="g-form w-100" action="{{ route('product-update-pro', $product->id) }}" method="POST" enctype="multipart/form-data">
+                    <form class="g-form w-100" action="{{ route('landing-product-update-pro', $product->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="id" value="{{ $product->id }}">
@@ -131,10 +131,7 @@
                                     <label class="form-label fw-bolder text-dark">Type of Product<span class="text-danger">*</span></label>
                                     <select class="form-control form-control-sm form-control-solid"
                                         id="assigned_to" name="product_type" aria-label="Default select example">
-                                        <option value='' {{ $product->product_type === '' ? 'selected' : '' }}>Select</option>
-                                        @foreach (config('constants.PRODUCT_TYPE') as $key => $type)
-                                            <option value="{{ $type }}" {{ $product->product_type === (string)$type ? 'selected' : '' }}>{{ $type }}</option>
-                                        @endforeach
+                                        <option value="landing_page">Landing Page</option>
                                     </select>
                                     @if ($errors->has('product_type'))
                                         <span class="text-danger">{{ $errors->first('product_type') }}</span>
