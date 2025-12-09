@@ -656,10 +656,13 @@ class FrontController extends Controller
 
     public function product_landing_page(Request $request, $id) {
         $encode = base64_encode($id);
-
         $product = Product::findOrFail($id);
+        $units = UnitDetail::pluck('unit_name', 'unit_code');
+        $pro_unit = json_decode($product->unit_wise_price, true);
+        $pro_values = !empty($pro_unit) ? array_filter($pro_unit) : $product->product_value;
+
         $settings = Settings::first();
-        return view('front.html.product_landing_page', compact('product', 'settings'));        
+        return view('front.html.product_landing_page', compact('product', 'settings', 'pro_unit', 'units', 'pro_values'));        
     }
 
     public function landing_page_checkout(Request $request) {

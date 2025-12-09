@@ -25,7 +25,7 @@ class ProductService
 
         }*/
 
-        $sql = Product::with('category');
+        $sql = Product::with('category')->where('product_type', '!=', 'landing_page');
         $data = $request->all();
 
         if (!empty($data["search"])) {

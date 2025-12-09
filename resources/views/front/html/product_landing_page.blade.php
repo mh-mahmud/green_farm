@@ -3,6 +3,17 @@
 <link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/checkout-styles.css">
 <link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/frontend.min.css">
 <link rel="stylesheet" type="text/css" href="{{url('/')}}/assets/landing/checkout-template.css?ver=2.1.10">
+   <style type="text/css">
+      .unit {
+        cursor:pointer;
+        color:#222;
+        border:1px solid #ddd;
+        margin-right:10px;
+      }
+      .unit-select {
+         border:2px solid green !important;
+      }
+   </style>
 @php
     $delivery_charge = $product->delivery_charge;
    // $init_total = \App\Helpers\Helper::settings()->charge_inside_dhaka + $product->product_value;
@@ -163,13 +174,26 @@
                                                    <input type="checkbox" name="wcf-multiple-sel" value="157258" checked="true">
                                                </div> -->
 
-                                               <div class="wcf-item-image" style="border: 1px solid #ddd;width:400px"><img src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt=""></div>
+                                               <div class="wcf-item-image" style="border: 1px solid #ddd;width:800px"><img src="{{url('/')}}/uploads/products/{{$product->img_path}}" alt=""></div>
                                                <div class="wcf-item-content-options">
                                                    <div class="wcf-item-wrap">
                                                        <span class="wcf-display-title">{{$product->name}}</span>
                                                        <span class="wcf-display-title-quantity"><span class="dashicons dashicons-no-alt"></span>
                                                        {{--<span class="wcf-display-quantity">1</span></span>--}}
                                                    </div>
+
+
+                     <div id="errmsg" style="display:none;color:#DC4C64;font-size:13px;">please, select a weight from the list</div>
+                     <input type="hidden" id="product_id" value="{{$product->id}}">
+                     <input type="hidden" id="cart-val" value="{{$product->product_value}}">
+                     @if(!empty($pro_unit))
+                     <div style="margin-bottom:30px;">
+                        <input type="hidden" name="cart_weight" id="cart-weight">
+                        @foreach($pro_values as $key=>$val)
+                        <span style="color:#222;border:1px solid #bbb" data-weight="{{$key}}" class="unit tpproduct-details__stock" data-unitprice="{{$val}}">{{ $units[$key] }}</span>
+                        @endforeach
+                     </div>
+                     @endif
 
                                                    <div class="wcf-qty">
                                                        <div class="wcf-qty-selection-wrap">
@@ -186,7 +210,13 @@
                                                    <div class="wcf-price">
                                                       <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                       <input type="hidden" name="unit_price" id="unit-price" value="{{ $product->product_value }}">
-                                                       <div class="wcf-display-price wcf-field-label"><span class="woocommerce-Price-amount amount">{{ $product->product_value }}  &nbsp;<span class="woocommerce-Price-currencySymbol">৳&nbsp;</span></span>
+
+                                                       <div class="wcf-display-price wcf-field-label">
+                                                        <!-- <span class="woocommerce-Price-amount amount">{{ $product->product_value }}  &nbsp;<span class="woocommerce-Price-currencySymbol">৳&nbsp;</span>
+                                                        </span> -->
+
+                                                        <span id="loka" style="color:#14A44D;font-size:24px">{{ $product->product_value }}</span>
+                                                        <span style="color:#14A44D;font-size:16px;">৳</span>
                                                        </div>
                                                    </div>
                                                </div>
@@ -616,6 +646,14 @@
       $('.cat-menu__category .category-menu').css('display', 'none');
    });
    $("#add-to-cart").on("click", function() {
+
+      $("#errmsg").hide();
+      let labib = $("#cart-weight").val();
+      if(!labib) {
+         $("#errmsg").show();
+         return false;
+      }
+
       var url_data = $(this).data('cart-url');
       window.location.href = url_data;
    });
@@ -625,8 +663,30 @@
    });
 
    $(document).ready(function() {
+
+       $(".unit").on("click", function() {
+          $("#errmsg").hide();
+          $(".unit").removeClass('unit-select');
+
+          var unitPrice = $(this).data('unitprice');
+          var unitWeight = $(this).data('weight');
+          $("#cart-weight").val(unitWeight);
+          $("#cart-val").val(unitPrice);
+
+          $("span#loka").text(unitPrice);
+          $(this).addClass('unit-select');
+       });
+
      // Function to update total prices
       function updateCart() {
+
+        $("#errmsg").hide();
+        let labib = $("#cart-weight").val();
+        if(!labib) {
+            $("#errmsg").show();
+            return false;
+        }
+
          let cartTotal = 0;
          var delivery = $('input[name="optradio"]:checked').val();
          delivery = parseInt(delivery);
