@@ -31,3 +31,6 @@ ALTER TABLE `order_details` ADD `unit_weight` VARCHAR(255) NULL DEFAULT NULL AFT
 
 ALTER TABLE `products` ADD `youtube_url` TEXT NULL DEFAULT NULL AFTER `status`;
 ALTER TABLE `products` ADD `delivery_charge_inside_dhaka` DECIMAL(10,2) NULL DEFAULT NULL AFTER `youtube_url`, ADD `delivery_charge_outside_dhaka` DECIMAL(10,2) NULL DEFAULT NULL AFTER `delivery_charge_inside_dhaka`;
+
+-- 09-12-2025
+ALTER TABLE `landing_page_orders` ADD `unit_weight` CHAR(50) NULL DEFAULT NULL AFTER `unit_price`;

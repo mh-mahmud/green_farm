@@ -201,7 +201,7 @@
                                                            <span class="cart-minus">-</span>
 
                                                            <!-- <input autocomplete="off" type="number" value="1" step="1" min="1" name="wcf_qty_selection" class="wcf-qty-selection" placeholder="1" data-sale-limit="false" title=""> -->
-                                                           <input class="cart-input quantity" name="quantity" type="number" value="1"/>
+                                                           <input id="select-quantity" class="cart-input quantity" name="quantity" type="number" value="1"/>
 
                                                            <!-- <span class="wcf-qty-selection-btn wcf-qty-increment wcf-qty-change-icon" title="">+</span> -->
                                                            <span class="cart-plus">+</span>
@@ -212,9 +212,7 @@
                                                       <input type="hidden" name="unit_price" id="unit-price" value="{{ $product->product_value }}">
 
                                                        <div class="wcf-display-price wcf-field-label">
-                                                        <!-- <span class="woocommerce-Price-amount amount">{{ $product->product_value }}  &nbsp;<span class="woocommerce-Price-currencySymbol">৳&nbsp;</span>
-                                                        </span> -->
-
+                                                        
                                                         <span id="loka" style="color:#14A44D;font-size:24px">{{ $product->product_value }}</span>
                                                         <span style="color:#14A44D;font-size:16px;">৳</span>
                                                        </div>
@@ -668,13 +666,15 @@
           $("#errmsg").hide();
           $(".unit").removeClass('unit-select');
 
-          var unitPrice = $(this).data('unitprice');
+          var unitPriceVal = $(this).data('unitprice');
           var unitWeight = $(this).data('weight');
           $("#cart-weight").val(unitWeight);
-          $("#cart-val").val(unitPrice);
+          $("#cart-val").val(unitPriceVal);
+          $("#unit-price").val(unitPriceVal);
 
-          $("span#loka").text(unitPrice);
+          $("span#loka").text(unitPriceVal);
           $(this).addClass('unit-select');
+          updateCart();
        });
 
      // Function to update total prices
@@ -690,14 +690,16 @@
          let cartTotal = 0;
          var delivery = $('input[name="optradio"]:checked').val();
          delivery = parseInt(delivery);
+         console.log(delivery);
 
           // const unitPrice = parseFloat($(this).find('.unit-price').data('price'));
           const unitPrice = parseFloat($("#unit-price").val());
+          console.log(unitPrice);
 
-          const quantity = parseInt($('.quantity').val());
+          var lavlu = $("#select-quantity").val();
+          const quantity = parseInt(lavlu);
           const productTotal = unitPrice * quantity;
-          delivery = delivery * quantity;
-
+          delivery = delivery + quantity;
 
           // Add to cart total
           cartTotal += productTotal;

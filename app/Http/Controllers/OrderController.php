@@ -110,8 +110,8 @@ class OrderController extends Controller
     public function landing_order_index()
     {
         $orders = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
-            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
-            ->where('order_status', '!=', 'DELETED')    
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.delivery_charge as del_charge', 'landing_page_orders.*', 'products.*')
+            ->where('order_status', '!=', 'DELETED')
             ->orderBy('landing_page_orders.id', 'desc')
             ->paginate(config('constants.ROW_PER_PAGE'));
 
@@ -136,7 +136,7 @@ class OrderController extends Controller
         $searchTerm = trim($request->input('search'));
 
         $orders = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
-            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.delivery_charge as del_charge', 'landing_page_orders.*', 'products.*')
             ->where('order_status', '!=', 'DELETED')
             ->where(function($query) use ($searchTerm) {
                 $query->orWhere('landing_page_orders.full_name', 'LIKE', "%$searchTerm%")
@@ -153,7 +153,7 @@ class OrderController extends Controller
     public function landing_edit($id)
     {
         $order = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
-            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.delivery_charge as del_charge', 'landing_page_orders.*', 'products.*')
             ->where('landing_page_orders.id', $id)
             ->where('landing_page_orders.order_status', '!=', 'DELETED')
             ->orderBy('landing_page_orders.id', 'desc')
@@ -181,7 +181,7 @@ class OrderController extends Controller
     public function landing_order_show($id)
     {
         $order = LandingPageOrder::join('products', 'landing_page_orders.product_id', '=', 'products.id')
-            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.*', 'products.*')
+            ->select('landing_page_orders.id as lukaku', 'landing_page_orders.delivery_charge as del_charge', 'landing_page_orders.*', 'products.*')
             ->where('landing_page_orders.id', $id)
             ->where('landing_page_orders.order_status', '!=', 'DELETED')
             ->orderBy('landing_page_orders.id', 'desc')

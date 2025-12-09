@@ -672,7 +672,8 @@ class FrontController extends Controller
 
             // save to order table
             $total_price = $request->quantity * $request->unit_price;
-            $delivery_charge = $request->optradio * $request->quantity;
+            # $delivery_charge = $request->optradio * $request->quantity;
+            $delivery_charge = $request->optradio;
             $final_price = $total_price + $delivery_charge;
             $order = new LandingPageOrder();
             $order->product_id = $request->product_id;
@@ -683,6 +684,7 @@ class FrontController extends Controller
             $order->custom_order_id = $this->generateUniqueOrderId();
             $order->order_phone_number = $request->phone_number;
             $order->unit_price = $request->unit_price;
+            $order->unit_weight = $request->cart_weight;
             $order->quantity = $request->quantity;
             $order->total_price = $total_price;
             $order->discount = 0;
@@ -707,6 +709,8 @@ class FrontController extends Controller
 
             $phone = "88".$request->phone_number . "";
             $response = Helper::send_sms($phone, $messages);
+
+            // dd($response);
             $last_order = LandingPageOrder::findOrFail($order->id);
             $last_order->sms_response = $response;
             $last_order->save();

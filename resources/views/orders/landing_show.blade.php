@@ -113,12 +113,17 @@
 
                         <div class="col-md-6">
                         <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
-                            <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Delivery Charge</span><span>{{ $order->delivery_charge }}</span>
+                            <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Delivery Charge</span><span>{{ $order->del_charge }}</span>
                         </div></div>
 
                         <div class="col-md-6">
                         <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
                             <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Unit Price</span><span>{{ $order->unit_price }}</span>
+                        </div></div>
+
+                        <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-2 bg-light p-3 mb-1">
+                            <span class="fs-6 fw-bolder mb-1 text-gray-900 text-hover-primary w-lg-100px w-xxl-150px">Weight</span><span>{{ str_replace("_", " ", $order->unit_weight) }}</span>
                         </div></div>
 
                         <div class="col-md-6">
@@ -295,7 +300,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="6" class="text-end fw-bold">Delivery Charge</td>
-                                    <td>{{ $order->delivery_charge }}</td>
+                                    <td>{{ $order->del_charge }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="6" class="text-end fw-bold">Payable Amount</td>

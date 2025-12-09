@@ -229,6 +229,7 @@ use Carbon\Carbon;
                                     <th class="min-w-150px">Product Name</th>
                                     <th class="min-w-150px">Billing Address</th>
 
+                                    <th class="min-w-80px">Weight</th>
                                     <th class="min-w-80px">Price</th>
                                     <th class="min-w-50px">Qty</th>
                                     <th class="min-w-80px">Delivery</th>
@@ -254,9 +255,10 @@ use Carbon\Carbon;
                                     <td class="text-dark fs-6">{{ $order->name }}</td>
                                     <td class="text-dark fs-6">{{ $order->billing_address }}</td>
 
+                                    <td class="text-dark fs-6">{{ str_replace("_", " ", $order->unit_weight) }}</td>
                                     <td class="text-dark fs-6">{{ $order->unit_price }}</td>
                                     <td class="text-dark fs-6">{{ $order->quantity }}</td>
-                                    <td class="text-dark fs-6">{{ $order->delivery_charge }}</td>
+                                    <td class="text-dark fs-6">{{ $order->del_charge }}</td>
                                     <td class="text-dark fs-6">{{ $order->final_price }}</td>
 
                                     <td class="text-dark fs-6">{{ $order->order_status }}</td>
