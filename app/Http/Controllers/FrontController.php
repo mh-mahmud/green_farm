@@ -108,12 +108,15 @@ class FrontController extends Controller
     }
 
     public function product_details($id) {
+
         $product = Product::findOrFail($id);
         $units = UnitDetail::pluck('unit_name', 'unit_code');
         $pro_unit = json_decode($product->unit_wise_price, true);
         $pro_values = !empty($pro_unit) ? array_filter($pro_unit) : $product->product_value;
         $settings = Settings::first();
-        return view('front.html.product_details', compact('product', 'settings', 'pro_unit', 'units', 'pro_values'));
+        $sug_products = Product::where('status', 1)->where('product_serial', '<=', 10)->orderBy('created_at', 'asc')->limit(8)->get();
+
+        return view('front.html.product_details', compact('product', 'settings', 'pro_unit', 'units', 'pro_values', 'sug_products'));
     }
 
     public function contact_page() {
