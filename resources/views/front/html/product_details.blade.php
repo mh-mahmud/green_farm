@@ -368,7 +368,186 @@
       <!-- product-details-area-end -->
 
       <!-- related-product-area-start -->
-
+      <div class="related-product-area pt-65 pb-50 related-product-border">
+         <div class="container">
+            <div class="row align-items-center">
+               <div class="col-sm-6">
+                  <div class="tpsection mb-40">
+                     <h4 class="tpsection__title">Related Products</h4>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="tprelated__arrow d-flex align-items-center justify-content-end mb-40">
+                     <div class="tprelated__prv"><i class="far fa-long-arrow-left"></i></div>
+                     <div class="tprelated__nxt"><i class="far fa-long-arrow-right"></i></div>
+                  </div>
+               </div>
+            </div>
+            <div class="swiper-container related-product-active">
+               <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                     <div class="tpproduct pb-15 mb-30">
+                        <div class="tpproduct__thumb p-relative">
+                           <a href="shop-details-2.html">
+                              <img src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-1.jpg" alt="product-thumb">
+                              <img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-2.jpg" alt="">
+                           </a>
+                           <div class="tpproduct__thumb-action">
+                              <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                              <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
+                              <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>
+                           </div>
+                        </div>
+                        <div class="tpproduct__content">
+                           <h3 class="tpproduct__title"><a href="shop-details.html">Miko Wooden Bluetooth Speaker</a></h3>
+                           <div class="tpproduct__priceinfo p-relative">
+                              <div class="tpproduct__priceinfo-list">
+                                 <span>$31.00</span>
+                              </div>
+                              <div class="tpproduct__cart">
+                                 <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="tpproduct pb-15 mb-30">
+                        <div class="tpproduct__thumb p-relative">
+                           <a href="shop-details.html">
+                              <img src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-3.jpg" alt="product-thumb">
+                              <img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-4.jpg" alt="">
+                           </a>
+                           <div class="tpproduct__thumb-action">
+                              <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                              <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
+                              <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>
+                           </div>
+                        </div>
+                        <div class="tpproduct__content">
+                           <h3 class="tpproduct__title"><a href="shop-details-2.html">Gorgeous Wooden Gloves</a></h3>
+                           <div class="tpproduct__priceinfo p-relative">
+                              <div class="tpproduct__priceinfo-list">
+                                 <span>$31.00</span>
+                              </div>
+                              <div class="tpproduct__cart">
+                                 <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="tpproduct pb-15 mb-30">
+                        <div class="tpproduct__thumb p-relative">
+                           <a href="shop-details-2.html">
+                              <img src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-5.jpg" alt="product-thumb">
+                              <img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-6.jpg" alt="">
+                           </a>
+                           <div class="tpproduct__thumb-action">
+                              <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                              <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
+                              <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>
+                           </div>
+                        </div>
+                        <div class="tpproduct__content">
+                           <h3 class="tpproduct__title"><a href="shop-details.html">Pinkol Enormous Granite Bottle</a></h3>
+                           <div class="tpproduct__priceinfo p-relative">
+                              <div class="tpproduct__priceinfo-list">
+                                 <span>$31.00</span>
+                              </div>
+                              <div class="tpproduct__cart">
+                                 <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="tpproduct pb-15 mb-30">
+                        <div class="tpproduct__thumb p-relative">
+                           <span class="tpproduct__thumb-topsall">On Sale</span>
+                           <a href="shop-details-2.html">
+                              <img src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-7.jpg" alt="product-thumb">
+                              <img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-8.jpg" alt="">
+                           </a>
+                           <div class="tpproduct__thumb-action">
+                              <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                              <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
+                              <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>
+                           </div>
+                        </div>
+                        <div class="tpproduct__content">
+                           <h3 class="tpproduct__title"><a href="shop-details-2.html">Gorgeous Aluminum Table</a></h3>
+                           <div class="tpproduct__priceinfo p-relative">
+                              <div class="tpproduct__priceinfo-list">
+                                 <span>$31.00</span>
+                              </div>
+                              <div class="tpproduct__cart">
+                                 <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="tpproduct pb-15 mb-30">
+                        <div class="tpproduct__thumb p-relative">
+                           <a href="shop-details-2.html">
+                              <img src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-9.jpg" alt="product-thumb">
+                              <img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-10.jpg" alt="">
+                           </a>
+                           <div class="tpproduct__thumb-action">
+                              <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                              <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
+                              <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>
+                           </div>
+                        </div>
+                        <div class="tpproduct__content">
+                           <h3 class="tpproduct__title"><a href="shop-details.html">Evo Lightweight Granite Shirt</a></h3>
+                           <div class="tpproduct__priceinfo p-relative">
+                              <div class="tpproduct__priceinfo-list">
+                                 <span>$31.00</span>
+                                 <span class="tpproduct__priceinfo-list-oldprice">$39.00</span>
+                              </div>
+                              <div class="tpproduct__cart">
+                                 <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="swiper-slide">
+                     <div class="tpproduct pb-15 mb-30">
+                        <div class="tpproduct__thumb p-relative">
+                           <span class="tpproduct__thumb-volt"><i class="fas fa-bolt"></i></span>
+                           <a href="shop-details-2.html">
+                              <img src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-11.jpg" alt="product-thumb">
+                              <img class="product-thumb-secondary" src="{{url('/')}}/assets/theme/assets/img/product/home-one/product-12.jpg" alt="">
+                           </a>
+                           <div class="tpproduct__thumb-action">
+                              <a class="comphare" href="#"><i class="fal fa-exchange"></i></a>
+                              <a class="quckview" href="#"><i class="fal fa-eye"></i></a>
+                              <a class="wishlist" href="wishlist.html"><i class="fal fa-heart"></i></a>
+                           </div>
+                        </div>
+                        <div class="tpproduct__content">
+                           <h3 class="tpproduct__title"><a href="#">CLCo. Incredible Paper Car</a></h3>
+                           <div class="tpproduct__priceinfo p-relative">
+                              <div class="tpproduct__priceinfo-list">
+                                 <span>$31.00</span>
+                              </div>
+                              <div class="tpproduct__cart">
+                                 <a href="cart.html"><i class="fal fa-shopping-cart"></i>Add To Cart</a>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
       <!-- related-product-area-end -->
    </div>
 

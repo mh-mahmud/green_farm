@@ -66,41 +66,12 @@ Route::post('track-your-order', [FrontController::class, 'post_track_your_order'
 Route::get('all-products', [FrontController::class, 'all_products'])->name('all-products');
 Route::get('user-carts', [FrontController::class, 'user_cart'])->name('user-carts');
 
-
-
-
-
-
-
-
-
-
 Route::get('add-to-cart/{product_id}', [FrontController::class, 'add_to_cart'])->name('add-to-cart');
 Route::get('direct-cash-on-delivery/{product_id}', [FrontController::class, 'direct_cash_on_delivery'])->name('direct-cash-on-delivery');
 Route::post('prodetails-cash-on-delivery', [FrontController::class, 'prodetails_cash_on_delivery'])->name('prodetails-cash-on-delivery');
 Route::post('add-to-cart-modal', [FrontController::class, 'add_to_cart_modal'])->name('add-to-cart-modal');
 Route::get('add-to-cart-details', [FrontController::class, 'add_to_cart_details'])->name('add-to-cart-details');
 Route::post('/add/ajax/cart', [FrontController::class, 'add_to_cart_ajax'])->name('ajax.add.cart');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::get('add-to-wishlist/{product_id}', [FrontController::class, 'add_to_wishlist'])->name('add-to-wishlist');
 Route::get('my-wishlist', [FrontController::class, 'my_wishlist'])->name('my-wishlist');
 Route::post('/wishlist/add', [FrontController::class, 'add_wishlist'])->name('wishlist.add');
@@ -121,11 +92,14 @@ Route::get('return-policy', [FrontController::class, 'return_policy'])->name('re
 Route::get('faq', [FrontController::class, 'faq'])->name('faq');
 Route::post('product-search', [FrontController::class, 'product_search'])->name('product-search');
 Route::post('post-contact-form', [FrontController::class, 'post_contact_form'])->name('post-contact-form');
+Route::get('go-thankyou-page/{phone}/{order}', [FrontController::class, 'go_thankyou_page'])->name('after-checkout');
+
+
+
 
 
 
 Route::group(['middleware' => ['auth']], function () {
-
 
 	// customer panel routes
 	Route::get('customer-order-history', [FrontController::class, 'customer_order_history'])->name('customer-order-history');

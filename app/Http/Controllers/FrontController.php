@@ -595,8 +595,13 @@ class FrontController extends Controller
             $last_order = Order::findOrFail($order->id);
             $last_order->sms_response = $response;
             $last_order->save();
+            // return $this->go_thankyou_page($phone, $order->id);
 
-            return redirect()->route('checkout')->with('success', "Thanks for your order.Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
+            return redirect()->route('after-checkout', [
+                'phone' => $phone,
+                'order' => $order->custom_order_id
+            ])->with('success', "Thanks for your order. Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
+
         } catch (\Exception $e) {
             DB::rollBack();
             return 'Transaction failed: ' . $e->getMessage();
@@ -605,16 +610,20 @@ class FrontController extends Controller
 
 
     public function generateUniqueOrderId($length = 6) {
-        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        /*$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $orderId = '';
-
         for ($i = 0; $i < $length; $i++) {
             $orderId .= $characters[random_int(0, strlen($characters) - 1)];
         }
+        return $orderId;*/
 
-        // Prepend a timestamp for uniqueness (optional)
-        // return time() . $orderId;
-        return $orderId;
+        $number = '';
+        for ($i = 0; $i < 9; $i++) {
+            $number .= rand(0, 9);
+        }
+        $formatted = substr($number, 0, 3) . '-' . substr($number, 3, 3) . '-' . substr($number, 6, 3);
+
+        return $formatted;
     }
 
     public function product_search(Request $request) {
@@ -720,6 +729,26 @@ class FrontController extends Controller
             DB::rollBack();
             return 'Transaction failed: ' . $e->getMessage();
         }
+    }
+
+    public function go_thankyou_page($phone_number, $order_id) {
+        // $request->validate([
+        //     'phone_number' => 'required',
+        //     'order_id' => 'required'
+        // ]);
+
+        $phone_number = substr($phone_number, 2);
+
+        $chk_data = Order::where('custom_order_id', $order_id)->where('order_phone_number', $phone_number)->first();
+        if($chk_data==null) {
+            return redirect()->back()->with('error', 'Invalid order data');
+        }
+
+        $order_id = $chk_data->id;
+        $lists = OrderDetail::with('products')->where('order_id', $order_id)->get();
+        // dd($lists);
+
+        return view('front.html.thankyou-page', compact('lists', 'chk_data'));
     }
 
 
