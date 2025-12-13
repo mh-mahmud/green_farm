@@ -35,4 +35,6 @@ ALTER TABLE `products` ADD `delivery_charge_inside_dhaka` DECIMAL(10,2) NULL DEF
 -- 09-12-2025
 ALTER TABLE `landing_page_orders` ADD `unit_weight` CHAR(50) NULL DEFAULT NULL AFTER `unit_price`;
 
-ALTER TABLE `orders` CHANGE `custom_order_id` `custom_order_id` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NULL DEFAULT NULL; 
+ALTER TABLE `orders` CHANGE `custom_order_id` `custom_order_id` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `landing_page_orders` CHANGE `custom_order_id` `custom_order_id` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NULL DEFAULT NULL;
+ALTER TABLE `landing_page_orders` CHANGE `custom_order_id` `custom_order_id` VARCHAR(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NULL DEFAULT NULL;

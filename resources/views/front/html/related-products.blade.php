@@ -17,6 +17,18 @@
                <div class="swiper-wrapper">
                   
                   @foreach($sug_products as $product)
+                  @php
+                     
+                     if(!empty($product->unit_wise_price)) {
+                        $pro_unit = json_decode($product->unit_wise_price, true);
+                        $pro_values = !empty($pro_unit) ? array_filter($pro_unit) : null;
+                        $pro_values = json_encode($pro_values);
+                     }
+                     else {
+                        $pro_values = null;
+                     }
+
+                  @endphp
                   <div class="swiper-slide">
 
                         <div class="box tpproduct pb-15 mb-30" style="border: 1px solid #ddd;">
@@ -39,11 +51,8 @@
                               @endif
                               </div>
 
-
+                              {{--
                               <div class="tpproduct__thumb-action">
-                                 <!-- <a class="comphare" href="#"><i class="fal fa-exchange"></i></a> -->
-                                 <!-- <a class="quckview" href="#"><i class="fal fa-eye"></i></a> -->
-
                                  <a href=""
                                     class="quick-view-btn quick-view-added"
                                     role="button"
@@ -58,11 +67,12 @@
                                     data-stock_status="{{$product->stock_status}}"
                                     data-href="{{ route('direct-cash-on-delivery', $product->id) }}"
                                     data-product-id-m="{{$product->id}}"
+                                    data-unitweight="{{ $pro_values }}"
+                                    data-unitdata="{{$units}}"
                                     
                                     data-flatsome-role-button="attached">Quick View</a>
-
-                                 <!-- <a data-product_id="{{ $product->id }}" class="wishlist" href="#"><i class="fal fa-heart"></i></a> -->
                               </div>
+                              --}}
                            </div>
                            <div class="tpproduct__content"  style="text-align:center;">
                               <h3 class="tpproduct__title" style="margin-bottom:20px;padding:10px"><a href="{{route('product-details', $product->id)}}">{{ $product->name }}</a></h3>
@@ -89,3 +99,75 @@
             </div>
          </div>
       </div>
+
+
+<!-- Quick View Modal -->
+<div id="quickViewModal" class="modal" style="display:none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- <span class="close-another">&times;</span> -->
+      <div class="modal-body">
+        
+        <div class="row">
+           <div class="col-md-6">
+           <!-- Left: Product Image -->
+           <div class="modal-image">
+             <img id="qvImage" src="" alt="Product Image">
+           </div>
+           </div>
+
+           <div class="col-md-6">
+           <!-- Right: Product Info -->
+           <div class="modal-info">
+             <h2 id="qvName"></h2>
+             <div class="is-divider small"></div>
+
+
+             <div id="errmsg" style="display:none;color:#DC4C64;font-size:13px;">please, select a weight from the list</div>
+             <div id="weight-container" style="margin-bottom:20px"></div>
+
+             <p class="modal-price" id="qvPrice"></p>
+             <p class="modal-desc" id="qvDescription"></p>
+
+             <div class="modal-actions">
+               <form method="POST" action="{{ route('add-to-cart-modal') }}">
+                  @csrf
+                  <input id="modal_product_id" type="hidden" name="modal_product_id" value="">
+                  <input type="hidden" id="cart-weight" name="cart_weight">
+                  <input type="hidden" id="cart-val" name="cart_value">
+                  <input name="quantity" type="number" id="qvQty" value="1" min="1">
+                  <button type="submit" id="addToCartBtn">🛒 Add to Cart</button>
+               </form>
+             </div>
+
+            <!-- <form id="dcashondelivery" method="GET" action="">
+               <button id="direct" style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+            </form> -->
+
+            <form method="POST" action="{{ route('prodetails-cash-on-delivery') }}">
+               @csrf
+               <input id="d-productid" type="hidden" name="product_id" value="">
+               <input id="unit-quantity" type="hidden" name="quantity" value="">
+               <input id="unit-weight" type="hidden" name="weight" value="">
+               <input id="unit-price" type="hidden" name="price" value="">
+               <button id="direct" style="background-color:#333;color:#fff;margin-top:20px;margin-bottom:30px;" type="submit" name="wc-quick-buy-now" value="168027" class="btn btn-default">ক্যাশ অন ডেলিভারিতে অর্ডার করুন</button>
+            </form>
+
+
+
+            <div class="product_meta">
+               <span class="sku_wrapper">Stock Status: <span id="stock-status"></span></span>
+               <span class="sku_wrapper">SKU: <span id="skuname"></span></span>
+               <span class="posted_in">Category: <span id="catname"></span></span>
+            </div>
+           </div>
+           </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+

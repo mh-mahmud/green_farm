@@ -114,6 +114,10 @@ class FrontController extends Controller
         $pro_unit = json_decode($product->unit_wise_price, true);
         $pro_values = !empty($pro_unit) ? array_filter($pro_unit) : $product->product_value;
         $settings = Settings::first();
+
+        // for suggested product section
+        // $units = UnitDetail::pluck('unit_name', 'unit_code');
+        // $units = json_encode($units);
         $sug_products = Product::where('status', 1)->where('product_serial', '<=', 10)->orderBy('created_at', 'asc')->limit(8)->get();
 
         return view('front.html.product_details', compact('product', 'settings', 'pro_unit', 'units', 'pro_values', 'sug_products'));
@@ -161,7 +165,11 @@ class FrontController extends Controller
         $products = Product::where('status', 1)->where('category_id', $cat_id)->orderBy('created_at', 'asc')->paginate(30);
         $count = Product::where('status', 1)->where('category_id', $cat_id)->count();
         $page = "Category: " . ucfirst($cat);
-        return view('front.html.products', compact('products', 'count', 'page', 'cat'));
+
+        // for suggested product section
+        $sug_products = Product::where('status', 1)->where('product_serial', '<=', 10)->orderBy('created_at', 'asc')->limit(8)->get();
+
+        return view('front.html.products', compact('products', 'count', 'page', 'cat', 'sug_products'));
     }
 
     public function product_brand_wise($brand_name) {
@@ -602,7 +610,8 @@ class FrontController extends Controller
 
             return redirect()->route('after-checkout', [
                 'phone' => $phone,
-                'order' => $order->custom_order_id
+                'order' => $order->custom_order_id,
+                'order_type' => 'cart_checkout'
             ])->with('success', "Thanks for your order. Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
 
         } catch (\Exception $e) {
@@ -727,14 +736,19 @@ class FrontController extends Controller
             $last_order->sms_response = $response;
             $last_order->save();
 
-            return redirect()->route('checkout')->with('success', "Thanks for your order.Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
+            return redirect()->route('after-checkout', [
+                'phone' => $phone,
+                'order' => $order->custom_order_id,
+                'order_type' => 'landing_page_order'
+            ])->with('success', "Thanks for your order. Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
+
         } catch (\Exception $e) {
             DB::rollBack();
             return 'Transaction failed: ' . $e->getMessage();
         }
     }
 
-    public function go_thankyou_page($phone_number, $order_id) {
+    public function go_thankyou_page($phone_number, $order_id, $order_type) {
         // $request->validate([
         //     'phone_number' => 'required',
         //     'order_id' => 'required'
@@ -742,14 +756,28 @@ class FrontController extends Controller
 
         $phone_number = substr($phone_number, 2);
 
-        $chk_data = Order::where('custom_order_id', $order_id)->where('order_phone_number', $phone_number)->first();
-        if($chk_data==null) {
-            return redirect()->back()->with('error', 'Invalid order data');
+        if($order_type=='landing_page_order') {
+            $chk_data = LandingPageOrder::where('custom_order_id', $order_id)->where('order_phone_number', $phone_number)->first();
+
+            if($chk_data==null) {
+                return redirect()->back()->with('error', 'Invalid order data');
+            }
+
+            $order_id = $chk_data->id;
+            $lists = LandingPageOrder::with('product')->where('id', $order_id)->get();
+            // dd($lists);
+        }
+        else {
+
+            $chk_data = Order::where('custom_order_id', $order_id)->where('order_phone_number', $phone_number)->first();
+            if($chk_data==null) {
+                return redirect()->back()->with('error', 'Invalid order data');
+            }
+
+            $order_id = $chk_data->id;
+            $lists = OrderDetail::with('products')->where('order_id', $order_id)->get();
         }
 
-        $order_id = $chk_data->id;
-        $lists = OrderDetail::with('products')->where('order_id', $order_id)->get();
-        // dd($lists);
 
         return view('front.html.thankyou-page', compact('lists', 'chk_data'));
     }

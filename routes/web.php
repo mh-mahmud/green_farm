@@ -92,7 +92,7 @@ Route::get('return-policy', [FrontController::class, 'return_policy'])->name('re
 Route::get('faq', [FrontController::class, 'faq'])->name('faq');
 Route::post('product-search', [FrontController::class, 'product_search'])->name('product-search');
 Route::post('post-contact-form', [FrontController::class, 'post_contact_form'])->name('post-contact-form');
-Route::get('go-thankyou-page/{phone}/{order}', [FrontController::class, 'go_thankyou_page'])->name('after-checkout');
+Route::get('go-thankyou-page/{phone}/{order}/{order_type}', [FrontController::class, 'go_thankyou_page'])->name('after-checkout');
 
 
 

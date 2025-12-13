@@ -81,7 +81,7 @@
                                        <span class="amount">{{ $list->quantity }}</span>
                                     </td>
                                     <td class="product-subtotal">
-                                       <span class="amount">{{ $list->total }}</span>
+                                       <span class="amount">{{ !empty($list->total) ? $list->total : $list->total_price }}</span>
                                     </td>
 
                                  </tr>
