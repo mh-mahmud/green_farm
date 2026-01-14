@@ -434,6 +434,11 @@
           </div>
       </div>
       <!-- product-filter-area-end -->
+
+      <!-- related-product-area-start -->
+      @include('front.html.related-products')
+      <!-- related-product-area-end -->
+
    </div>
 
    <!-- Quick View Modal -->

@@ -368,7 +368,7 @@
       <!-- product-details-area-end -->
 
       <!-- related-product-area-start -->
-
+      @include('front.html.related-products')
       <!-- related-product-area-end -->
    </div>
 
@@ -527,9 +527,6 @@ $(document).ready(function () {
     });
 });
 </script>
-
-
-
 
 
 @endsection
