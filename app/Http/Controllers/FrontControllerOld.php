@@ -35,7 +35,7 @@ class FrontController extends Controller
 
         $sliders = Slider::where('status', 1)->get(['slider_title', 'slider_image']);
         $reviews = Review::where('status', 1)->get(['review_title', 'review_image']);
-        $products = Product::with('category')->where('status', 1)->where('product_sell_type', '!=', 'landing_page')->orderBy('product_serial', 'asc')->limit(30)->get();
+        $products = Product::with('category')->where('status', 1)->orderBy('product_serial', 'asc')->limit(30)->get();
 
         $units = UnitDetail::pluck('unit_name', 'unit_code');
         $units = json_encode($units);
@@ -67,7 +67,7 @@ class FrontController extends Controller
 
     public function all_products() {
         // $products = Product::orderBy('created_at', 'desc')->paginate(config('constants.ROW_PER_PAGE'));
-        $products = Product::where('status', 1)->where('product_sell_type', '!=', 'landing_page')->orderBy('created_at', 'asc')->paginate(30);
+        $products = Product::where('status', 1)->orderBy('created_at', 'asc')->paginate(30);
         $count = Product::where('status', 1)->count();
         $page = "Products";
         $cat = "ALL PRODUCTS";
@@ -113,13 +113,7 @@ class FrontController extends Controller
         $pro_unit = json_decode($product->unit_wise_price, true);
         $pro_values = !empty($pro_unit) ? array_filter($pro_unit) : $product->product_value;
         $settings = Settings::first();
-        
-        // for suggested product section
-        // $units = UnitDetail::pluck('unit_name', 'unit_code');
-        // $units = json_encode($units);
-        $sug_products = Product::where('status', 1)->where('product_serial', '<=', 10)->orderBy('created_at', 'asc')->limit(8)->get();
-        
-        return view('front.html.product_details', compact('product', 'settings', 'pro_unit', 'units', 'pro_values', 'sug_products'));
+        return view('front.html.product_details', compact('product', 'settings', 'pro_unit', 'units', 'pro_values'));
     }
 
     public function contact_page() {
@@ -161,14 +155,10 @@ class FrontController extends Controller
             dd("No Category Found");
         }
         $cat_id = $get_cat->id;
-        $products = Product::where('status', 1)->where('category_id', $cat_id)->where('product_sell_type', '!=', 'landing_page')->orderBy('created_at', 'asc')->paginate(30);
+        $products = Product::where('status', 1)->where('category_id', $cat_id)->orderBy('created_at', 'asc')->paginate(30);
         $count = Product::where('status', 1)->where('category_id', $cat_id)->count();
         $page = "Category: " . ucfirst($cat);
-
-        // for suggested product section
-        $sug_products = Product::where('status', 1)->where('product_serial', '<=', 10)->orderBy('created_at', 'asc')->limit(8)->get();
-        
-        return view('front.html.products', compact('products', 'count', 'page', 'cat', 'sug_products'));
+        return view('front.html.products', compact('products', 'count', 'page', 'cat'));
     }
 
     public function product_brand_wise($brand_name) {
@@ -179,7 +169,7 @@ class FrontController extends Controller
             dd("No brand found on this name");
         }
         $brand_id = $get_brand->id;
-        $products = Product::where('status', 1)->where('brand_id', $brand_id)->where('product_sell_type', '!=', 'landing_page')->orderBy('created_at', 'asc')->paginate(30);
+        $products = Product::where('status', 1)->where('brand_id', $brand_id)->orderBy('created_at', 'asc')->paginate(30);
         $count = Product::where('status', 1)->where('brand_id', $brand_id)->count();
         $page = "Brand: " . ucfirst($brand_name);
         return view('front.html.products', compact('products', 'count', 'page'));
@@ -347,7 +337,6 @@ class FrontController extends Controller
             $user_id = Auth::user()->id;
             $carts = Cart::where('user_id', $user_id)->get();
         }
-        
         $units = UnitDetail::pluck('unit_name', 'unit_code');
         return view('front.html.add_to_cart', compact('carts', 'units'));
     }
@@ -606,14 +595,8 @@ class FrontController extends Controller
             $last_order = Order::findOrFail($order->id);
             $last_order->sms_response = $response;
             $last_order->save();
-            // return $this->go_thankyou_page($phone, $order->id);
 
-            return redirect()->route('after-checkout', [
-                'phone' => $phone,
-                'order' => $order->custom_order_id,
-                'order_type' => 'cart_checkout'
-            ])->with('success', "Thanks for your order. Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
-
+            return redirect()->route('checkout')->with('success', "Thanks for your order.Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
         } catch (\Exception $e) {
             DB::rollBack();
             return 'Transaction failed: ' . $e->getMessage();
@@ -622,20 +605,16 @@ class FrontController extends Controller
 
 
     public function generateUniqueOrderId($length = 6) {
-        /*$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         $orderId = '';
+
         for ($i = 0; $i < $length; $i++) {
             $orderId .= $characters[random_int(0, strlen($characters) - 1)];
         }
-        return $orderId;*/
 
-        $number = '';
-        for ($i = 0; $i < 9; $i++) {
-            $number .= rand(0, 9);
-        }
-        $formatted = substr($number, 0, 3) . '-' . substr($number, 3, 3) . '-' . substr($number, 6, 3);
-
-        return $formatted;
+        // Prepend a timestamp for uniqueness (optional)
+        // return time() . $orderId;
+        return $orderId;
     }
 
     public function product_search(Request $request) {
@@ -693,7 +672,8 @@ class FrontController extends Controller
 
             // save to order table
             $total_price = $request->quantity * $request->unit_price;
-            $delivery_charge = $request->optradio * $request->quantity;
+            # $delivery_charge = $request->optradio * $request->quantity;
+            $delivery_charge = $request->optradio;
             $final_price = $total_price + $delivery_charge;
             $order = new LandingPageOrder();
             $order->product_id = $request->product_id;
@@ -729,54 +709,17 @@ class FrontController extends Controller
 
             $phone = "88".$request->phone_number . "";
             $response = Helper::send_sms($phone, $messages);
+
+            // dd($response);
             $last_order = LandingPageOrder::findOrFail($order->id);
             $last_order->sms_response = $response;
             $last_order->save();
 
-            return redirect()->route('after-checkout', [
-                'phone' => $phone,
-                'order' => $order->custom_order_id,
-                'order_type' => 'landing_page_order'
-            ])->with('success', "Thanks for your order. Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
-
+            return redirect()->route('checkout')->with('success', "Thanks for your order.Order submitted successfully. Your order number is " . $order->custom_order_id . " Please save your order number for future tracking");
         } catch (\Exception $e) {
             DB::rollBack();
             return 'Transaction failed: ' . $e->getMessage();
         }
-    }
-    
-    public function go_thankyou_page($phone_number, $order_id, $order_type) {
-        // $request->validate([
-        //     'phone_number' => 'required',
-        //     'order_id' => 'required'
-        // ]);
-
-        $phone_number = substr($phone_number, 2);
-
-        if($order_type=='landing_page_order') {
-            $chk_data = LandingPageOrder::where('custom_order_id', $order_id)->where('order_phone_number', $phone_number)->first();
-
-            if($chk_data==null) {
-                return redirect()->back()->with('error', 'Invalid order data');
-            }
-
-            $order_id = $chk_data->id;
-            $lists = LandingPageOrder::with('product')->where('id', $order_id)->get();
-            // dd($lists);
-        }
-        else {
-
-            $chk_data = Order::where('custom_order_id', $order_id)->where('order_phone_number', $phone_number)->first();
-            if($chk_data==null) {
-                return redirect()->back()->with('error', 'Invalid order data');
-            }
-
-            $order_id = $chk_data->id;
-            $lists = OrderDetail::with('products')->where('order_id', $order_id)->get();
-        }
-
-
-        return view('front.html.thankyou-page', compact('lists', 'chk_data'));
     }
 
 

@@ -286,14 +286,14 @@
                            <div class="tpproduct__content"  style="text-align:center;">
                               <h3 class="tpproduct__title" style="margin-bottom:20px;padding:10px"><a href="{{route('product-details', $product->id)}}">{{ $product->name }}</a></h3>
                               <div class="tpproduct__priceinfo p-relative">
-                                 <div class="tpproduct__priceinfo-list--" style="margin-bottom:20px;">
+                                 <div class="tpproduct__priceinfo-list--" style="margin-bottom:0px;">
                                     <span>Tk {{$product->product_value}}</span>
                                  </div>
 
                                     @if($product->product_sell_type=='landing_page')
                                     <a class="btn btn-danger" href="{{ URL::to('products/'.$product->id.'/landing-page/'.$product->name) }}"><i class="fal fa-shopping-cart"></i> Order Now</a>
                                     @else
-                                    <a class="btn btn-warning" href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i> Add To Cart</a>
+                                    {{--<a class="btn btn-warning" href="{{ route('add-to-cart', $product->id) }}"><i class="fal fa-shopping-cart"></i> Add To Cart</a>--}}
                                     @endif
                                     
                                  <!-- </div> -->
